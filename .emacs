@@ -30,7 +30,7 @@
      ("gnu" . "http://elpa.gnu.org/packages/"))))
  '(package-selected-packages
    (quote
-    (company-ghc company-go company-shell company-web haskell-mode haskell-snippets)))
+    (evil evil-args evil-commentary evil-easymotion evil-ediff evil-escape evil-exchange evil-god-state evil-leader evil-mark-replace evil-matchit evil-mc evil-mc-extras evil-numbers evil-org evil-paredit evil-quickscope evil-replace-with-register evil-rsi evil-smartparens evil-snipe evil-space evil-surround evil-swap-keys evil-tabs evil-terminal-cursor-changer evil-vimish-fold evil-visual-mark-mode evil-visual-replace evil-visualstar company-ghc company-go company-shell company-web haskell-mode haskell-snippets)))
  '(tool-bar-mode nil)
  '(tool-bar-style (quote text)))
 (custom-set-faces
