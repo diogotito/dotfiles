@@ -2,9 +2,10 @@
 source /usr/share/vim/vim80/defaults.vim
 
 " User interface
-color pablo
+color solarized
+set background=dark
 if has("gui_running")
-	color desert
+	color solarized
         set guioptions-=T  " remove the toolbar, but keep the menubar
 end
 set title         " Always set the terminal title to 'titlestring'
