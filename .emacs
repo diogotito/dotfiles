@@ -21,7 +21,7 @@
  '(custom-enabled-themes (quote (wombat)))
  '(haskell-mode-hook
    (quote
-    (haskell-decl-scan-mode haskell-indentation-mode highlight-uses-mode imenu-add-menubar-index interactive-haskell-mode turn-on-haskell-unicode-input-method)))
+    (haskell-decl-scan-mode haskell-indentation-mode highlight-uses-mode imenu-add-menubar-index interactive-haskell-mode)))
  '(inhibit-startup-screen t)
  '(initial-scratch-message nil)
  '(package-archives

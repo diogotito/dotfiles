@@ -2,13 +2,23 @@
 source /usr/share/vim/vim80/defaults.vim
 
 " User interface
+" color solarized
 color pablo
+set background=light
 if has("gui_running")
+    set lines=35 columns=150
 	color desert
-        set guioptions-=T  " remove the toolbar, but keep the menubar
+    set guioptions-=T  " remove the toolbar, but keep the menubar
 end
 set title         " Always set the terminal title to 'titlestring'
+" Change cursor shape in different modes
+let &t_SI = "\<Esc>[6 q"
+let &t_SR = "\<Esc>[4 q"
+let &t_EI = "\<Esc>[2 q"
 
+" Miscellaneous
+set clipboard^=unnamed
+ 
 " Indentation
 set autoindent
 set smarttab
@@ -35,4 +45,5 @@ inoremap jk <esc>
 
 
 " vim: foldmethod=marker
+
 

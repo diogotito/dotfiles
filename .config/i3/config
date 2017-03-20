@@ -8,15 +8,18 @@
 exec --no-startup-id feh --bg-fill '/home/diogo/Pictures/Wallpapers/t3_5bjy01.png'
 
 exec --no-startup-id nm-applet                    # Network Manager applet
+exec --no-startup-id redshift-gtk
 
-exec --no-startup-id xfce4-power-manager          # Makes the volume buttons work like in XFCE4
-exec --no-startup-id xfce4-volumed-pulse          # Makes the volume buttons work like in XFCE4
-exec --no-startup-id thunar --daemon              # Makes Thunar open quicker (like in XFCE4)
+exec xfce4-power-manager          # Makes the volume buttons work like in XFCE4
+exec xfce4-volumed-pulse          # Makes the volume buttons work like in XFCE4
+exec thunar --daemon              # Makes Thunar open quicker (like in XFCE4)
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # exec pasystray                  # PulseAudio system tray
 # exec start-pulseaudio-x11       # I don't know if this is really needed...
 # exec systemctl start illum.service
-exec_always --no-startup-id "killall xxkb; xxkb"  # fucking xxkb
+exec_always --no-startup-id "killall xxkb; sleep 0.05s; xxkb"
+
 
 
 ################################################################################
@@ -26,6 +29,19 @@ exec_always --no-startup-id "killall xxkb; xxkb"  # fucking xxkb
 bindsym $mod+Shift+b exec chromium
 bindsym $mod+Shift+m exec thunderbird
 bindsym $mod+Shift+f exec thunar
+
+
+
+################################################################################
+# WINDOW RULES
+################################################################################
+
+for_window [class="Firefox"] border none
+for_window [class="Chromium"] border pixel
+for_window [class="Gnome-calculator"] floating enable
+for_window [title="GVIMDIFF$"] floating enable
+
+
 
 ################################################################################
 
@@ -138,7 +154,12 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 # bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-bindsym $mod+Shift+e exec eval $(dmenu <<< $'i3-msg exit\nsystemctl poweroff\nsystemctl suspend')
+bindsym $mod+Shift+e exec eval $(rofi -dmenu <<< $'\
+i3-msg exit                                          # Log out\n\
+systemctl poweroff                                   # Shutdown\n\
+systemctl suspend                                    # Suspend\n\
+systemctl reboot                                     # Reboot\n\
+gksu \'efibootmgr --bootnext=0\' && systemctl reboot   # Windows')
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -185,3 +206,5 @@ bar {
     #     urgent_workspace   #75281E #d64937 #ffffff
     # }
 }
+
+

@@ -2,7 +2,7 @@
 # ~/.bash_profile
 #
 
-export TERMINAL="sakura"
+export TERMINAL="xfce4-terminal"
 export EDITOR="vim"
 export VISUAL=$EDITOR
 export PATH=$PATH:$HOME/bin:$HOME/.screenlayout/

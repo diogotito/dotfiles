@@ -16,6 +16,13 @@ export HISTCONTROL=ignoreboth
 alias ls='ls --color=auto'
 alias du='du -h'
 
+alias pp='ping -c 4 8.8.8.8'
+
+function rr() {
+    ranger --choosedir=$HOME/.rangerdir
+    cd $(cat ~/.rangerdir)
+    rm ~/.rangerdir
+}
 
 export PS1='[\u@\h \W]\$ '
 
