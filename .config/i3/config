@@ -1,4 +1,12 @@
 ################################################################################
+# Variables                                                                    #
+################################################################################
+
+# Modifier key
+set $mod Mod1
+
+
+################################################################################
 # STARTUP                                                                      #
 ################################################################################
 
@@ -6,14 +14,17 @@
 #                          '/home/diogo/Pictures/Wallpapers/y36iTKU.png'
 # exec --no-startup-id ~/.fehbg
 exec --no-startup-id feh --bg-fill '/home/diogo/Pictures/Wallpapers/t3_5bjy01.png'
+# exec --no-startup-id feh --bg-fill '/home/diogo/Pictures/Wallpapers/4CBTKcz.png'
+
+exec --no-startup-id xfce4-power-manager          # Makes the volume buttons work like in XFCE4
+exec --no-startup-id xfce4-volumed-pulse          # Makes the volume buttons work like in XFCE4
+exec --no-startup-id xfce4-clipman                # Makes the 'Copy to clipboard' option appear
+exec --no-startup-id thunar --daemon              # Makes Thunar open quicker (like in XFCE4)
 
 exec --no-startup-id nm-applet                    # Network Manager applet
 exec --no-startup-id redshift-gtk
 
-exec xfce4-power-manager          # Makes the volume buttons work like in XFCE4
-exec xfce4-volumed-pulse          # Makes the volume buttons work like in XFCE4
-exec thunar --daemon              # Makes Thunar open quicker (like in XFCE4)
-exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # exec pasystray                  # PulseAudio system tray
 # exec start-pulseaudio-x11       # I don't know if this is really needed...
@@ -29,6 +40,7 @@ exec_always --no-startup-id "killall xxkb; sleep 0.05s; xxkb"
 bindsym $mod+Shift+b exec chromium
 bindsym $mod+Shift+m exec thunderbird
 bindsym $mod+Shift+f exec thunar
+bindsym Print        exec xfce4-screenshooter
 
 
 
@@ -36,18 +48,37 @@ bindsym $mod+Shift+f exec thunar
 # WINDOW RULES
 ################################################################################
 
-for_window [class="Firefox"] border none
+for_window [class="Firefox"] border pixel
 for_window [class="Chromium"] border pixel
 for_window [class="Gnome-calculator"] floating enable
 for_window [title="GVIMDIFF$"] floating enable
+for_window [class="Terminator"] floating enable
+for_window [title="^mGBA"] floating enable
+
+################################################################################
 
 
 
 ################################################################################
+# SCRATCHPAD     (Problem: Alt minus overrides a useful Sublime Text shortcut) #
+################################################################################
+
+# Make the currently focused window a SCRATCHPAD
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the first scratchpad window
+bindsym $mod+minus scratchpad show
+
+################################################################################
+
+
+
+# bindsym Mod2+C1rl+space exec "sed -i '/set $mod/ {s/t/t/; s/1/1/; s/t/2}' ~/.config/i3/config"
+# bindsym Mod1+Ctrl+space exec "zenity --info --text='/set \$mod/ {s/1/t/; s/2/1/; s/t/2}'"
+bindsym Mod1+Ctrl+space exec ~/bin/i3-swap-modifier.sh
 
 # bindsym button1 exec orage -t
 
-set $mod Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -64,6 +95,7 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Shift+Return exec terminator
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -71,8 +103,15 @@ bindsym $mod+Shift+q kill
 # start dmenu (a program launcher)
 #bindsym $mod+p exec dmenu_run
 bindsym $mod+p exec rofi -show run
-bindsym $mod+Shift+p exec --no-startup-id i3-dmenu-desktop
-bindsym $mod+Tab exec rofi -show
+#bindsym $mod+Shift+p exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+Shift+p exec --no-startup-id rofi -show
+#bindsym Mod1+Tab exec rofi -show
+bindsym Mod1+Tab workspace back_and_forth
+# bindsym Mod1+Tab workspace next
+# bindsym Mod1+Shift+Tab workspace prev
+
+# A binding to enter i3 commands
+bindsym "$mod+Shift+:" exec i3-input
 
 # change focus
 bindsym $mod+h focus left
@@ -99,7 +138,7 @@ bindsym $mod+Shift+l move right
 # bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+Shift+s split h
+# bindsym $mod+Shift+s split h
 
 # split in vertical orientation
 bindsym $mod+v split v

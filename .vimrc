@@ -5,6 +5,7 @@ source /usr/share/vim/vim80/defaults.vim
 " color solarized
 color pablo
 set background=light
+set background=dark
 if has("gui_running")
     set lines=35 columns=150
 	color desert
