@@ -16,6 +16,11 @@ export HISTCONTROL=ignoreboth
 alias ls='ls --color=auto'
 alias du='du -h'
 
+alias xclip='xclip -selection primary'
+
+alias impressive='impressive --cache=memory'
+
+
 alias pp='ping -c 4 8.8.8.8'
 
 function rr() {
@@ -25,4 +30,4 @@ function rr() {
 }
 
 export PS1='[\u@\h \W]\$ '
-
+eval "$(fasd --init auto)"

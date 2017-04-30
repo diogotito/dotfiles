@@ -18,7 +18,8 @@ let &t_SR = "\<Esc>[4 q"
 let &t_EI = "\<Esc>[2 q"
 
 " Miscellaneous
-set clipboard^=unnamed
+" set clipboard^=unnamed
+" path+=**
  
 " Indentation
 set autoindent
@@ -29,7 +30,7 @@ set softtabstop=4
 set shiftround    " multiples of 4
 set expandtab     " I generally prefer spaces over tabs
 
-" Searching
+    " Searching
 set hlsearch
 set ignorecase
 set smartcase     " Overrides ignorecase if search pattern has uppercase chars.
