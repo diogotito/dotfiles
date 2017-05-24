@@ -4,6 +4,7 @@
 
 # Modifier key
 set $mod Mod1
+set $super Mod4
 
 
 ################################################################################
@@ -49,8 +50,10 @@ bindsym Print        exec xfce4-screenshooter
 # WINDOW RULES
 ################################################################################
 
-for_window [class="Firefox"] border pixel
-for_window [class="Chromium"] border pixel
+for_window [class="Firefox"] border none
+for_window [class="Chromium"] border none
+for_window [title="Cloud9$"] border none
+
 for_window [class="Gnome-calculator"] floating enable
 for_window [title="GVIMDIFF$"] floating enable
 for_window [class="Terminator"] floating enable
@@ -88,7 +91,8 @@ bindsym Mod1+Ctrl+space exec ~/bin/i3-swap-modifier.sh
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 font pango:DejaVu Sans Mono 8
-#font pango:DejaVu Sans Mono 8
+# font pango:Comic Sans MS Regular
+# font pango:DejaVu Sans Mono 8
 #font pango:Liberation Serif 16
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -105,7 +109,8 @@ bindsym $mod+Shift+q kill
 #bindsym $mod+p exec dmenu_run
 bindsym $mod+p exec rofi -show run
 #bindsym $mod+Shift+p exec --no-startup-id i3-dmenu-desktop
-bindsym $mod+Shift+p exec --no-startup-id rofi -show
+#bindsym $mod+Shift+p exec --no-startup-id rofi -show
+bindsym $mod+Shift+p exec --no-startup-id i3-dmenu-desktop
 #bindsym Mod1+Tab exec rofi -show
 bindsym Mod1+Tab workspace back_and_forth
 bindsym Mod1+Shift+Tab workspace next
@@ -114,6 +119,11 @@ bindsym Mod1+Shift+Tab workspace next
 
 # A binding to enter i3 commands
 bindsym "$mod+Shift+:" exec i3-input
+
+
+################################################################################
+# MOVE AND CHANGE FOCUS                                                        #
+################################################################################
 
 # change focus
 bindsym $mod+h focus left
@@ -126,12 +136,20 @@ bindsym $mod+l focus right
 # bindsym $mod+Down focus down                    #  some handy shortcuts
 # bindsym $mod+Up focus up                        #  for many GUI applications
 # bindsym $mod+Right focus right                  #
+bindsym $super+Left focus left
+bindsym $super+Down focus down
+bindsym $super+Up focus up
+bindsym $super+Right focus right
 
 # move focused window
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
+bindsym $super+Shift+Left move left
+bindsym $super+Shift+Down move down
+bindsym $super+Shift+Up move up
+bindsym $super+Shift+Right move right
 
 # alternatively, you can use the cursor keys:
 # bindsym $mod+Shift+Left move left
@@ -221,6 +239,12 @@ mode "resize" {
         bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
 
+        # pressing 'c' will center the window
+        bindsym c move position center
+
+        # pressing 'b' will cycle through the 3 border styles
+        bindsym b border toggle
+
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -234,6 +258,7 @@ bar {
     status_command i3status
     # position bottom
     font pango:DejaVu Sans Mono, Icons 10
+    # font pango:Comic Sans MS Regular
     # separator_symbol "|"
     # tray_output LVDS1
     # colors {

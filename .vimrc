@@ -1,6 +1,7 @@
 " I trust the Vim 8.0 defaults
 source /usr/share/vim/vim80/defaults.vim
 
+
 " User interface
 " color solarized
 color pablo
