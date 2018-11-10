@@ -1,0 +1,4 @@
+#!/bin/sh
+export GTK2_RC_FILES=/usr/share/themes/Numix-SX-FullDark/gtk-2.0/gtkrc
+export GTK_THEME=Numix-SX-FullDark "$@"
+exec eclipse "$@"

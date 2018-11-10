@@ -1,0 +1,11 @@
+#!/bin/sh
+
+FILE='TODO.txt'
+TITLE="$FILE"
+# TITLE="🗹 $FILE"
+
+if lsof ".$FILE.swp" >/dev/null 2>&1; then
+	i3-msg "[title=\"$TITLE\"] focus" >/dev/null
+else
+	i3-sensible-terminal --title="$TITLE" -x vim "$@" ~/$FILE &
+fi

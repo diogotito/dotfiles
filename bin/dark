@@ -1,0 +1,2 @@
+exec env GTK_THEME=Numix-SX-FullDark "$@"
+

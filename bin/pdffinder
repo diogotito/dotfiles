@@ -1,0 +1,56 @@
+#!/bin/bash
+PDFVIEWER=chromium-browser
+PDFVIEWER=evince
+
+echo -ne "\033]0;pdffinder\007"
+
+folder=$1
+if [ "$folder" == "." ]; then
+	folder=$PWD/
+fi;
+echo $folder
+
+function response {
+	case $1 in
+		run)
+			shift;
+			$*;
+		;;
+		setView)
+			PDFVIEWER=$2
+		;;
+		ls)
+				ls $folder
+		;;
+		cd)
+			folder=$2
+		;;
+		"")
+		;;
+		exit)
+		;;
+		open)
+			file=$2".pdf"
+			if [ ".pdf" != "$file" ]; then
+				$PDFVIEWER $folder$file 2> /dev/null & disown
+			fi;
+		;;
+		*)
+			search="$@"
+			if [ "" != "$1" ]; then
+				find_in_pdf $folder $search
+			fi;
+	esac
+}
+
+function find_in_pdf {
+	find $1 -name '*.pdf' -exec sh -c "pdftotext \"{}\" - | grep --with-filename --line-number --label=\"{}\" --color -A 2 -i $2" \;
+}
+
+
+while [ "$reply" != "exit" ]; do
+	read -e -p "> " reply || {echo; break}
+	response $reply
+done
+
+echo -ne "\033]0;\007"

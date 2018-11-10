@@ -1,0 +1,4 @@
+#!/bin/sh
+xrandr --output LVDS-1 --primary
+swarp 1000 50
+
