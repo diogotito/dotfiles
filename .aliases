@@ -1,0 +1,32 @@
+alias aliases='vim ~/.aliases; source ~/.aliases'
+
+alias pacsizes="expac -H M --timefmt='%Y-%m-%d' '%m\t%b\t%-30v%n' | sort -rn | less"
+
+alias record-small='ffmpeg -video_size 1366x768 -framerate 10 -f x11grab -i :0.0 VIDEO.mp4'
+alias record-big='ffmpeg -video_size 1920x1080 -framerate 10 -f x11grab -i :0.0+1366,0 test.mp4'
+
+alias wdmycloud='smbclient -U $USERNAME[%optional password] //wdmycloud/$USERNAME'
+
+
+alias treset='tput reset'
+alias ls='ls --color=auto'
+alias du='du -h'
+
+alias lesse='less +G -eX'
+alias lecat='less -EX +G'
+
+alias xclip="xclip -selection clipbooard"
+
+alias impressive='impressive --cache=memory'
+
+
+alias pp='ping -c 4 8.8.8.8'
+
+function rr() {
+    local RANGERDIR=/tmp/.rangerdir
+    ranger --choosedir=$RANGERDIR $@
+    cd $(cat $RANGERDIR)
+    rm $RANGERDIR
+}
+
+# vim: syntax=sh
