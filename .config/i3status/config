@@ -44,12 +44,12 @@ load {
 
 disk "/" {
         # format = " hdd %avail "
-        format = "  ⛁ %avail "
+        format = "  ⛁  %avail "
 }
 
 wireless _first_ {
         # 🌍 
-        format_up = " %ip (%essid) "
+        format_up = " %ip (%essid) %quality "
         format_down = " --- "
 }
 
@@ -81,5 +81,6 @@ battery all {
 
 tztime local {
         # format = "📆🗓 %Y-%m-%d %H:%M:%S"
-        format = " %d/%m/%Y  ⏲ %H:%M |"
+        # format = " %d/%m/%Y  ⏲ %H:%M |"
+        format = " %d/%m/%Y  %H:%M "
 }
