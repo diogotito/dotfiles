@@ -1,85 +1,232 @@
-################################################################################
-# Variables                                                                    #
-################################################################################
+# vim: foldmethod=expr foldlevel=1 nowrap
+# vim: fde=v\:lnum>5&&!(getline(v\:lnum)=~'###'\|\|getline(v\:lnum+1)=~'###')
+
+# Note to self: zr opens all folds. zm closes all folds
+#               I can use zj and zk to move between sections (i.e. folds)
+
+#----------------------------------------------------------------------------###
+# 1 - Variables                                                                #
+#----------------------------------------------------------------------------###
 
 # Modifier key
-set $mod Mod1
+set $mod Mod4
 set $super Mod4
 
+set $wallpaper /home/diogo/Pictures/Wallpapers/61f2853a686adc9d002beae6369f0b4d.jpg
+set $wallpaper /home/diogo/Pictures/Wallpapers/y36iTKU.png
+set $wallpaper /home/diogo/Pictures/Wallpapers/t3_5bjy01.png
+# exec convert $wallpaper -size 1366x768 /tmp/lock.png
 
-################################################################################
-# STARTUP                                                                      #
-################################################################################
+#----------------------------------------------------------------------------###
+# 2 - Startup                                                                  #
+#----------------------------------------------------------------------------###
 
-# exec --no-startup-id feh --no-fehbg --bg-fill \
-#                          '/home/diogo/Pictures/Wallpapers/y36iTKU.png'
-# exec --no-startup-id ~/.fehbg
-exec --no-startup-id feh --bg-fill '/home/diogo/Pictures/Wallpapers/t3_5bjy01.png'
+# exec --no-startup-id feh --no-fehbg --bg-fill \|
+#                          '/home/diogo/Pictures/|Wallpapers/y36iTKU.png'
+# exec --no-startup-id ~/.fehbg                  |
+# exec_always --no-startup-id feh --bg-fill '/home/diogo/Pictures/Wallpapers/t3_5bjy01.png'
+exec_always --no-startup-id feh --bg-fill '$wallpaper'
 # exec --no-startup-id feh --bg-fill '/home/diogo/Pictures/Wallpapers/4CBTKcz.png'
+exec --no-startup-id run-on-ac compton
+exec --no-startup-id synclient TapButton1=1
+# exec --no-startup-id qmenu_registrar
 
-exec --no-startup-id xfce4-power-manager          # Makes the volume buttons work like in XFCE4
+exec --no-startup-id xfce4-power-manager          # Makes battery stuff work like in XFCE4
 exec --no-startup-id xfce4-volumed-pulse          # Makes the volume buttons work like in XFCE4
 exec --no-startup-id xfce4-clipman                # Makes the 'Copy to clipboard' option appear
 exec --no-startup-id thunar --daemon              # Makes Thunar open quicker (like in XFCE4)
 
+
 exec --no-startup-id nm-applet                    # Network Manager applet
 # exec --no-startup-id orage
-exec --no-startup-id redshift-gtk
-
+# exec --no-startup-id redshift-gtk                 # Make me sleepy before 1 AM
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+# O:)
+# exec --no-startup-id emacs --daemon
 
 # exec pasystray                  # PulseAudio system tray
 # exec start-pulseaudio-x11       # I don't know if this is really needed...
 # exec systemctl start illum.service
-exec_always --no-startup-id "killall xxkb; sleep 0.05s; xxkb"
+# exec_always --no-startup-id "killall xxkb; sleep 0.05s; xxkb" # xxkb sux
+
+exec_always --no-startup-id fucking-razer.sh
 
 
 
-################################################################################
-# APPLICATION SHORTCUTS                                                        #
-################################################################################
+#----------------------------------------------------------------------------###
+# 3 - Application shortcuts                                                    #
+#----------------------------------------------------------------------------###
 
-bindsym $mod+Shift+b exec chromium
+# bindsym $mod+Shift+b exec chromium
+bindsym $mod+Shift+b exec bin/light-firefox.sh
 bindsym $mod+Shift+f exec thunar
-bindsym $mod+Shift+m exec i3-input -P 'i3-msg '
+bindsym $mod+Shift+s exec --no-startup-id subl, [class="Sublime"] focus
+bindsym $mod+Shift+d exec xfce4-terminal --drop-down
+bindsym $mod+Shift+t exec /home/diogo/apps/Telegram/Telegram, [class="Telegram"] focus
 bindsym Print        exec xfce4-screenshooter
 
+# bindsym $mod+Shift+x exec i3-input -P 'i3-msg '
+bindsym $mod+Shift+x exec i3-msg $(rofi -theme glue_pro_blue -dmenu \
+                                         -p 'i3-msg ' -input ~/i3-commands.txt \
+                                     | tee --append ~/i3-commands.txt) && \
+                                   sort --unique ~/i3-commands.txt \
+                                     | sponge ~/i3-commands.txt
 
+bindsym $mod+m exec bin/i3-display-swap.sh
 
-################################################################################
-# WINDOW RULES
-################################################################################
+# bindsym XF86Display  exec arandr
+bindsym XF86Display exec eval $(rofi -dmenu <<< $'\
+.screenlayout/laptop_only.sh\n\
+.screenlayout/no-laptop.sh\n\
+.screenlayout/two_monitors.sh\n\
+i3-msg move workspace to output right\n\
+i3-msg move workspace to output left\n\
+arandr')
+bindsym XF86Launch1  exec ~/bin/edit_i3config
+bindsym $mod+F10     exec qmenu_hud
 
-for_window [class="Firefox"] border none
-for_window [class="Chromium"] border none
-for_window [title="Cloud9$"] border none
-
-for_window [class="Gnome-calculator"] floating enable
-for_window [title="GVIMDIFF$"] floating enable
-for_window [class="Terminator"] floating enable
-for_window [title="^mGBA"] floating enable
-
-################################################################################
-
-
-
-################################################################################
-# SCRATCHPAD     (Problem: Alt minus overrides a useful Sublime Text shortcut) #
-################################################################################
-
-# Make the currently focused window a SCRATCHPAD
-bindsym $mod+Shift+minus move scratchpad
-
-# Show the first scratchpad window
-bindsym $mod+minus scratchpad show
-
-################################################################################
+# bindsym Mod4+l exec i3lock --color=1a1e23
 
 
 
-# bindsym Mod2+C1rl+space exec "sed -i '/set $mod/ {s/t/t/; s/1/1/; s/t/2}' ~/.config/i3/config"
+#----------------------------------------------------------------------------###
+# 4 - LAUNCH Mode!                                                             #
+#----------------------------------------------------------------------------###
+
+set $LAUNCH_main "Launch (C)alculator"
+bindsym Mod1+F2 mode $LAUNCH_main
+
+mode $LAUNCH_main { bindsym C mode $LAUNCH_calculator
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+set $LAUNCH_calculator "Calculator: (g)nome-calculator | (q)alculate | (p)ython"
+mode $LAUNCH_calculator {
+    bindsym g exec gnome-calculator, mode "default"
+    bindsym q exec qalculate-gtk, mode "default"
+    bindsym p exec xfce4-terminal --command=bpython, mode "default"
+    
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+
+#----------------------------------------------------------------------------###
+# 5 - Window rules (borders, floating apps, assignments)                       #
+#----------------------------------------------------------------------------###
+
+# bindsym $mod+semicolon for_window [urgent="latest"] focus
+for_window [urgent="latest"] focus
+
+for_window [title="i3 config$"]                       border normal
+for_window [title="TODO.txt$"]                        border normal
+for_window [class="^mGBA$"]                           border normal
+for_window [class="Git-gui"]                          border normal
+for_window [class="Gitk"]                             border normal
+for_window [class="Firefox" title="^Opening"]         border normal
+for_window [class="Firefox" title="Mozilla Firefox$"] border pixel
+
+for_window [class="Firefox" title="Scratchpad"]    floating enable, resize set 900 600
+for_window [class="Gnome-calculator"]              floating enable
+for_window [title="GVIMDIFF$"]                     floating enable
+for_window [class="Terminator"]                    floating enable
+for_window [class="^mGBA$"]                        floating enable
+for_window [title="i3 config$"]                    floating enable
+
+# for_window [title="i3 config$"] sticky enable
+for_window [title="i3 config$"] move position center
+
+for_window [class="Blender"]       focus child, layout tabbed, focus
+for_window [class="Emacs"]         focus child, layout tabbed, focus
+# for_window [class="Chromium"]    focus child, layout tabbed, focus
+# for_window [class="Firefox"]     focus child, layout tabbed, focus
+# for_window [class="Sublime"]     focus
+
+# for_window [class="Sublime_text" title=""] kill
+
+assign [class="Chromium"] → $workspace_2
+assign [title="Mozilla Firefox$"] → $workspace_2
+assign [class="Caprine"] → $workspace_3
+assign [class="TelegramDesktop"] → $workspace_3
+assign [class="File-roller"] → $workspace_4
+assign [class="Thunar"] → $workspace_4
+assign [class="Sublime Text"] → $workspace_5
+assign [class="Code"] → $workspace_5
+assign [title="Cloud9$"] → $workspace_5
+assign [class="Blender"] → $workspace_5
+assign [class="Eclipse"] → $workspace_5
+assign [class="Sublime"] → $workspace_5
+assign [class="^mGBA$"] → $workspace_6
+
+
+
+#----------------------------------------------------------------------------###
+# 6 - Misc                                                                     #
+#----------------------------------------------------------------------------###
+
+focus_on_window_activation urgent
+# The "smart" setting hides borders on workspaces with only one window visible,
+# but keeps them on workspaces with multiple windows visible
+hide_edge_borders smart
+# hide_edge_borders both
+floating_maximum_size -1x700
+
+workspace_layout default # default|stacking|tabbed
+
+workspace_auto_back_and_forth yes
+
+new_window pixel
+new_float normal
+
+# bindsym $super+semicolon border pixel 25
+# bindsym --release $super+semicolon border toggle
+
+
+#----------------------------------------------------------------------------###
+# 7 - Mark / go to                                                             #
+#----------------------------------------------------------------------------###
+
+# Mark
+# Alt + Shift + M -> "mark [a-z]"
+bindsym $mod+Shift+m exec i3-input -F 'mark %s' -l 1 -P 'mark: '
+
+# Go To
+bindsym $mod+Shift+quotedbl exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Go to: '
+
+
+
+#----------------------------------------------------------------------------###
+# 8 - Colors                                                                   #
+#----------------------------------------------------------------------------###
+
+# <colorclass> <border> <background> <text> <inidcator> <child_border>
+
+
+
+# Blue Theme
+# client.focused			#5294E2 #5294E2 #000000 #5294E2
+# client.focused_inactive #333333 #474d4f #ffffff #484e50
+#client.unfocused		#333333 #222222 #888888 #292d2e
+#client.urgent			#2f343a #900000 #ffffff #900000
+#client.placeholder		#000000 #0c0c0c #ffffff #000000
+
+# Red Theme
+#client.focused			#5E2018 #75281E #ffffff #A13729
+#client.focused_inactive #333333 #474d4f #ffffff #484e50
+#client.unfocused		#333333 #222222 #888888 #292d2e
+#client.urgent			#2f343a #900000 #ffffff #900000
+#client.placeholder		#000000 #0c0c0c #ffffff #000000
+
+#----------------------------------------------------------------------------###
+# Here's what remained from the i3 defaults                                    #
+#----------------------------------------------------------------------------###
+
+# bindsym Mod1+C2rl+space exec "sed -i '/set $mod/ {s/t/t/; s/1/1/; s/t/2}' ~/.config/i3/config"
 # bindsym Mod1+Ctrl+space exec "zenity --info --text='/set \$mod/ {s/1/t/; s/2/1/; s/t/2}'"
-bindsym Mod1+Ctrl+space exec ~/bin/i3-swap-modifier.sh
+# bindsym Mod1+Ctrl+space exec ~/bin/i3-swap-modifier.sh
 
 # bindsym button1 exec orage -t
 
@@ -90,14 +237,13 @@ bindsym Mod1+Ctrl+space exec ~/bin/i3-swap-modifier.sh
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 8
+font pango:Droid Sans Mono 8
 # font pango:Comic Sans MS Regular
 # font pango:DejaVu Sans Mono 8
 #font pango:Liberation Serif 16
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
-
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+Return exec terminator
@@ -107,23 +253,34 @@ bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 #bindsym $mod+p exec dmenu_run
-bindsym $mod+p exec rofi -show run
+bindsym $mod+p exec rofi -theme glue_pro_blue -sidebar-mode -show run
 #bindsym $mod+Shift+p exec --no-startup-id i3-dmenu-desktop
 #bindsym $mod+Shift+p exec --no-startup-id rofi -show
 bindsym $mod+Shift+p exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+Shift+Control+p exec --no-startup-id i3-dmenu-desktop
 #bindsym Mod1+Tab exec rofi -show
+
+# Preserve my Alt+Tabbing habit from using stacking window managers :D
+bindsym $super+Tab workspace back_and_forth
+bindsym $Mod+minus scratchpad show
 bindsym Mod1+Tab workspace back_and_forth
-bindsym Mod1+Shift+Tab workspace next
+
+# Make the currently focused window a SCRATCHPAD
+bindsym $mod+Shift+minus move scratchpad
+
+
+
+bindsym $Mod+Shift+Tab workspace next
 # bindsym Mod1+Tab workspace next
 # bindsym Mod1+Shift+Tab workspace prev
+bindsym $Mod+Prior workspace prev
+bindsym $Mod+Next workspace next
+bindsym $Mod+Shift+Prior move container to workspace prev, workspace prev
+bindsym $Mod+Shift+Next move container to workspace next, workspace next
 
-# A binding to enter i3 commands
-bindsym "$mod+Shift+:" exec i3-input
-
-
-################################################################################
-# MOVE AND CHANGE FOCUS                                                        #
-################################################################################
+#----------------------------------------------------------------------------###
+# 9 - Move and change focus                                                    #
+#----------------------------------------------------------------------------###
 
 # change focus
 bindsym $mod+h focus left
@@ -136,6 +293,7 @@ bindsym $mod+l focus right
 # bindsym $mod+Down focus down                    #  some handy shortcuts
 # bindsym $mod+Up focus up                        #  for many GUI applications
 # bindsym $mod+Right focus right                  #
+
 bindsym $super+Left focus left
 bindsym $super+Down focus down
 bindsym $super+Up focus up
@@ -172,10 +330,11 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
+bindsym Mod1+Shift+space floating toggle
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym Mod1+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -183,42 +342,42 @@ bindsym $mod+a focus parent
 # focus the child container
 bindsym $mod+Shift+a focus child
 
-# switch to workspace 
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace ·
-
-# move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace ·
-
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 # bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-bindsym $mod+Shift+e exec eval $(rofi -dmenu <<< $'\
-i3-msg exit                                          # Log out\n\
-systemctl poweroff                                   # Shutdown\n\
-systemctl suspend                                    # Suspend\n\
-systemctl reboot                                     # Reboot\n\
-gksu \'efibootmgr --bootnext=0\' && systemctl reboot   # Windows')
+
+# bindsym $mod+Shift+e exec eval $(rofi -theme Monokai -dmenu <<< $'\
+# i3-msg exit                                          # Log out\n\
+# systemctl poweroff                                   # Shutdown\n\
+# systemctl suspend                                    # Suspend\n\
+# systemctl reboot                                     # Reboot\n\
+# gksu \'efibootmgr --bootnext=0\' && systemctl reboot   # Windows')
+
+#----------------------------------------------------------------------------###
+# 10 - Exit mode                                                               #
+#----------------------------------------------------------------------------###
+
+set $EXIT_MODE " E - Logout  |  L - Lock  |  P - Shutdown  |  R - Reboot  |  S - Suspend  |  W - Windows "
+bindsym $mod+Shift+e mode $EXIT_MODE
+mode $EXIT_MODE {
+        bindsym e exec i3-msg exit             ; mode "default"
+        bindsym l exec i3lock -i /tmp/lock.png ; mode "default"
+        bindsym p exec systemctl poweroff      ; mode "default"
+        bindsym s exec systemctl suspend       ; mode "default"
+        bindsym r exec systemctl reboot        ; mode "default"
+        bindsym w exec gksu 'efibootmgr --bootnext=0' && systemctl reboot; mode "default"
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+#----------------------------------------------------------------------------###
+# 11 - Resize mode                                                             #
+#----------------------------------------------------------------------------###
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -245,6 +404,16 @@ mode "resize" {
         # pressing 'b' will cycle through the 3 border styles
         bindsym b border toggle
 
+        bindsym t floating toggle
+
+        bindsym a exec lxappearance; mode "default"
+
+        # pressing 'o' will move the window to another output
+        bindsym o move to output right
+
+        # pressing 's' will swap the two active workspaces between outputs
+        bindsym p exec swap_outputs.py; mode "default"
+
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -252,17 +421,29 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+#----------------------------------------------------------------------------###
+# 12 - i3bar                                                                   #
+#----------------------------------------------------------------------------###
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
     status_command i3status
-    # position bottom
+    position top
     font pango:DejaVu Sans Mono, Icons 10
+    tray_padding 3
     # font pango:Comic Sans MS Regular
     # separator_symbol "|"
-    # tray_output LVDS1
-    # colors {
-    #     background #0D0D0D
+    # output LVDS-1
+      colors {
+          background #000000
+          # background #333333
+          # background #0D0E0F
+          # background #1A1E23
+
+          # Cobalt theme
+          # background #0C1A24
+
     #     statusline #ffffff
     #     separator #666666
     #
@@ -270,7 +451,68 @@ bar {
     #     active_workspace   #333333 #5f676a #ffffff
     #     inactive_workspace #333333 #222222 #888888
     #     urgent_workspace   #75281E #d64937 #ffffff
-    # }
+      }
+    bindsym button2 exec eval $(rofi -theme dmenu_bottom -dmenu -p 'exit: ' <<<$'\
+i3-msg exit\n\
+systemctl poweroff\n\
+systemctl suspend\n\
+systemctl reboot\n\
+gksu \'efibootmgr --bootnext=0\' && systemctl reboot   # windows')
+
 }
+
+
+#----------------------------------------------------------------------------###
+# 13 - Workspaces                                                              #
+#----------------------------------------------------------------------------###
+
+# workspace names
+
+set $workspace_1 1
+set $workspace_2 2:Web
+set $workspace_3 3:Ler
+set $workspace_4 4:Org
+set $workspace_5 5:Trab
+set $workspace_6 6:
+set $workspace_7 7:Pessoal
+set $workspace_8 8:Config
+set $workspace_9 9:Monitor
+set $workspace_0 ·
+
+# set $workspace_1 1
+# set $workspace_2 2
+# set $workspace_3 3
+# set $workspace_4 4
+# set $workspace_5 5
+# set $workspace_6 6
+# set $workspace_7 7
+# set $workspace_8 8
+# set $workspace_9 9
+# set $workspace_0 0
+# set $workspace_0 ·
+
+# switch to workspace 
+bindsym $mod+1 workspace $workspace_1
+bindsym $mod+2 workspace $workspace_2
+bindsym $mod+3 workspace $workspace_3
+bindsym $mod+4 workspace $workspace_4
+bindsym $mod+5 workspace $workspace_5
+bindsym $mod+6 workspace $workspace_6
+bindsym $mod+7 workspace $workspace_7
+bindsym $mod+8 workspace $workspace_8
+bindsym $mod+9 workspace $workspace_9
+bindsym $mod+0 workspace $workspace_0
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $workspace_1
+bindsym $mod+Shift+2 move container to workspace $workspace_2
+bindsym $mod+Shift+3 move container to workspace $workspace_3
+bindsym $mod+Shift+4 move container to workspace $workspace_4
+bindsym $mod+Shift+5 move container to workspace $workspace_5
+bindsym $mod+Shift+6 move container to workspace $workspace_6
+bindsym $mod+Shift+7 move container to workspace $workspace_7
+bindsym $mod+Shift+8 move container to workspace $workspace_8
+bindsym $mod+Shift+9 move container to workspace $workspace_9
+bindsym $mod+Shift+0 move container to workspace $workspace_0
 
 
