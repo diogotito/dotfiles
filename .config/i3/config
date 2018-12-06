@@ -27,10 +27,12 @@ set $wallpaper /home/diogo/Pictures/Wallpapers/t3_5bjy01.png
 # exec_always --no-startup-id feh --bg-fill '/home/diogo/Pictures/Wallpapers/t3_5bjy01.png'
 exec_always --no-startup-id feh --bg-fill '$wallpaper'
 # exec --no-startup-id feh --bg-fill '/home/diogo/Pictures/Wallpapers/4CBTKcz.png'
+exec --no-startup-id /home/diogo/.screenlayout/arandr.sh
 exec --no-startup-id run-on-ac compton
 exec --no-startup-id synclient TapButton1=1
 # exec --no-startup-id qmenu_registrar
 
+# stuff borrowed from XFCE
 exec --no-startup-id xfce4-power-manager          # Makes battery stuff work like in XFCE4
 exec --no-startup-id xfce4-volumed-pulse          # Makes the volume buttons work like in XFCE4
 exec --no-startup-id xfce4-clipman                # Makes the 'Copy to clipboard' option appear
@@ -38,8 +40,10 @@ exec --no-startup-id thunar --daemon              # Makes Thunar open quicker (l
 
 
 exec --no-startup-id nm-applet                    # Network Manager applet
+# exec --no-startup-id udiskie -t
 # exec --no-startup-id orage
 # exec --no-startup-id redshift-gtk                 # Make me sleepy before 1 AM
+
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # O:)
@@ -73,7 +77,11 @@ bindsym $mod+Shift+x exec i3-msg $(rofi -theme glue_pro_blue -dmenu \
                                    sort --unique ~/i3-commands.txt \
                                      | sponge ~/i3-commands.txt
 
-bindsym $mod+m exec bin/i3-display-swap.sh
+bindsym $mod+m focus output right
+bindsym $mod+comma focus output right
+bindsym $mod+Shift+m move workspace to output right
+bindsym $mod+Shift+comma move workspace to output right
+bindsym $mod+Ctrl+m exec bin/i3-display-swap.sh
 
 # bindsym XF86Display  exec arandr
 bindsym XF86Display exec eval $(rofi -dmenu <<< $'\
@@ -172,7 +180,7 @@ focus_on_window_activation urgent
 # but keeps them on workspaces with multiple windows visible
 hide_edge_borders smart
 # hide_edge_borders both
-floating_maximum_size -1x700
+# floating_maximum_size -1x700
 
 workspace_layout default # default|stacking|tabbed
 
@@ -191,7 +199,7 @@ new_float normal
 
 # Mark
 # Alt + Shift + M -> "mark [a-z]"
-bindsym $mod+Shift+m exec i3-input -F 'mark %s' -l 1 -P 'mark: '
+bindsym $mod+quotedbl exec i3-input -F 'mark %s' -l 1 -P 'mark: '
 
 # Go To
 bindsym $mod+Shift+quotedbl exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Go to: '
@@ -412,7 +420,7 @@ mode "resize" {
         bindsym o move to output right
 
         # pressing 's' will swap the two active workspaces between outputs
-        bindsym p exec swap_outputs.py; mode "default"
+        bindsym p exec bin/i3-display-swap.sh; mode "default"
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -425,8 +433,11 @@ bindsym $mod+r mode "resize"
 # 12 - i3bar                                                                   #
 #----------------------------------------------------------------------------###
 
+# exec --no-startup-id polybar example
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
+# exec i3bar_command i3bar -t
 bar {
     status_command i3status
     position top
@@ -440,10 +451,10 @@ bar {
           # background #333333
           # background #0D0E0F
           # background #1A1E23
-
+ 
           # Cobalt theme
           # background #0C1A24
-
+ 
     #     statusline #ffffff
     #     separator #666666
     #
@@ -458,7 +469,7 @@ systemctl poweroff\n\
 systemctl suspend\n\
 systemctl reboot\n\
 gksu \'efibootmgr --bootnext=0\' && systemctl reboot   # windows')
-
+ 
 }
 
 
