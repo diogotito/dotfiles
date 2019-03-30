@@ -1,0 +1,7 @@
+#!/bin/sh
+
+URL=$1
+shift
+
+chromium --app="$URL" "$@"
+

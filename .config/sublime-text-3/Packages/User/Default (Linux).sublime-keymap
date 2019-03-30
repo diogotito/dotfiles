@@ -1,0 +1,61 @@
+[
+{ "keys": ["ctrl+shift+o"], "command": "prompt_open_folder" },
+{ "keys": ["ctrl+7"], "command": "toggle_comment"},
+{ "keys": ["ctrl+shift+7"], "command": "toggle_block_comment"},
+
+    { "keys": ["j", "j"], "command": "exit_insert_mode",
+        "context":
+        [
+            { "key": "setting.command_mode", "operand": false },
+            { "key": "setting.is_widget", "operand": false }
+        ]
+    },
+
+    { "keys": ["j", "k"], "command": "exit_insert_mode",
+        "context":
+        [
+            { "key": "setting.command_mode", "operand": false },
+            { "key": "setting.is_widget", "operand": false }
+        ]
+    },
+
+    { "keys": ["g", "c", "c"], "command": "toggle_comment",
+        "context":
+        [
+            { "key": "setting.command_mode", "operand": true },
+            { "key": "setting.is_widget", "operand": false }
+        ]
+    },
+
+	{
+        "keys": ["j", "j"],
+        "command": "_enter_normal_mode",
+        "args": {
+            "mode": "mode_insert"
+        },
+        "context": [{"key": "vi_insert_mode_aware"}]
+    },
+
+    {
+        "keys": ["j", "k"],
+        "command": "_enter_normal_mode",
+        "args": {
+            "mode": "mode_insert"
+        },
+        "context": [{"key": "vi_insert_mode_aware"}]
+    },
+
+    {
+      "keys": ["super+shift+r"], "command": "browser_refresh", "args": {
+        "auto_save": true,
+        "delay": 0.0,
+        "activate": true,
+        "browsers" : ["firefox"]
+      }
+    },
+
+    { "keys": ["f12"], "command": "goto_definition" },
+    { "keys": ["shift+f12"], "command": "goto_reference" },
+
+  
+]

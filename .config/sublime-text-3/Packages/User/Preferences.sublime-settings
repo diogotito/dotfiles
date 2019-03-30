@@ -1,0 +1,38 @@
+{
+	"added_words":
+	[
+		"Diogo"
+	],
+	"auto_complete_triggers":
+	[
+		{
+			"characters": ".",
+			"selector": "source.python"
+		},
+		{
+			"characters": "\\",
+			"selector": "text.tex.latex"
+		}
+	],
+	"auto_find_in_selection": true,
+	"bold_folder_labels": true,
+	"color_scheme": "Packages/Theme - Centurion/Galea.tmTheme",
+	"draw_centered": false,
+	"font_size": 9,
+	"gutter": true,
+	"highlight_line": true,
+	"highlight_modified_tabs": true,
+	"ignored_packages":
+	[
+	],
+	"line_numbers": true,
+	"line_padding_bottom": 2,
+	"line_padding_top": 2,
+	"overlay_scroll_bars": "system",
+	"rulers":
+	[
+		80
+	],
+	"theme": "Centurion.sublime-theme",
+	"vintageous_use_ctrl_keys": false
+}

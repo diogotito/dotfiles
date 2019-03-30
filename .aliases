@@ -8,7 +8,8 @@ alias record-big='ffmpeg -video_size 1920x1080 -framerate 10 -f x11grab -i :0.0+
 alias wdmycloud='smbclient -U $USERNAME[%optional password] //wdmycloud/$USERNAME'
 
 
-alias treset='tput reset'
+alias cls='tput reset'
+alias ll='ls -l'
 alias ls='ls --color=auto'
 alias du='du -h'
 

@@ -1,0 +1,12 @@
+set selection-clipboard clipboard
+set default-bg #112244
+set statusbar-home-tilde
+set window-title-basename
+
+set default-bg \#181818
+set statusbar-bg \#2D2D2D
+set statusbar-fg \#dedede
+set recolor-lightcolor \#181818
+set recolor-darkcolor \#dedede
+
+

@@ -1,5 +1,6 @@
 # vim: foldmethod=expr foldlevel=1 nowrap
 # vim: fde=v\:lnum>5&&!(getline(v\:lnum)=~'###'\|\|getline(v\:lnum+1)=~'###')
+# vim: cursorline
 
 # Note to self: zr opens all folds. zm closes all folds
 #               I can use zj and zk to move between sections (i.e. folds)
@@ -12,9 +13,10 @@
 set $mod Mod4
 set $super Mod4
 
-set $wallpaper /home/diogo/Pictures/Wallpapers/61f2853a686adc9d002beae6369f0b4d.jpg
-set $wallpaper /home/diogo/Pictures/Wallpapers/y36iTKU.png
-set $wallpaper /home/diogo/Pictures/Wallpapers/t3_5bjy01.png
+# set $wallpaper /home/diogo/Pictures/Wallpapers/61f2853a686adc9d002beae6369f0b4d.jpg
+# set $wallpaper /home/diogo/Pictures/Wallpapers/y36iTKU.png
+# set $wallpaper /home/diogo/Pictures/Wallpapers/t3_5bjy01.png
+# set $wallpaper /home/diogo/Pictures/Numix1.png
 # exec convert $wallpaper -size 1366x768 /tmp/lock.png
 
 #----------------------------------------------------------------------------###
@@ -25,34 +27,41 @@ set $wallpaper /home/diogo/Pictures/Wallpapers/t3_5bjy01.png
 #                          '/home/diogo/Pictures/|Wallpapers/y36iTKU.png'
 # exec --no-startup-id ~/.fehbg                  |
 # exec_always --no-startup-id feh --bg-fill '/home/diogo/Pictures/Wallpapers/t3_5bjy01.png'
-exec_always --no-startup-id feh --bg-fill '$wallpaper'
+# exec_always --no-startup-id feh --bg-fill '$wallpaper'
+exec_always nitrogen --restore
 # exec --no-startup-id feh --bg-fill '/home/diogo/Pictures/Wallpapers/4CBTKcz.png'
+exec --no-startup-id dunst
 exec --no-startup-id /home/diogo/.screenlayout/arandr.sh
-exec --no-startup-id run-on-ac compton
+exec --no-startup-id compton
+
+# Tray icons
+exec --no-startup-id sleep 0.1s; dropbox
+exec --no-startup-id sleep 0.1s; pasystray                  # PulseAudio system tray
+exec --no-startup-id sleep 0.1s; nm-applet                    # Network Manager applet
+exec --no-startup-id sleep 0.1s; redshift-gtk                 # Make me sleepy before 1 AM
+exec --no-startup-id sleep 0.1s; xfce4-clipman                # Makes the 'Copy to clipboard' option appear
+exec --no-startup-id sleep 0.1s; xfce4-power-manager          # Makes battery & brightness work like in XFCE4
+exec_always --no-startup-id "killall xxkb; sleep 0.05s; xxkb" # xxkb sux
+
+# Right now libinput makes my touchpad barely usable
+#
 exec --no-startup-id synclient TapButton1=1
-# exec --no-startup-id qmenu_registrar
 
 # stuff borrowed from XFCE
-exec --no-startup-id xfce4-power-manager          # Makes battery stuff work like in XFCE4
 exec --no-startup-id xfce4-volumed-pulse          # Makes the volume buttons work like in XFCE4
-exec --no-startup-id xfce4-clipman                # Makes the 'Copy to clipboard' option appear
 exec --no-startup-id thunar --daemon              # Makes Thunar open quicker (like in XFCE4)
 
 
-exec --no-startup-id nm-applet                    # Network Manager applet
 # exec --no-startup-id udiskie -t
 # exec --no-startup-id orage
-# exec --no-startup-id redshift-gtk                 # Make me sleepy before 1 AM
 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # O:)
 # exec --no-startup-id emacs --daemon
 
-# exec pasystray                  # PulseAudio system tray
 # exec start-pulseaudio-x11       # I don't know if this is really needed...
 # exec systemctl start illum.service
-# exec_always --no-startup-id "killall xxkb; sleep 0.05s; xxkb" # xxkb sux
 
 exec_always --no-startup-id fucking-razer.sh
 
@@ -63,12 +72,17 @@ exec_always --no-startup-id fucking-razer.sh
 #----------------------------------------------------------------------------###
 
 # bindsym $mod+Shift+b exec chromium
+bindsym $mod+Shift+Ctrl+b exec chromium app="$(xclip -selection clipboard -o)"
+# bindsym $mod+Shift+b exec bin/light-firefox.sh
 bindsym $mod+Shift+b exec bin/light-firefox.sh
 bindsym $mod+Shift+f exec thunar
 bindsym $mod+Shift+s exec --no-startup-id subl, [class="Sublime"] focus
+# bindsym $mod+Shift+s [class="Code"] focus
 bindsym $mod+Shift+d exec xfce4-terminal --drop-down
-bindsym $mod+Shift+t exec /home/diogo/apps/Telegram/Telegram, [class="Telegram"] focus
+bindsym $mod+Shift+t exec telegram-desktop, [class="Telegram"] focus
 bindsym Print        exec xfce4-screenshooter
+bindsym $mod+Shift+c exec xfce4-popup-clipman-actions
+bindsym $mod+Shift+v exec xfce4-popup-clipman
 
 # bindsym $mod+Shift+x exec i3-input -P 'i3-msg '
 bindsym $mod+Shift+x exec i3-msg $(rofi -theme glue_pro_blue -dmenu \
@@ -77,10 +91,10 @@ bindsym $mod+Shift+x exec i3-msg $(rofi -theme glue_pro_blue -dmenu \
                                    sort --unique ~/i3-commands.txt \
                                      | sponge ~/i3-commands.txt
 
-bindsym $mod+m focus output right
+bindsym $mod+m     focus output right
 bindsym $mod+comma focus output right
-bindsym $mod+Shift+m move workspace to output right
-bindsym $mod+Shift+comma move workspace to output right
+bindsym $mod+Shift+m     move workspace to output right
+bindsym $mod+Shift+comma move to output right, focus output right
 bindsym $mod+Ctrl+m exec bin/i3-display-swap.sh
 
 # bindsym XF86Display  exec arandr
@@ -92,7 +106,10 @@ i3-msg move workspace to output right\n\
 i3-msg move workspace to output left\n\
 arandr')
 bindsym XF86Launch1  exec ~/bin/edit_i3config
-bindsym $mod+F10     exec qmenu_hud
+bindsym $mod+F1  exec ~/bin/edit_i3config
+
+bindsym $mod+KP_Add exec --no-startup-id light -A 5 && dunstify -r 1234 `light`
+bindsym $mod+KP_Subtract exec --no-startup-id light -U 5 && dunstify -r 1234 `light`
 
 # bindsym Mod4+l exec i3lock --color=1a1e23
 
@@ -105,7 +122,8 @@ bindsym $mod+F10     exec qmenu_hud
 set $LAUNCH_main "Launch (C)alculator"
 bindsym Mod1+F2 mode $LAUNCH_main
 
-mode $LAUNCH_main { bindsym C mode $LAUNCH_calculator
+mode $LAUNCH_main {
+    bindsym C mode $LAUNCH_calculator
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -134,15 +152,20 @@ for_window [title="TODO.txt$"]                        border normal
 for_window [class="^mGBA$"]                           border normal
 for_window [class="Git-gui"]                          border normal
 for_window [class="Gitk"]                             border normal
-for_window [class="Firefox" title="^Opening"]         border normal
+#for_window [class="Firefox" title="^Opening"]         border normal
+for_window [title="Application Finder"]               border normal
 for_window [class="Firefox" title="Mozilla Firefox$"] border pixel
 
+for_window [title="ZSH Launcher"]    border normal, floating enable, resize set 900 400, move position center
+
 for_window [class="Firefox" title="Scratchpad"]    floating enable, resize set 900 600
+for_window [title="Application Finder"]            floating enable 
 for_window [class="Gnome-calculator"]              floating enable
 for_window [title="GVIMDIFF$"]                     floating enable
 for_window [class="Terminator"]                    floating enable
 for_window [class="^mGBA$"]                        floating enable
 for_window [title="i3 config$"]                    floating enable
+#for_window [title="Parse Tree Inspector"]          floating enable, resize set 900 600, move position center, border normal
 
 # for_window [title="i3 config$"] sticky enable
 for_window [title="i3 config$"] move position center
@@ -155,19 +178,20 @@ for_window [class="Emacs"]         focus child, layout tabbed, focus
 
 # for_window [class="Sublime_text" title=""] kill
 
-assign [class="Chromium"] → $workspace_2
+assign [class="Chromium"]         → $workspace_2
 assign [title="Mozilla Firefox$"] → $workspace_2
-assign [class="Caprine"] → $workspace_3
-assign [class="TelegramDesktop"] → $workspace_3
-assign [class="File-roller"] → $workspace_4
-assign [class="Thunar"] → $workspace_4
-assign [class="Sublime Text"] → $workspace_5
-assign [class="Code"] → $workspace_5
-assign [title="Cloud9$"] → $workspace_5
-assign [class="Blender"] → $workspace_5
-assign [class="Eclipse"] → $workspace_5
-assign [class="Sublime"] → $workspace_5
-assign [class="^mGBA$"] → $workspace_6
+assign [class="Caprine"]          → $workspace_3
+assign [class="TelegramDesktop"]  → $workspace_3
+# assign [class="File-roller"]    → $workspace_4
+# assign [class="Thunar"]         → $workspace_4
+assign [class="Sublime Text"]     → $workspace_5
+assign [class="Code"]             → $workspace_5
+assign [title="Cloud9$"]          → $workspace_5
+assign [class="Blender"]          → $workspace_5
+assign [class="Eclipse"]          → $workspace_5
+assign [class="Sublime"]          → $workspace_5
+assign [class="^mGBA$"]           → $workspace_6
+assign [title="TODO.txt"]         → $workspace_7
 
 
 
@@ -182,7 +206,8 @@ hide_edge_borders smart
 # hide_edge_borders both
 # floating_maximum_size -1x700
 
-workspace_layout default # default|stacking|tabbed
+workspace_layout default
+# default|stacking|tabbed
 
 workspace_auto_back_and_forth yes
 
@@ -215,11 +240,17 @@ bindsym $mod+Shift+quotedbl exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Go
 
 
 # Blue Theme
-# client.focused			#5294E2 #5294E2 #000000 #5294E2
+# client.focused		#5294E2 #5294E2 #000000 #5294E2
 # client.focused_inactive #333333 #474d4f #ffffff #484e50
 #client.unfocused		#333333 #222222 #888888 #292d2e
 #client.urgent			#2f343a #900000 #ffffff #900000
 #client.placeholder		#000000 #0c0c0c #ffffff #000000
+
+# Numix Theme
+client.focused          #d64937 #d64937 #dedede #d64937 #d64937
+client.unfocused        #333333 #333333 #dedede #333333 #333333
+client.focused_inactive #333333 #333333 #dedede #000000 #000000
+client.urgent           #383a3b #383a3b #ee0000 #000000 #000000
 
 # Red Theme
 #client.focused			#5E2018 #75281E #ffffff #A13729
@@ -245,7 +276,9 @@ bindsym $mod+Shift+quotedbl exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Go
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:Droid Sans Mono 8
+# font pango:Droid Sans Mono 8 <---- old
+font pango:Source Sans Pro 10
+
 # font pango:Comic Sans MS Regular
 # font pango:DejaVu Sans Mono 8
 #font pango:Liberation Serif 16
@@ -254,7 +287,8 @@ font pango:Droid Sans Mono 8
 floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Shift+Return exec terminator
+# bindsym $mod+Shift+Return exec terminator
+bindsym $mod+Shift+Return exec xfce4-terminal -T 'ZSH Launcher' -e 'env LAUNCH=yes zsh'
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -264,13 +298,14 @@ bindsym $mod+Shift+q kill
 bindsym $mod+p exec rofi -theme glue_pro_blue -sidebar-mode -show run
 #bindsym $mod+Shift+p exec --no-startup-id i3-dmenu-desktop
 #bindsym $mod+Shift+p exec --no-startup-id rofi -show
-bindsym $mod+Shift+p exec --no-startup-id i3-dmenu-desktop
+#bindsym $mod+Shift+p exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+Shift+p exec --no-startup-id xfce4-appfinder
 bindsym $mod+Shift+Control+p exec --no-startup-id i3-dmenu-desktop
 #bindsym Mod1+Tab exec rofi -show
 
 # Preserve my Alt+Tabbing habit from using stacking window managers :D
 bindsym $super+Tab workspace back_and_forth
-bindsym $Mod+minus scratchpad show
+bindsym $mod+minus scratchpad show
 bindsym Mod1+Tab workspace back_and_forth
 
 # Make the currently focused window a SCRATCHPAD
@@ -278,13 +313,15 @@ bindsym $mod+Shift+minus move scratchpad
 
 
 
-bindsym $Mod+Shift+Tab workspace next
+bindsym $mod+Shift+Tab workspace next
 # bindsym Mod1+Tab workspace next
 # bindsym Mod1+Shift+Tab workspace prev
-bindsym $Mod+Prior workspace prev
-bindsym $Mod+Next workspace next
-bindsym $Mod+Shift+Prior move container to workspace prev, workspace prev
-bindsym $Mod+Shift+Next move container to workspace next, workspace next
+bindsym $mod+Prior workspace prev
+bindsym $mod+Shift+n workspace prev
+bindsym $mod+Next workspace next
+bindsym $mod+n workspace next
+bindsym $mod+Shift+Prior move container to workspace prev, workspace prev
+bindsym $mod+Shift+Next move container to workspace next, workspace next
 
 #----------------------------------------------------------------------------###
 # 9 - Move and change focus                                                    #
@@ -351,7 +388,7 @@ bindsym $mod+a focus parent
 bindsym $mod+Shift+a focus child
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+bindsym $mod+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
@@ -368,7 +405,7 @@ bindsym $mod+Shift+r restart
 # 10 - Exit mode                                                               #
 #----------------------------------------------------------------------------###
 
-set $EXIT_MODE " E - Logout  |  L - Lock  |  P - Shutdown  |  R - Reboot  |  S - Suspend  |  W - Windows "
+set $EXIT_MODE " E - Logout  |  L - Lock  |  P - Shutdown  |  R - Reboot  |  S - Suspend  |  H - Hibernate  |  W - Windows "
 bindsym $mod+Shift+e mode $EXIT_MODE
 mode $EXIT_MODE {
         bindsym e exec i3-msg exit             ; mode "default"
@@ -376,6 +413,7 @@ mode $EXIT_MODE {
         bindsym p exec systemctl poweroff      ; mode "default"
         bindsym s exec systemctl suspend       ; mode "default"
         bindsym r exec systemctl reboot        ; mode "default"
+        bindsym h exec systemctl hibernate     ; mode "default"
         bindsym w exec gksu 'efibootmgr --bootnext=0' && systemctl reboot; mode "default"
 
         # back to normal: Enter or Escape
@@ -447,7 +485,19 @@ bar {
     # separator_symbol "|"
     # output LVDS-1
       colors {
-          background #000000
+          #background #000000
+
+          # Numix theme
+          background #2d2d2d
+          statusline #dedede
+          separator #2d2d2d
+
+          focused_workspace  #d64937 #d64937 #dedede
+          active_workspace   #2d2d2d #5f676a #dedede
+          inactive_workspace #2d2d2d #2d2d2d #888888
+          urgent_workspace   #333333 #900000 #ffffff
+
+          # background #002B36
           # background #333333
           # background #0D0E0F
           # background #1A1E23
@@ -526,4 +576,49 @@ bindsym $mod+Shift+8 move container to workspace $workspace_8
 bindsym $mod+Shift+9 move container to workspace $workspace_9
 bindsym $mod+Shift+0 move container to workspace $workspace_0
 
+
+#----------------------------------------------------------------------------###
+# 14 - Gaps                                                                    #
+#----------------------------------------------------------------------------###
+
+# smart_gaps on
+
+set $mode_gaps Gaps: (o)uter, (i)nner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "$mode_gaps"
+        bindsym Escape mode "default"
+}
+
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 5
+        bindsym equal gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym Return mode "$mode_gaps"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym equal gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "$mode_gaps"
+        bindsym Escape mode "default"
+}
 
