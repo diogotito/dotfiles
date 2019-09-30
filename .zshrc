@@ -146,25 +146,11 @@ function open-pdf() (
     function filter() { sed --null-data -E "\;$HOME/\.\w+;d" }
 
     function decorate() {
-        sed_cmds=()
-        for pattern decor in $DECOR; do
-            sed_cmds+="s;$pattern;$decor;"
-        done
-
-        # String the sed commands with \n
-        local IFS=$'\n'
-        sed --null-data -E "$sed_cmds"
+        sed --null-data -E "$(for path icon in $DECOR; do printf "s;$path;$icon;\n"; done)"
     }
 
     function undecorate() {
-        sed_cmds=()
-        for original decor in $DECOR; do
-            sed_cmds+="s;$decor;$original;"
-        done
-
-        # Join sed_cmds with \n
-        local IFS=$'\n'
-        sed --null-data -E "$sed_cmds"
+        sed --null-data -E "$(for path icon in $DECOR; do printf "s;$icon;$path;\n"; done)"
     }
 
     locate --null --existing "$HOME/*.pdf" \
@@ -174,8 +160,6 @@ function open-pdf() (
         | undecorate \
         | xargs --null --no-run-if-empty $PDF_READER
 )
-
-
 
 # nnoremap <C-p> :vertical rightbelow terminal ++close zsh -c "source ~/.zshrc && open-pdf"<CR>
 
