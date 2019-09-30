@@ -140,10 +140,32 @@ function open-pdf() (
     set -o pipefail
 
     PDF_READER=(zathura --fork)
+    DECOR=("$HOME/Dropbox/" " "
+           "$HOME"         "~")
 
-    function filter()     { sed --null-data -E "\;$HOME/\.\w+;d" }
-    function decorate()   { sed --null-data -e "s;$HOME/Dropbox/; ;" -e "s;^$HOME;~;" }
-    function undecorate() { sed --null-data -e "s; ;$HOME/Dropbox/;" -e "s;^~;$HOME;" }
+    function filter() { sed --null-data -E "\;$HOME/\.\w+;d" }
+
+    function decorate() {
+        sed_cmds=()
+        for pattern decor in $DECOR; do
+            sed_cmds+="s;$pattern;$decor;"
+        done
+
+        # String the sed commands with \n
+        local IFS=$'\n'
+        sed --null-data -E "$sed_cmds"
+    }
+
+    function undecorate() {
+        sed_cmds=()
+        for original decor in $DECOR; do
+            sed_cmds+="s;$decor;$original;"
+        done
+
+        # Join sed_cmds with \n
+        local IFS=$'\n'
+        sed --null-data -E "$sed_cmds"
+    }
 
     locate --null --existing "$HOME/*.pdf" \
         | filter \
@@ -152,6 +174,8 @@ function open-pdf() (
         | undecorate \
         | xargs --null --no-run-if-empty $PDF_READER
 )
+
+
 
 # nnoremap <C-p> :vertical rightbelow terminal ++close zsh -c "source ~/.zshrc && open-pdf"<CR>
 
