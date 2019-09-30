@@ -9,8 +9,8 @@ ZSH=/usr/share/oh-my-zsh/
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ZSH_THEME=powerline
 # ZSH_THEME=frisk
-# ZSH_THEME=af-magic
-ZSH_THEME=agnoster
+ZSH_THEME=af-magic
+# ZSH_THEME=agnoster
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -128,8 +128,32 @@ bindkey '^X^A' fasd-complete
 bindkey '^X^F' fasd-complete-f
 bindkey '^X^Z' fasd-complete-d
 
+bindkey -s '^[m' '^a{^e 2>/dev/null &} && disown\n'
+bindkey -s '^[R' 'tput reset\n'
+
+# woooooooooooooooooooooooooooooow
 bindkey -s '^[r' 'rr\n'
-bindkey -s '^X^P' 'zathura --fork pdf^X^F'
+# bindkey -s '^X^P' 'zathura --fork pdf^X^F'
+bindkey -s '^X^P' 'open-pdf\nexit\n'
+
+function open-pdf() (
+    set -o pipefail
+
+    PDF_READER=(zathura --fork)
+
+    function filter()     { sed --null-data -E "\;$HOME/\.\w+;d" }
+    function decorate()   { sed --null-data -e "s;$HOME/Dropbox/; ;" -e "s;^$HOME;~;" }
+    function undecorate() { sed --null-data -e "s; ;$HOME/Dropbox/;" -e "s;^~;$HOME;" }
+
+    locate --null --existing "$HOME/*.pdf" \
+        | filter \
+        | decorate \
+        | fzf --read0 --multi --reverse --print0 \
+        | undecorate \
+        | xargs --null --no-run-if-empty $PDF_READER
+)
+
+# nnoremap <C-p> :vertical rightbelow terminal ++close zsh -c "source ~/.zshrc && open-pdf"<CR>
 
 if [[ $LAUNCH = yes ]]; then
     cat <<EOF
@@ -138,10 +162,21 @@ Some shortcuts:
 
 EOF
     bindkey -s '^M' '&\ndisown\nexit\n'
+    bindkey -s '^X^P' 'zathura --fork "$(locate "$HOME/*.pdf" | fzf -m)"\nexit\n'
 fi
 
 # Exercism completions
 if [ -f ~/.config/exercism/exercism_completion.zsh ]; then
     . ~/.config/exercism/exercism_completion.zsh 
+fi
+
+# Powerline
+F=/usr/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh
+powerline-daemon -q
+[ -f $F ] && . $F
+
+# Ruby gems
+if which ruby >/dev/null && which gem >/dev/null; then
+        PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
 fi
 
