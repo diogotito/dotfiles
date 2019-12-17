@@ -1,0 +1,16 @@
+QMenu, QMenuBar, QMenuBar::item {
+    background-color: #444444;
+    color: #eeeeee;
+}
+
+QMenu::item:disabled {
+    color: #888888
+}
+
+QMenuBar::item:selected {
+   background-color:  #686868;
+}
+
+QMenu::item:selected {
+    background-color: #1793D1;
+}
