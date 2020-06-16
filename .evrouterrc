@@ -1,0 +1,6 @@
+"Razer Razer BlackWidow" ".*" any key/185 "XButton/2"
+
+Window "Minecraft.*"
+"Razer Razer DeathAdder Chroma" ".*" none key/275 "XKey/Shift_L"
+"Razer Razer DeathAdder Chroma" ".*" none key/276 "XKey/Control_L"
+
