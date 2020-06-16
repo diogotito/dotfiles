@@ -1,4 +1,5 @@
 #!/bin/sh
 export GTK2_RC_FILES=/usr/share/themes/Numix/gtk-2.0/gtkrc
 export GTK_THEME=Numix
+export SWT_GTK3=0
 exec eclipse "$@"

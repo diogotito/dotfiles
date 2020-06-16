@@ -1,16 +1,5 @@
-inoremap pl<tab> System.out.println();<esc>hi
-inoremap pls<tab> System.out.println("");<esc>hhi
-inoremap pf<tab> System.out.printf("");<esc>hhi
-inoremap fmt<tab> String.format("");<esc>hhi
-inoremap psf<tab> private static final 
-inoremap pusf<tab> public static final 
-
 inoremap jk <esc>
-nnoremap _ ^
-nnoremap ^ _
-nnoremap ,c ct;
-nnoremap ,d dt;
-nnoremap ,<space> i<space><esc>la<space>
+inoremap kj <esc>
 
 set clipboard=unnamedplus
 
@@ -27,8 +16,3 @@ set tabstop=4
 set softtabstop=4
 
 set autochdir
-
-set nocleanindent
-set noexitlinkmode
-set contentassistmode
-set startnormalmode

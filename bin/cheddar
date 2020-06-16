@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cd ~/apps/Cheddar-3.1-Linux32-bin
+source cheddar.bash
+exec cheddar "$@"
+

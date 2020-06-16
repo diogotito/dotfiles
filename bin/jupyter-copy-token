@@ -1,0 +1,5 @@
+#!/bin/bash
+jupyter notebook list --json \
+    | jq -r .token \
+    | tee >(notify-send 'Jupyter Notebook tokens:' "$(cat)") \
+          >(tail -n 1 | xclip -selection clipboard)

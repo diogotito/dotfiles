@@ -10,4 +10,5 @@ xrandr --output LVDS-1 --off                      \
        --output DP-1 --off
 
 # repor o background, para aparecer como deve ser
-feh --bg-fill '/home/diogo/Pictures/Wallpapers/t3_5bjy01.png'
+# feh --bg-fill '/home/diogo/Pictures/Wallpapers/t3_5bjy01.png'
+nitrogen --restore

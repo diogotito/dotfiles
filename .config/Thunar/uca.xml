@@ -1,4 +1,4 @@
-<?xml encoding="UTF-8" version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <actions>
 <action>
 	<icon>utilities-terminal</icon>
@@ -6,6 +6,26 @@
 	<unique-id>1546918356324943-1</unique-id>
 	<command>exo-open --working-directory %f --launch TerminalEmulator</command>
 	<description>Example for a custom action</description>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+<action>
+	<icon>firefox</icon>
+	<name>Browse</name>
+	<unique-id>1569511491689043-1</unique-id>
+	<command>jq -r &apos;.url&apos; %N | xargs -n 1 firefox</command>
+	<description>Open Dropbox.com URLs in Firefox</description>
+	<patterns>*.web</patterns>
+	<other-files/>
+	<text-files/>
+</action>
+<action>
+	<icon>code-oss</icon>
+	<name>Open in VS Code</name>
+	<unique-id>1572273198229837-1</unique-id>
+	<command>code %f</command>
+	<description>Open this folder in Visual Studio Code</description>
 	<patterns>*</patterns>
 	<startup-notify/>
 	<directories/>

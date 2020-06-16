@@ -1,26 +1,58 @@
-" I trust the Vim 8.0 defaults
-source /usr/share/vim/vim80/defaults.vim
+runtime  defaults.vim
+runtime! archlinux.vim
+
+augroup i3config
+    autocmd!
+    autocmd BufReadPre $HOME/.config/i3/config set modelineexpr
+augroup END
+
+
+filetype plugin indent on
+
+
+
+" Plugin specific
+" execute pathogen#infect()
+
+nnoremap <C-n> :NERDTreeToggle<CR>
 
 
 " User interface
+color dracula
+set laststatus=2
+let g:airline_theme = 'cool'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+
+
+
 " color solarized
-color pablo
 set background=light
 set background=dark
 if has("gui_running")
     set lines=35 columns=150
-	color desert
-    set guioptions-=T  " remove the toolbar, but keep the menubar
+	color dracula
+    let g:airline_theme = 'cool'
+    set guioptions-=T  " toolbar
+    set guioptions-=m  " menubar
+    set guifont=Source\ Code\ Pro\ 12,Fixed\ 12
 end
+
 set title         " Always set the terminal title to 'titlestring'
+
+set number
+set cursorline
+
 " Change cursor shape in different modes
 let &t_SI = "\<Esc>[6 q"
 let &t_SR = "\<Esc>[4 q"
 let &t_EI = "\<Esc>[2 q"
 
 " Miscellaneous
-" set clipboard^=unnamed
-" path+=**
+set clipboard^=unnamed
+set path+=.,**
+set viminfo+=%
+set splitright
  
 " Indentation
 set autoindent
@@ -32,14 +64,21 @@ set shiftround    " multiples of 4
 set expandtab     " I generally prefer spaces over tabs
 
     " Searching
-set hlsearch
+" set hlsearch
 set ignorecase
 set smartcase     " Overrides ignorecase if search pattern has uppercase chars.
 
+" other features
+set dictionary=/usr/share/dict/british,/usr/share/dict/portuguese
+set spelllang=en,pt
 
 " Mappings
-nnoremap <F9> :noh<CR>
+nnoremap gb :ls<CR>:b<space>
+nnoremap <Tab> <C-6>
 inoremap jk <esc>
+inoremap kj <esc>
+
+nnoremap <esc>t :vertical rightbelow terminal<CR>
 
 " Refinements {{{
 " set ttyfast

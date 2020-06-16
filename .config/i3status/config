@@ -17,6 +17,7 @@ general {
 
 order += "run_watch VPN"
 order += "wireless _first_"
+order += "memory"
 # order += "ethernet _first_"
 # order += "cpu_usage"
 # order += "load"
@@ -35,6 +36,15 @@ run_watch VPN {
 
 cpu_usage {
         format = " cpu  %usage "
+}
+
+memory {
+        color_degraded = "#666666"
+        threshold_degraded = "50%"
+        threshold_critical = "10%"
+        format          = "" # I usually don't care about my RAM when not using Windows
+        format_degraded = "  🗗  %used used,  %available available "
+        # format = "%free %available (%used) / %total"
 }
 
 load {
@@ -66,7 +76,7 @@ battery all {
         format_down = " No battery "
         last_full_capacity = true
         integer_battery_capacity = true
-        # status_chr = ""
+        status_chr = " "
         status_chr = "⚡"
         # status_bat = "bat"
         status_bat = "☉"
@@ -83,4 +93,5 @@ tztime local {
         # format = "📆🗓 %Y-%m-%d %H:%M:%S"
         # format = " %d/%m/%Y  ⏲ %H:%M |"
         format = " %d/%m/%Y  %H:%M "
+        # format = " 🗓  %Y-%m-%d	⏲  %H:%M "
 }

@@ -9,8 +9,8 @@ ZSH=/usr/share/oh-my-zsh/
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ZSH_THEME=powerline
 # ZSH_THEME=frisk
-ZSH_THEME=af-magic
 # ZSH_THEME=agnoster
+# ZSH_THEME=af-magic
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -57,7 +57,8 @@ export HISTFILE=~/.zsh_history
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+# plugins=(git)
+plugins=(git fzf)
 
 
 # User configuration
@@ -96,8 +97,8 @@ fi
 
 source $ZSH/oh-my-zsh.sh
 
-autoload -Uz promptinit
-promptinit
+# autoload -Uz promptinit
+# promptinit
 # prompt adam1
 
 autoload -U select-word-style
@@ -130,6 +131,9 @@ bindkey '^X^Z' fasd-complete-d
 
 bindkey -s '^[m' '^a{^e 2>/dev/null &} && disown\n'
 bindkey -s '^[R' 'tput reset\n'
+bindkey -s '^[L' 'exa --long -F --git^M'
+bindkey -s '^[F' 'thunar .\n'
+bindkey -s '\e[18~' 'mkdir '  # Binds F7
 
 # woooooooooooooooooooooooooooooow
 bindkey -s '^[r' 'rr\n'
@@ -140,10 +144,13 @@ function open-pdf() (
     set -o pipefail
 
     PDF_READER=(zathura --fork)
-    DECOR=("$HOME/Dropbox/" " "
-           "$HOME"         "~")
 
-    function filter() { sed --null-data -E "\;$HOME/\.\w+;d" }
+    DECOR=("$HOME/Dropbox/" "\ue707 "
+           "$HOME"          "~")
+
+    function filter() {
+        sed --null-data -E "\;$HOME/\.\w+;d"
+    }
 
     function decorate() {
         sed --null-data -E "$(for path icon in $DECOR; do printf "s;$path;$icon;\n"; done)"
@@ -153,12 +160,16 @@ function open-pdf() (
         sed --null-data -E "$(for path icon in $DECOR; do printf "s;$icon;$path;\n"; done)"
     }
 
-    locate --null --existing "$HOME/*.pdf" \
+    [[ $1 == -u ]] && dunstify decorating "$2" && sleep 2s && res="$(undecorate <<<"$2")" && dunstify result: "$res" && echo yay && sleep 10s
+    PREVIEW='pdftotext "$(zsh -ic '\''open-pdf -u "{}"'\'')" -'
+
+    exec locate --null --existing "$HOME/*.pdf" \
         | filter \
         | decorate \
         | fzf --read0 --multi --reverse --print0 \
         | undecorate \
         | xargs --null --no-run-if-empty $PDF_READER
+                                                                   # --preview="$PREVIEW" 
 )
 
 # nnoremap <C-p> :vertical rightbelow terminal ++close zsh -c "source ~/.zshrc && open-pdf"<CR>
@@ -187,4 +198,25 @@ powerline-daemon -q
 if which ruby >/dev/null && which gem >/dev/null; then
         PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
 fi
+
+# VTE Configuration for Tilix
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+        source /etc/profile.d/vte.sh
+fi
+
+# # Emscripten
+#
+# if [ -f ~/asdf/emsdk/emsdk_env.sh ]; then
+#     source ~/asdf/emsdk/emsdk_env.sh
+# fi
+
+# Bitwarden
+export BW_SESSION="0zAJ8dcK6vJT3UewqnHmjs+xS8Q0QIxeb3K+onCtpIxb/3GPGnrq3WSryAT5gQMO0kQYBlUuQTeOYTbmDe0ryg=="
+
+export PATH=/home/diogo/.local/bin:/home/diogo/.emacs.d/bin:$PATH
+
+source /home/diogo/.config/broot/launcher/bash/br
+
+# Starship
+eval "$(starship init zsh)"
 

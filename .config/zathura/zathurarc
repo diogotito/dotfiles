@@ -1,12 +1,27 @@
 set selection-clipboard clipboard
-set default-bg #112244
 set statusbar-home-tilde
 set window-title-basename
 
-set default-bg \#181818
-set statusbar-bg \#2D2D2D
-set statusbar-fg \#dedede
+# SyncTex
+set synctex true
+set synctex-editor-command "subl %{input}:%{line}"
+
+# Appearance
+
+set guioptions sv
+set font "Source Sans Pro 10"
+
+set default-bg \#181818             # \#dedede
+set statusbar-bg \#2D2D2D            # \#2D2D2D
+set statusbar-fg \#dedeff
+set index-active-bg \#D64937
+set index-active-fg \#dedede
+
+# Recolor - dark theme
 set recolor-lightcolor \#181818
 set recolor-darkcolor \#dedede
 
+# Recolor - Darcula (IntelliJ dark theme)
+# set recolor-lightcolor \#AFB1B3
+# set recolor-darkcolor \#2b2b2b
 

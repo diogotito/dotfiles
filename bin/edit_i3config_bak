@@ -1,0 +1,21 @@
+#!/bin/bash
+
+cd ~/.config || exit
+
+FILE='.config/i3/config'
+SWP=$(perl -pe '$_.chomp; s@(?<=/)([^/]*)$@.$1.swp@' <<< $FILE)
+
+# TODO: tentar reescrever usando so o `sed`
+
+
+if lsof "$SWP" >/dev/null 2>&1; then
+	i3-msg "[title=$FILE] focus" >/dev/null
+else
+	i3-sensible-terminal --geometry=120x35 \
+                         --title="⚙ i3 config" \
+                         -x sh -c "vim ~/.config/i3{,status}/config +'n|e#' && i3-msg reload"
+    
+fi
+
+# +NERDTreeToggle +/i3 +'norm o' +'wincmd w'
+

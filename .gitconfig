@@ -1,3 +1,12 @@
 [user]
 	name = diogotito
 	email = diogotitomarques@gmail.com
+[core]
+    pager = less -EX
+[alias]
+	st = status
+[gui]
+	recentrepo = /home/diogo/asdf/godot/Flappy Godot
+	recentrepo = /home/diogo/git/teledraw
+[credential]
+	helper = /usr/lib/git-core/git-credential-libsecret

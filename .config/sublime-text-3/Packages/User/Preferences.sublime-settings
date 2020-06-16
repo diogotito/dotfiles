@@ -1,7 +1,20 @@
 {
 	"added_words":
 	[
-		"Diogo"
+		"Diogo",
+		"Thymio",
+		"Aseba",
+		"Raspberry",
+		"Python",
+		"Medulla",
+		"Processing",
+		"Android",
+		"robot",
+		"smartphone",
+		"tablet",
+		"Raspbian",
+		"odometria",
+		"reflectância"
 	],
 	"auto_complete_triggers":
 	[
@@ -16,14 +29,19 @@
 	],
 	"auto_find_in_selection": true,
 	"bold_folder_labels": true,
-	"color_scheme": "Packages/Theme - Centurion/Galea.tmTheme",
+	"color_scheme": "Packages/Solarized Color Scheme/Solarized (light).sublime-color-scheme",
+	"dictionary": "Packages/LanguagePortuguese/Portuguese (European).dic",
 	"draw_centered": false,
-	"font_size": 9,
+	"font_size": 11,
 	"gutter": true,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
+	],
+	"ignored_words":
+	[
+		"operá"
 	],
 	"line_numbers": true,
 	"line_padding_bottom": 2,
@@ -33,6 +51,9 @@
 	[
 		80
 	],
-	"theme": "Centurion.sublime-theme",
+	"theme": "Adaptive.sublime-theme",
+	"ui_native_titlebar": false,
+	"ui_separator": true,
+	"ui_wide_scrollbars": false,
 	"vintageous_use_ctrl_keys": false
 }

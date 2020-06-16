@@ -35,10 +35,14 @@ do
 		APPLESCRIPT
 		;;
 	*)
-		xdotool search --onlyvisible --class "$app" windowfocus key \
-		    --window %@ 'ctrl+r' || {
-			1>&2 echo "unable to signal an application named \"$app\""
-		}
+        prev=$(xdotool getactivewindow)
+        xdotool search --onlyvisible --class "$app" \
+            windowfocus \
+            key  --window %@ 'ctrl+r'
+        if [ $? -ne 0 ]; then 
+            1>&2 echo "unable to signal an application named \"$app\""
+        fi
+        xdotool windowfocus $prev
 		;;
 	esac
 done

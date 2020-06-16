@@ -1,3 +1,14 @@
+(require 'package)
+(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+                    (not (gnutls-available-p))))
+       (proto (if no-ssl "http" "https")))
+  
+  ;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired
+  (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
+  ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
+  (when (< emacs-major-version 24)
+    ;; For important compatibility libraries like cl-lib
+    (add-to-list 'package-archives (cons "gnu" (concat proto "://elpa.gnu.org/packages/")))))
 
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
@@ -5,11 +16,21 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
-(require 'haskell-interactive-mode)
-(require 'haskell-process)
-(add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+;; (require 'haskell-interactive-mode)
+;; (require 'haskell-process)
 
+;; (add-hook 'haskell-mode-hook 'haskell-auto-insert-module-template 'interactive-haskell-mode)
 
+;; (add-hook 'haskell-mode-hook
+;;           (lambda ()
+;;             (set (make-local-variable 'company-backends)
+;;                  (append '((company-capf company-dabbrev-code))
+;;                          company-backends))))
+
+;; I don't know what I'm doing
+(tool-bar-mode nil)
+(menu-bar-mode nil)
+(column-number-mode)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -19,52 +40,30 @@
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
  '(ansi-color-names-vector
-   (vector "#cccccc" "#f2777a" "#99cc99" "#ffcc66" "#6699cc" "#cc99cc" "#66cccc" "#515151"))
- '(custom-enabled-themes nil)
+   ["black" "#d55e00" "#009e73" "#f8ec59" "#0072b2" "#cc79a7" "#56b4e9" "white"])
+ '(custom-enabled-themes (quote (misterioso)))
  '(custom-safe-themes
    (quote
-    ("06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" default)))
- '(fci-rule-color "#515151")
- '(haskell-mode-hook
-   (quote
-    (haskell-decl-scan-mode haskell-indentation-mode highlight-uses-mode imenu-add-menubar-index interactive-haskell-mode)))
+    ("e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855" default)))
+ '(doc-view-continuous t)
+ '(haskell-process-auto-import-loaded-modules t)
+ '(haskell-process-log t)
+ '(haskell-process-suggest-remove-import-lines t)
+ '(haskell-stylish-on-save t)
  '(inhibit-startup-screen t)
- '(initial-scratch-message nil)
- '(package-archives
-   (quote
-    (("melpa" . "https://melpa.org/packages/")
-     ("gnu" . "http://elpa.gnu.org/packages/"))))
+ '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (ztree spinner svg svg-clock apu arduino-mode websocket windresize god-mode goto-chg undo-tree vimish-fold 2048-game csv-mode evil evil-args evil-commentary evil-easymotion evil-ediff evil-escape evil-exchange evil-god-state evil-leader evil-mark-replace evil-matchit evil-mc evil-mc-extras evil-numbers evil-org evil-paredit evil-quickscope evil-replace-with-register evil-rsi evil-smartparens evil-snipe evil-space evil-surround evil-swap-keys evil-tabs evil-terminal-cursor-changer evil-vimish-fold evil-visual-mark-mode evil-visual-replace evil-visualstar company-ghc company-go company-shell company-web haskell-mode haskell-snippets)))
+    (clips-mode magit elm-mode elm-yasnippets flycheck-elm company company-ghci company-shell haskell-mode darkroom)))
  '(tool-bar-mode nil)
- '(tool-bar-style (quote text))
- '(vc-annotate-background nil)
- '(vc-annotate-color-map
-   (quote
-    ((20 . "#f2777a")
-     (40 . "#f99157")
-     (60 . "#ffcc66")
-     (80 . "#99cc99")
-     (100 . "#66cccc")
-     (120 . "#6699cc")
-     (140 . "#cc99cc")
-     (160 . "#f2777a")
-     (180 . "#f99157")
-     (200 . "#ffcc66")
-     (220 . "#99cc99")
-     (240 . "#66cccc")
-     (260 . "#6699cc")
-     (280 . "#cc99cc")
-     (300 . "#f2777a")
-     (320 . "#f99157")
-     (340 . "#ffcc66")
-     (360 . "#99cc99"))))
- '(vc-annotate-very-old-color nil))
+ '(x-select-enable-clipboard-manager nil))
+
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
-(put 'scroll-left 'disabled nil)
+ '(default ((t (:inherit nil :stipple nil :background "#2d3743" :foreground "#e1e1e0" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "ADBO" :family "Source Code Pro")))))
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)

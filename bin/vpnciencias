@@ -1,0 +1,114 @@
+#!/bin/bash
+strong="/usr/sbin/ipsec"
+conn="ciencias"
+action=$1
+strongstate=`$strong status | grep -o up`
+vpnpeerip="194.117.47.2"
+gateway=`ip route list match 0.0.0.0/0 | awk '{print $3}'`
+dev="ppp0"
+t="0"
+timeout="60"
+
+if [ "$action" == "start" ]; then
+	if [ "$strongstate" != "up" ]; then
+		$strong start
+		sleep 2
+		$strong up $conn
+		sleep 1
+		xl2tpd
+		sleep 1
+		echo "Trying..."
+		echo "c $conn" > /var/run/xl2tpd/l2tp-control
+		echo "Adding new route to peer using $gateway as gateway"
+		route add -host $vpnpeerip gw $gateway
+		sleep 1
+		echo "Waiting for ppp interface to became ready..."
+		while [ $t -lt $timeout ]
+		do
+			ppp=`ip add | grep $dev | grep $vpnpeerip`
+			if [ ! -z "$ppp" ]; then
+				pppip=`ip addr show $dev | grep peer | awk '{print $2}'`
+				echo "Received IP address $pppip"
+				echo "Adding new default route via device $dev"
+				route add -net 0.0.0.0 dev $dev
+				t=$timeout
+				echo "Successfully established a VPN session with FCUL!!"
+			fi
+			true $((t=t+1))
+			if [ -z "$ppp" ] && [ "$t" == "$timeout" ]; then
+				echo "Timeout was reached and no IP address was assigned to ppp interface..."
+				echo "Check configuration files and user credentials!!"
+				echo "Leaving and disconneting IPSec session..."
+				echo "d $conn" > /var/run/xl2tpd/l2tp-control
+				pkill xl2tpd
+				$strong stop
+				route del -host $vpnpeerip
+			fi
+			sleep 1
+		done
+	else
+		echo "StrongSwan is running..."
+		status=`$strong status | egrep $conn | egrep -o ESTABLISHED`
+		if [ "$status" == "ESTABLISHED" ]; then
+			echo "Connection $conn is already established !!"
+			echo "If vpn does not work maybe you should restart everything..."
+		else
+			echo "Bringing up connection $conn..."
+			$strong up $conn
+			sleep 1
+			xl2tpd
+			sleep 1
+			echo "Trying..."
+			echo "c $conn" > /var/run/xl2tpd/l2tp-control
+			echo "Adding new route to peer using $gateway as gateway"
+			route add -host $vpnpeerip gw $gateway
+			sleep 1
+			echo "Waiting for ppp interface to became ready..."
+			while [ $t -lt $timeout ]
+			do
+				ppp=`ip add | grep $dev | grep $vpnpeerip`
+				if [ ! -z "$ppp" ]; then
+					pppip=`ip addr show $dev | grep peer | awk '{print $2}'`
+					echo "Received IP address $pppip"
+					echo "Adding new default route via device $dev"
+					route add -net 0.0.0.0 dev $dev
+					t=$timeout
+					echo "Successfully established a VPN session with FCUL..."
+				fi
+				true $((t=t+1))
+				if [ -z "$ppp" ] && [ "$t" == "$timeout" ]; then
+					echo "Timeout was reached and no IP address was assigned to ppp interface..."
+					echo "Check configuration files and user credentials!!"
+					echo "Leaving and disconneting IPSec session..."
+					echo "d $conn" > /var/run/xl2tpd/l2tp-control
+					pkill xl2tpd
+					$strong stop
+					route del -host $vpnpeerip
+				fi
+				sleep 1
+			done
+		fi
+	fi
+elif [ "$action" == "stop" ]; then
+	pppip=`ip addr show | grep $vpnpeerip | awk '{print $2}'`
+	if [ ! -z "$pppip" ]; then
+		echo -n "Disconnecting from VPN server... "
+		echo "d $conn" > /var/run/xl2tpd/l2tp-control
+		echo "Done!!"
+		pkill xl2tpd
+	else
+		echo "There is no VPN session to end!!"
+	fi
+	if [ "$strongstate" == "up" ]; then
+		$strong stop
+	fi
+	routeup=`ip route | grep $vpnpeerip | awk '{print $1}'`
+	if [ ! -z "$routeup" ]; then
+		echo -n "Deleting VPN route... "
+		lastgw=`route -n | grep $vpnpeerip | grep -v $dev | awk '{print $2}'`
+		route del -host $vpnpeerip gw $lastgw
+		echo "Done!!"
+	fi
+else
+	echo "Usage vpnciencias < start | stop >"
+fi

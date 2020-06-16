@@ -1,1 +1,6 @@
+rofi.modi: window,run,drun,ssh,calc,keys
 rofi.matching: fuzzy
+rofi.sort: true
+rofi.levenshtein-sort: false
+rofi.show-icons: true
+rofi.theme: /usr/share/rofi/themes/Arc-Dark.rasi
