@@ -83,7 +83,7 @@ exec --no-startup-id evrouter /dev/input/by-id/usb-Razer_Razer_*
 bindsym $mod+Shift+Ctrl+b exec chromium app="$(xclip -selection clipboard -o)"
 # bindsym $mod+Shift+b exec bin/light-firefox.sh
 # bindsym $mod+Shift+b exec bin/light-firefox.sh
-bindsym $mod+b exec --no-startup-id bwmenu
+bindsym $mod+b exec --no-startup-id clipman-inhibit ~/git/bitwarden-rofi/bwmenu
 bindsym $mod+Shift+b exec firefox
 bindsym $mod+f exec thunar
 bindsym $mod+Shift+f exec nautilus --name=floating-nautilus

@@ -1,0 +1,8 @@
+#!/bin/bash
+#
+# Runs a command with Clipman disabled
+
+xfconf-query -c xfce4-panel -p /plugins/clipman/tweaks/inhibit -s true
+"$@"
+xfconf-query -c xfce4-panel -p /plugins/clipman/tweaks/inhibit -s false
+
