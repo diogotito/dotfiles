@@ -206,7 +206,7 @@ for_window [class="^mGBA$"]                           border normal
 for_window [class="Git-gui"]                          border normal
 for_window [class="Gitk"]                             border normal
 #for_window [class="Firefox" title="^Opening"]         border normal
-for_window [title="Application Finder"]               border normal
+for_window [title="Application Finder"]               border none, resize set 900 400
 for_window [class="Firefox" title="Mozilla Firefox$"] border pixel
 
 for_window [title="ZSH Launcher"]    border normal, floating enable, resize set 900 400, move position center
@@ -395,8 +395,8 @@ bindsym $mod+Shift+w exec rofi -sidebar-mode -show window
 #bindsym $mod+Shift+p exec --no-startup-id i3-dmenu-desktop
 #bindsym $mod+Shift+p exec --no-startup-id rofi -show
 #bindsym $mod+Shift+p exec --no-startup-id i3-dmenu-desktop
-bindsym $mod+p exec --no-startup-id darkblue xfce4-appfinder-category.sh "All Applications"
-bindsym Mod1+F3 exec --no-startup-id darkblue xfce4-appfinder
+bindsym $mod+p exec --no-startup-id xfce4-appfinder-category.sh "All Applications"
+bindsym Mod1+F3 exec --no-startup-id xfce4-appfinder
 bindsym $mod+Shift+Control+p exec --no-startup-id i3-dmenu-desktop
 #bindsym Mod1+Tab exec rofi -show
 
@@ -644,9 +644,9 @@ systemctl reboot\n\
 gksu \'efibootmgr --bootnext=0\' && systemctl reboot   # windows')
     # bindsym button3 exec qdbus com.georgefb.quickaccess /QuickAccess showMenu
     # bindsym button3 exec jgmenu_run
-    bindsym button3 exec --no-startup-id xfce4-appfinder-category.sh "Bookmarks"
-
- 
+    bindsym button3 exec --no-startup-id \
+            xfce4-appfinder-category.sh "Bookmarks" && \
+                i3-msg move position mouse && i3-msg border none
 }
 
 
