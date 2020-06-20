@@ -59,12 +59,14 @@
     # Horizontal padding.
     horizontal_padding = 8
 
+    corner_radius = 2
+
     # Defines width in pixels of frame around the notification window.
     # Set to 0 to disable.
     frame_width = 3
 
     # Defines color of the frame around the notification window.
-    frame_color = "#aaaaaa"
+    frame_color = "#99A1AD"
 
     # Define a color for the separator.
     # possible values are:
@@ -72,7 +74,7 @@
     #  * foreground: use the same color as the foreground;
     #  * frame: use the same color as the frame;
     #  * anything else will be interpreted as a X color.
-    separator_color = frame
+    separator_color = auto
 
     # Sort messages by urgency.
     sort = yes
@@ -159,13 +161,13 @@
     ### Icons ###
 
     # Align icons left/right/off
-    icon_position = off
+    icon_position = left
 
     # Scale larger icons down to this size, set to 0 to disable
     max_icon_size = 32
 
     # Paths to default icons.
-    icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
+    icon_path = /usr/share/icons/Qogir/16/places/:/usr/share/icons/Qogir/16/actions/:/usr/share/icons/Qogir/16/panel/:/usr/share/icons/Qogir/16/mimetypes/:/usr/share/icons/Qogir/16/devices/:/usr/share/icons/Qogir/16/emblems/:/usr/share/icons/Qogir/16/status/:/usr/share/icons/Qogir/16/apps/usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
 
     ### History ###
 
@@ -245,15 +247,15 @@
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#222222"
-    foreground = "#888888"
+    background = "#8888AA"
+    foreground = "#272A33"
     timeout = 10
     # Icon for notifications with low urgency, uncomment to enable
     #icon = /path/to/icon
 
 [urgency_normal]
-    background = "#285577"
-    foreground = "#ffffff"
+    background = "#3D4150"
+    foreground = "#EEEEFF"
     timeout = 10
     # Icon for notifications with normal urgency, uncomment to enable
     #icon = /path/to/icon

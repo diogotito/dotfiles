@@ -4,8 +4,13 @@
 #############################################################################################
 
 alias aliases='vim ~/.aliases; source ~/.aliases'
+alias bashrc='vim ~/.bashrc'
+alias zshrc='vim ~/.zshrc'
+alias vimrc='vim ~/.vimrc'
+alias xconfig='vim ~/.xmonad/xmonad.hs'
 
 alias config='git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
+alias conf='git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
 
 alias open=xdg-open # macOS has it right
 
@@ -18,7 +23,7 @@ alias cls='tput reset'
 # alias ls='ls --color=auto'
 # alias ll='ls --color=auto -lF'
 alias ls=exa
-alias ll='exa -lF --git'
+alias ll='exa -lF --git --header'
 alias du='du -h'
 
 alias lesse='less +G -eX'

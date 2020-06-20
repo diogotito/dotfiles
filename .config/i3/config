@@ -23,7 +23,7 @@ set $super Mod4
 # 2 - Startup                                                                  #
 #----------------------------------------------------------------------------###
 
-exec autorandr quarto
+exec --no-startup-id autorandr quarto
 # exec --no-startup-id feh --no-fehbg --bg-fill \|
 #                          '/home/diogo/Pictures/|Wallpapers/y36iTKU.png'
 # exec --no-startup-id ~/.fehbg                  |
@@ -636,7 +636,7 @@ bar {
     #     inactive_workspace #333333 #222222 #888888
     #     urgent_workspace   #75281E #d64937 #ffffff
       }
-    bindsym button2 exec eval $(rofi -theme dmenu_bottom -dmenu -p 'exit: ' <<<$'\
+    bindsym button2 exec eval $(rofi -theme dmenu -dmenu -p 'exit: ' <<<$'\
 i3-msg exit\n\
 systemctl poweroff\n\
 systemctl suspend\n\

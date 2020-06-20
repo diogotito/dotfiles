@@ -58,7 +58,7 @@ export HISTFILE=~/.zsh_history
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # plugins=(git)
-plugins=(git fzf)
+plugins=(git fzf zsh-abbr)
 
 
 # User configuration

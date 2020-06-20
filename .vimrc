@@ -3,7 +3,9 @@ runtime! archlinux.vim
 
 augroup i3config
     autocmd!
-    autocmd BufReadPre $HOME/.config/i3/config set modelineexpr
+    autocmd BufReadPre   $HOME/.config/i3/config set modelineexpr
+    autocmd BufWritePost $HOME/.config/i3/config silent !i3-msg reload
+    autocmd BufWritePost $HOME/.config/i3/config redraw!
 augroup END
 
 
