@@ -1,6 +1,8 @@
+{-# LANGUAGE NoMonomorphismRestriction #-}
 import XMonad
 import XMonad.Actions.DynamicWorkspaces
-import XMonad.Actions.GridSelect
+import XMonad.Actions.GridSelect as GS
+import XMonad.Actions.Launcher
 import XMonad.Actions.TreeSelect
 import XMonad.Actions.WindowBringer
 import XMonad.Config.Desktop
@@ -13,9 +15,10 @@ import XMonad.Layout.DecorationAddons
 import XMonad.Layout.DecorationMadness
 import XMonad.Layout.Grid
 import XMonad.Layout.MouseResizableTile
-import XMonad.Layout.NoBorders ( noBorders, smartBorders )
+import XMonad.Layout.NoBorders
 import XMonad.Layout.Tabbed
 import XMonad.Layout.WindowArranger
+import XMonad.Layout.Fullscreen
 import XMonad.Prompt
 import XMonad.Prompt.ConfirmPrompt (confirmPrompt)
 import XMonad.Prompt.Theme
@@ -27,6 +30,13 @@ import XMonad.Util.Ungrab
 import qualified XMonad.StackSet as W
 import System.Exit (exitWith, ExitCode ( ExitSuccess ) )
 import Data.Tree
+import Data.Tuple (swap)
+import Data.Map as M
+
+
+-- I want pipes in my Haskell!!!
+(|>) :: a -> (a -> b) -> b
+(|>) = flip ($)
 
 
 -- Apps
@@ -34,8 +44,16 @@ myBrowser = "firefox"
 myTerminal = "xfce4-terminal"
 
 
+-- Colors
+myNormalBorder = "#272A33"
+myFocusedBorder =  "#5294E2"
+myForegroundActiveColor = "#EEEEFF"
+myForegroundInactiveColor = "#CCCCCC"
+
 myStartup = do
-    spawnOnce "xmobar"
+    spawnOnce "xfce4-panel"
+    -- spawnOnce "stalonetray"
+    -- spawnOnce "xmobar"
     spawnOnce "autorandr quarto"
     spawnOnce "xfce4-volumed-pulse"
     spawnOnce "xfce4-power-manager"
@@ -51,11 +69,14 @@ myStartup = do
 myKeys :: [(String, X ())]
 myKeys =
     [ ("M-S-b", spawn myBrowser)
+    , ("M-<Return>", spawn myTerminal)
+    , ("M-S-<Return>", spawn myTerminal)
     , ("M-S-t", spawn "telegram-desktop")
     , ("M-S-v", themePrompt def)
     , ("M-S-f", spawn "nautilus")
     , ("M-f"  , spawn "thunar")
-    , ("M-S-p", spawn "xfce4-appfinder")
+    , ("M-p", spawn "darkblue xfce4-appfinder-category.sh 'All Applications'")
+    , ("M-S-p", spawn "dmenu_run")
     , ("M-g b", bringSelected def)
     , ("M-g g", goToSelected def)
     , ("M-g w", gridselectWorkspace def W.greedyView)
@@ -66,7 +87,7 @@ myKeys =
     , ("M-g c", spawn "darkblue gvim ~/.xmonad/xmonad.hs")
     , ("M-S-x", xmonadPrompt def)
     , ("M1-<Tab>", workspaceHistory >>= \(_:l:_) -> windows (W.view l))
-    , ("M-S-q", confirmExit)
+    , ("M-S-q", exitGrid)
     , ("M-u",   sendMessage ShrinkSlave)
     , ("M-i",   sendMessage ExpandSlave)
     ]
@@ -81,25 +102,63 @@ myKeys =
                         "Quit XMonad?" $
                             io (exitWith ExitSuccess)
 
-        exitGrid = runSelectedAction def [ ("Quit XMonad"    , confirmExit)
-                                         , ("Lock (fancy)"   , spawn fancyLockCmd)
-                                         , ("Lock (lightdm)" , spawn "dm-tool lock")
-                                         , ("Shut down"      , spawn "systemctl poweroff")
-                                         , ("Suspend"        , spawn "systemctl suspend")
-                                         , ("Reboot"         , spawn "systemctl reboot")
-                                         , ("Hibernate"      , fancyHibernate)
+
+        exitGrid = runSelectedAction cfg [ ("Lock (fancy)"     , fancyLock)
+                                         , ("Quit XMonad"      , confirmExit)
+                                         , ("Lock (lightdm)"   , spawn "dm-tool lock")
+                                         , ("Shut down"        , spawn "systemctl poweroff")
+                                         , ("Suspend"          , spawn "systemctl suspend")
+                                         , ("Reboot"           , spawn "systemctl reboot")
+                                         , ("Hibernate"        , fancyHibernate)
                                          , ("Reboot to Windows", winBoot)
                                          ]
+          where
+            cfg = def { gs_cellheight = 50, gs_cellwidth = 200, gs_colorizer = colorizer, gs_navigate = myNavigation, gs_font = "xft:Source Code Sans 12", gs_bordercolor = myFocusedBorder }
+            colorizer _ True  = return (myFocusedBorder, myForegroundActiveColor)
+            colorizer _ False = return (myNormalBorder, myForegroundInactiveColor)
+            myNavigation :: TwoD a (Maybe a)
+            myNavigation = makeXEventhandler $ shadowWithKeymap navKeyMap navDefaultHandler
+             where navKeyMap = M.fromList [
+                      ((0,xK_r)     , setPos (0,2) >> myNavigation)
+                     ,((0,xK_w)     , setPos (2,0) >> myNavigation)
+                     ,((0,xK_q)     , setPos (0,1) >> myNavigation)
+                     ,((shiftMask,xK_Q), setPos (0,1) >> myNavigation)
+                     ,((mod4Mask,xK_q), setPos (0,1) >> myNavigation)
+                     ,((shiftMask .|. mod4Mask,xK_Q), setPos (0,1) >> myNavigation)
+                     ,((0,xK_s)     , setPos (-1,0) >> myNavigation)
+                     ,((0,xK_Escape), GS.cancel)
+                     ,((0,xK_Return), GS.select)
+                     ,((0,xK_slash) , substringSearch myNavigation)
+                     ,((0,xK_Left)  , move (-1,0)  >> myNavigation)
+                     ,((0,xK_h)     , move (-1,0)  >> myNavigation)
+                     ,((0,xK_Right) , move (1,0)   >> myNavigation)
+                     ,((0,xK_l)     , move (1,0)   >> myNavigation)
+                     ,((0,xK_Down)  , move (0,1)   >> myNavigation)
+                     ,((0,xK_j)     , move (0,1)   >> myNavigation)
+                     ,((0,xK_Up)    , move (0,-1)  >> myNavigation)
+                     ,((0,xK_k)     , move (0,-1)  >> myNavigation)
+                     ,((0,xK_y)     , move (-1,-1) >> myNavigation)
+                     ,((0,xK_i)     , move (1,-1)  >> myNavigation)
+                     ,((0,xK_n)     , move (-1,1)  >> myNavigation)
+                     ,((0,xK_m)     , move (1,1)  >> myNavigation)
+                     ,((0,xK_space) , setPos (0,0) >> myNavigation)
+                     ]
+                   -- The navigation handler ignores unknown key symbols
+                   navDefaultHandler = const GS.defaultNavigation
 
-        fancyLockCmd = unwords [ "i3lock"
-                               , "--blur 5"
-                               , "--indicator --clock"
-                               , "--timecolor=1793D1ff"
-                               , "--datecolor=1793D1ff"
-                               ]
+            
+
+        fancyLock = do
+            unGrab
+            spawn $ unwords [ "i3lock"
+                            , "--blur 5"
+                            , "--indicator --clock"
+                            , "--timecolor=1793D1ff"
+                            , "--datecolor=1793D1ff"
+                            ]
 
         fancyHibernate = do
-            spawn fancyLockCmd
+            fancyLock
             spawn "systemctl hibernate"
 
         winBoot = do
@@ -108,27 +167,37 @@ myKeys =
 
 
 myLayout =
-    smartBorders mouseResizableTile |||
-    smartBorders mouseResizableTile { isMirrored = True } |||
+    (lessBorders Screen) mouseResizableTile |||
+    (lessBorders Screen) mouseResizableTile { isMirrored = True } |||
     centerMaster Grid |||
     buttonDeco shrinkText defaultThemeWithButtons floatSimpleSimple |||
     noBorders (tabbed shrinkText (theme adwaitaDarkTheme))
 
-myConfig = desktopConfig
-    { logHook = workspaceHistoryHook >> dynamicLog
-    , startupHook = myStartup
-    , layoutHook = myLayout
 
-    -- overrides
-    , modMask = mod4Mask
-    , terminal = myTerminal
-    , borderWidth = 4
-    , normalBorderColor = "#272A33"
-    , focusedBorderColor = "#5294E2"
-    }
+myManageHook = composeAll
+                 [ className =? "Xfce4-appfinder"   --> doFloat
+                 ]
 
-main = do
-  xmonad =<< xmobar (myConfig `additionalKeysP` myKeys)
+
+main = desktopConfig
+        { logHook = workspaceHistoryHook <+> dynamicLog
+        , startupHook = myStartup
+        , layoutHook = myLayout
+        , manageHook = myManageHook <+> manageHook desktopConfig
+
+        , modMask = mod4Mask
+        , terminal = "xfce4-terminal"
+        , borderWidth = 4
+        , normalBorderColor = myNormalBorder
+        , focusedBorderColor = myFocusedBorder
+        }
+
+    |> fullscreenSupport
+    |> (`additionalKeysP` myKeys)
+    |> xmobar
+
+    >>= xmonad
+
 
 -- Things to do
 --
@@ -148,20 +217,14 @@ main = do
 --
 --  Keybindings
 --      Launch apps:
---          <M-S-b>   Firefox
---          <M-f>     Thunar
 --          <PrtSc>   xfce4-screenshot?
---          <M-S-p>   xfce4-appfinder?   rofi?   algum runner do xmonad-contrib?
 --          <M-Tab>   rofi -sidebar-mode -show window
 --
 --  Other stuff to configure
 --      xmobar
 --
 --  Misc WM stuff
---      Automatically float some windows
---      Bring i3's "smart border" (a lonely window in a workspace doesn't have border)
---      Proper EWMH fullscreen handling
---      Confortable "Exit submap" (lock, suspend, hibernate, reboot to Windows, etc.)
+--      Proper EWMH fullscreen handling -- Only Firefox doesn't work
 
 -- Copy-pasted notes:
 --     desktopConfig is an XConfig that configures xmonad to ignore and
