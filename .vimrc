@@ -18,6 +18,8 @@ filetype plugin indent on
 
 nnoremap <C-n> :NERDTreeToggle<CR>
 
+let g:rustfmt_autosave = 1
+let g:rust_clip_command = 'xclip -selection clipboard'
 
 " User interface
 color dracula
@@ -86,7 +88,6 @@ nnoremap <esc>t :vertical rightbelow terminal<CR>
 " set ttyfast
 " set lazyredraw
 " }}}
-
 
 " vim: foldmethod=marker
 

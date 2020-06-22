@@ -5,7 +5,7 @@ cd ~/.config || exit
 TITLE="⚙ i3 config" 
 
 i3-msg "[title=\"$TITLE\"] focus" >/dev/null || \
-darkblue xfce4-terminal --geometry=120x35 \
+darkblue xfce4-terminal --geometry=120x30 \
                         --title="$TITLE" \
                         -x sh -c "vim ~/.config/i3{,status}/config +'n|e#' && i3-msg reload"
     
