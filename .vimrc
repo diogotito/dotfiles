@@ -3,9 +3,9 @@ runtime! archlinux.vim
 
 augroup i3config
     autocmd!
-    autocmd BufReadPre   $HOME/.config/i3/config set modelineexpr
-    autocmd BufWritePost $HOME/.config/i3/config silent !i3-msg reload
-    autocmd BufWritePost $HOME/.config/i3/config redraw!
+    autocmd BufReadPre   $HOME/.config/{i3,sway}/config set modelineexpr
+    autocmd BufWritePost $HOME/.config/{i3,sway}/config silent !i3-msg reload
+    autocmd BufWritePost $HOME/.config/{i3,sway}/config redraw!
 augroup END
 
 
@@ -20,6 +20,10 @@ nnoremap <C-n> :NERDTreeToggle<CR>
 
 let g:rustfmt_autosave = 1
 let g:rust_clip_command = 'xclip -selection clipboard'
+
+let g:ale_fixers = {
+\   'sh': [ 'shfmt' ],
+\}
 
 " User interface
 color dracula

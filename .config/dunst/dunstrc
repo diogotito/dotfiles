@@ -245,16 +245,16 @@
     context = ctrl+shift+period
 
 [urgency_low]
+    background = "#3D4150"
+    foreground = "#EEEEFF"
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#8888AA"
-    foreground = "#272A33"
     timeout = 10
     # Icon for notifications with low urgency, uncomment to enable
     #icon = /path/to/icon
 
 [urgency_normal]
-    background = "#3D4150"
+    background = "#8888AA"
     foreground = "#EEEEFF"
     timeout = 10
     # Icon for notifications with normal urgency, uncomment to enable

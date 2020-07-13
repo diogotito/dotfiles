@@ -25,6 +25,7 @@ exec --no-startup-id autorandr quarto
 exec_always --no-startup-id sleep 2s; nitrogen --restore
 exec --no-startup-id dunst
 exec --no-startup-id picom
+exec --no-startup-id sleep 2s; conky
 
 exec --no-startup-id setxkbmap -option grp:win_space_toggle
 
@@ -35,7 +36,8 @@ exec --no-startup-id sleep 0.1s; nm-applet                    # Network Manager 
 exec --no-startup-id sleep 0.1s; redshift-gtk                 # Make me sleepy before 1 AM
 exec --no-startup-id sleep 0.1s; xfce4-clipman                # Makes the 'Copy to clipboard' option appear
 exec --no-startup-id sleep 0.1s; xfce4-power-manager          # Makes battery & brightness work like in XFCE4
-exec --no-startup-id sleep 0.1s; polychromatic-tray-applet
+# exec --no-startup-id sleep 0.1s; polychromatic-tray-applet
+# exec --no-startup-id sleep 0.1s; syncthing-gtk
 # exec --no-startup-id sleep 0.1s; birdtray                     # Thunderbird tray
 exec_always --no-startup-id "killall xxkb; sleep 0.05s; xxkb" # xxkb sux
 
@@ -64,6 +66,7 @@ exec --no-startup-id evrouter /dev/input/by-id/usb-Razer_Razer_*
 
 bindsym $mod+Shift+Ctrl+b exec chromium app="$(xclip -selection clipboard -o)"
 bindsym $mod+b exec --no-startup-id clipman-inhibit ~/git/bitwarden-rofi/bwmenu
+bindsym $mod+t exec --no-startup-id ~/git/todofi.sh/todofi.sh -d ~/.todo/config
 bindsym $mod+Shift+b exec firefox
 bindsym $mod+f exec thunar
 bindsym $mod+Shift+f exec nautilus --name=floating-nautilus
@@ -98,10 +101,10 @@ bindsym $mod+KP_Add      exec --no-startup-id light -A 5 && dunstify -r 1234 -h 
 bindsym $mod+KP_Subtract exec --no-startup-id light -U 5 && dunstify -r 1234 -h int:value:`light` brightness
 bindsym $mod+KP_Enter    exec --no-startup-id playerctl play-pause
 bindsym XF86AudioPlay    exec --no-startup-id playerctl play-pause
-bindsym XF86AudioPrev    exec --no-startup-id playerctl next
-bindsym XF86AudioNext    exec --no-startup-id playerctl previous
-bindsym $mod+KP_Multiply exec --no-startup-id playerctl next
-bindsym $mod+KP_Divide   exec --no-startup-id playerctl previous
+bindsym XF86AudioPrev    exec --no-startup-id playerctl previous
+bindsym XF86AudioNext    exec --no-startup-id playerctl next
+bindsym $mod+KP_Multiply exec --no-startup-id playerctl previous
+bindsym $mod+KP_Divide   exec --no-startup-id playerctl next
 
 
 
@@ -187,6 +190,7 @@ for_window [class="^mGBA$"]                        floating enable
 for_window [title="i3 config$"]                    floating enable
 for_window [title="Network Connections"]           floating enable
 for_window [title="Nitrogen"]                      floating enable, border normal, move position center
+# for_window [title="Variety Images"]                floating enable
 for_window [instance="Godot_Engine"]               floating enable, border normal, move position center
 for_window [class="love"]                          floating enable, border normal, move position center
 for_window [title="^Godot Engine - " instance="Godot_Engine"] floating disable, border pixel
@@ -292,7 +296,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+Shift+p exec rofi -sidebar-mode -show drun
 bindsym $mod+Shift+w exec rofi -sidebar-mode -show window
 bindsym $mod+p exec --no-startup-id xfce4-appfinder-category.sh "All Applications"
-bindsym Mod1+F3 exec --no-startup-id xfce4-appfinder
+# bindsym Mod1+F3 exec --no-startup-id xfce4-appfinder
 bindsym $mod+Shift+Control+p exec --no-startup-id i3-dmenu-desktop
 
 # Preserve my Alt+Tabbing habit from using stacking window managers :D
@@ -471,6 +475,9 @@ gksu \'efibootmgr --bootnext=0\' && systemctl reboot   # windows')
     bindsym button3 exec --no-startup-id \
             xfce4-appfinder-category.sh "Bookmarks" && \
                 i3-msg move position mouse && i3-msg border none
+
+    bindsym button8 layout toggle split
+    bindsym button9 layout tabbed
 }
 
 
@@ -480,16 +487,16 @@ gksu \'efibootmgr --bootnext=0\' && systemctl reboot   # windows')
 
 # workspace names
 
-set $workspace_1 1:Term
-set $workspace_2 2:Web
-set $workspace_3 3:Ler
-set $workspace_4 4:Org
-set $workspace_5 5:Code
-set $workspace_6 6:Test
-set $workspace_7 7:Chat
-set $workspace_8 8:Config
-set $workspace_9 9:Monitor
-set $workspace_0 ·
+set $workspace_1 number "1: Term"
+set $workspace_2 number "2: Web"
+set $workspace_3 number "3: Ler"
+set $workspace_4 number "4: Org"
+set $workspace_5 number "5: Code"
+set $workspace_6 number "6: Test"
+set $workspace_7 number "7: Chat"
+set $workspace_8 number "8: Config"
+set $workspace_9 number "9: Monitor"
+set $workspace_0 "·"
 
 # switch to workspace 
 bindsym $mod+1 workspace $workspace_1

@@ -1,0 +1,4 @@
+set ideajoin
+set surround
+set commentary
+inoremap jk <Esc>
