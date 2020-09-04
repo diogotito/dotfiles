@@ -104,6 +104,10 @@ source $ZSH/oh-my-zsh.sh
 autoload -U select-word-style
 select-word-style bash
 
+
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
+
 function rr() {
     ranger --choosedir=$HOME/.rangerdir "$@"
     cd "$(cat ~/.rangerdir)"
@@ -134,6 +138,7 @@ bindkey -s '^[R' 'tput reset\n'
 bindkey -s '^[L' 'exa --long -F --git^M'
 bindkey -s '^[F' 'thunar .\n'
 bindkey -s '\e[18~' 'mkdir '  # Binds F7
+bindkey -s '^[S' '^p^asudo ^e'
 
 # woooooooooooooooooooooooooooooow
 bindkey -s '^[r' 'rr\n'

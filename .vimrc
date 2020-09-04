@@ -46,6 +46,8 @@ if has("gui_running")
     set guifont=Source\ Code\ Pro\ 12,Fixed\ 12
 end
 
+set hidden
+
 set title         " Always set the terminal title to 'titlestring'
 
 set number

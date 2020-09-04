@@ -3,5 +3,5 @@ rofi.matching: fuzzy
 rofi.sort: true
 rofi.levenshtein-sort: false
 rofi.show-icons: true
-rofi.terminal: i3-sensible-terminal
+rofi.terminal: xfce4-terminal
 rofi.theme: /usr/share/rofi/themes/gruvbox-dark-hard.rasi

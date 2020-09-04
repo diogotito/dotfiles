@@ -3,6 +3,8 @@
 # (either useful day-to-day or just some cool tricks)
 #############################################################################################
 
+alias sudo='sudo '
+
 alias aliases='vim ~/.aliases; source ~/.aliases'
 alias bashrc='vim ~/.bashrc'
 alias zshrc='vim ~/.zshrc'
@@ -28,6 +30,8 @@ alias du='du -h'
 
 alias lesse='less +G -eX'
 alias lecat='less -EX +G'
+
+alias df='dfc'
 
 alias xclip="xclip -selection clipbooard"
 
@@ -83,6 +87,7 @@ function nvm() {
 
 alias pacsizes="expac -H M --timefmt='%Y-%m-%d' '%m\t%l\t%-30v%n' | sort -rn | less"
 alias yolo="yay --noconfirm"
+alias pacram="mkdir -p /tmp/pkg && sudo pacman --cachedir /tmp/pkg"
 
 alias pacro='sudo pacman -Rns $(pacman -Qtdq)' # Remove orphan packages
 

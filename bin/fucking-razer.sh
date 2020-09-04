@@ -4,16 +4,26 @@ set -Eeuxo pipefail
 # set +xe
 
 
- MOUSE_ID=$(xinput | grep DeathAdder            \
-                   | grep pointer               \
-                   | grep -v "Consumer Control" \
-                   | cut -d $'\t' -f 2          \
-                   | cut -d = -f 2              \
-                   | head -1)
- 
-# echo "xinput device ID: $MOUSE_ID"
 
-xinput set-prop "$MOUSE_ID" 'libinput Accel Speed' "${1:--1.00}"
+
+xinput | grep DeathAdder            \
+       | grep pointer               \
+       | grep -v "Consumer Control" \
+       | cut -d $'\t' -f 2          \
+       | cut -d = -f 2              \
+       | while read -r mouse_id; do
+             xinput set-prop "$mouse_id" 'libinput Accel Speed' "${1:--1.00}" \
+                 && break
+         done
+
+
+# xinput | awk --field-separator '\t|=' --assign speed="${1:--1.00}" '
+#     /Razer DeathAdder/ && /pointer/ && !/Consumer Control/ {
+#         system("xinput set-prop " $3 " \"libinput Accel Speed\" $speed")
+#     }'
+
+
+# echo "xinput device ID: $MOUSE_ID"
 
 # xinput set-prop \
 #     'pointer:Razer Razer DeathAdder Chroma' \

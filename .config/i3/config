@@ -15,6 +15,9 @@
 set $mod Mod4
 set $super Mod4
 
+# OCD
+set $bar_height 25
+
 
 
 #----------------------------------------------------------------------------###
@@ -22,9 +25,11 @@ set $super Mod4
 #----------------------------------------------------------------------------###
 
 exec --no-startup-id autorandr quarto
-exec_always --no-startup-id sleep 2s; nitrogen --restore
+exec_always --no-startup-id nitrogen --restore
+exec --no-startup-id sleep 2s; nitrogen --restore
 exec --no-startup-id dunst
 exec --no-startup-id picom
+
 exec --no-startup-id sleep 2s; conky
 
 exec --no-startup-id setxkbmap -option grp:win_space_toggle
@@ -36,8 +41,8 @@ exec --no-startup-id sleep 0.1s; nm-applet                    # Network Manager 
 exec --no-startup-id sleep 0.1s; redshift-gtk                 # Make me sleepy before 1 AM
 exec --no-startup-id sleep 0.1s; xfce4-clipman                # Makes the 'Copy to clipboard' option appear
 exec --no-startup-id sleep 0.1s; xfce4-power-manager          # Makes battery & brightness work like in XFCE4
-# exec --no-startup-id sleep 0.1s; polychromatic-tray-applet
-# exec --no-startup-id sleep 0.1s; syncthing-gtk
+exec --no-startup-id sleep 0.1s; polychromatic-tray-applet
+exec --no-startup-id sleep 0.1s; syncthing-gtk
 # exec --no-startup-id sleep 0.1s; birdtray                     # Thunderbird tray
 exec_always --no-startup-id "killall xxkb; sleep 0.05s; xxkb" # xxkb sux
 
@@ -77,6 +82,7 @@ bindsym $mod+Shift+t exec telegram-desktop, [class="Telegram"] focus
 bindsym Print        exec xfce4-screenshooter
 bindsym Shift+Print  exec qdbus com.deepin.Screenshot /com/deepin/Screenshot StartScreenshot
 bindsym $mod+Shift+v exec xfce4-popup-clipman
+bindsym $mod+Ctrl+b  exec chromium-app
 
 bindsym $mod+Shift+x exec i3-msg $(rofi -dmenu \
                                          -p 'i3-msg ' -input ~/i3-commands.txt \
@@ -120,7 +126,7 @@ set $<CMD>         exec --no-startup-id
 set $>             -e
 set $</CMD>        ; mode "default"
 
-set $LAUNCH_main "Launch (B)Python (C)hromium (H)top (P)ing (M)usic (K)eyboard layout (O)pen a PDF (S)potify"
+set $LAUNCH_main "[LAUNCH]   (B)Python  (C)hromium  (H)top  (P)ing  (M)usic  (O)pen a PDF  (S)potify                     [FIX]   (K)eyboard layout   (X) compositor  (R)estore wallpaper"
 bindsym Mod1+F2 mode $LAUNCH_main
 
 mode $LAUNCH_main {
@@ -135,6 +141,9 @@ mode $LAUNCH_main {
 
     # fix picom (sometimes it offsets the screens in a weird way)
     bindsym X $<CMD> "killall picom; picom -b" $</CMD>
+
+    # fix wallpaper
+    bindsym R $<CMD> nitrogen --restore $</CMD>
 
     bindsym C exec "chromium"; mode default
 
@@ -175,6 +184,7 @@ for_window [class="^mGBA$"]                           border normal
 for_window [class="Git-gui"]                          border normal
 for_window [class="Gitk"]                             border normal
 for_window [title="Application Finder"]               border none, resize set 900 400
+for_window [class="jetbrains-toolbox"]                border none, floating enable; exec i3-msg move down 25 px
 for_window [class="Firefox" title="Mozilla Firefox$"] border pixel
 
 for_window [title="ZSH Launcher"]                  border normal, floating enable, resize set 900 400, move position center
@@ -199,7 +209,7 @@ for_window [title="^VLsub|VLSub"]                  floating enable, border norma
 for_window [title="Parse Tree Inspector"]          floating enable, resize set 900 600, move position center, border normal
 for_window [instance="floating-nautilus"]          floating enable, resize set 900 600, move position center
 for_window [class="Tk"]                            floating enable, border normal
-for_window [title="(?i)Hello World"]               floating enable, border normal, move position center
+# for_window [title="(?i)Hello World"]               floating enable, border normal, move position center
 
 for_window [title="i3 config$"] move position center
 
@@ -207,6 +217,7 @@ for_window [class="Blender"]       focus child, layout tabbed, focus
 for_window [class="Emacs"]         focus child, layout tabbed, focus
 for_window [class="Thunderbird"]   focus child, layout tabbed, focus
 for_window [class="jetbrains-idea-ce"] layout tabbed
+for_window [class="jetbrains-pycharm" title="win0"] floating enable
 
 assign [title="Mozilla Firefox$"]  → $workspace_2
 assign [class="code-oss"]    → $workspace_5
@@ -216,6 +227,7 @@ assign [class="Blender"]           → $workspace_5
 assign [class="Eclipse"]           → $workspace_5
 assign [class="jetbrains-idea-ce"] → $workspace_5
 assign [class="^mGBA$"]            → $workspace_6
+assign [class="Chromium"]          → $workspace_6
 assign [class="Steam"]             → $workspace_6
 assign [class="Caprine"]           → $workspace_7
 assign [class="TelegramDesktop"]   → $workspace_7
@@ -256,10 +268,10 @@ for_window [tiling] title_format " %title"
 
 # Mark
 # Alt + Shift + M -> "mark [a-z]"
-bindsym $mod+quotedbl exec i3-input -F 'mark --toggle %s' -l 1 -P 'mark: '
+bindsym $mod+Shift+quotedbl exec i3-input -F 'mark --add --toggle %s' -l 1 -P 'mark: '
 
 # Go To
-bindsym $mod+Shift+quotedbl exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Go to: '
+bindsym $mod+quotedbl exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Go to: '
 
 
 
@@ -293,9 +305,9 @@ bindsym $mod+Shift+Return exec darkblue xfce4-terminal -T 'ZSH Launcher'
 # kill focused window
 bindsym $mod+Shift+q kill
 
-bindsym $mod+Shift+p exec rofi -sidebar-mode -show drun
+bindsym $mod+p exec rofi -sidebar-mode -show drun
 bindsym $mod+Shift+w exec rofi -sidebar-mode -show window
-bindsym $mod+p exec --no-startup-id xfce4-appfinder-category.sh "All Applications"
+bindsym $mod+Shift+p exec --no-startup-id xfce4-appfinder-category.sh "All Applications"
 # bindsym Mod1+F3 exec --no-startup-id xfce4-appfinder
 bindsym $mod+Shift+Control+p exec --no-startup-id i3-dmenu-desktop
 
@@ -450,17 +462,20 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
+    # i3bar_command i3bar --transparency
+    #mode hide
     status_command i3status
     position top
     tray_padding 3
     colors {
 
         # Qogir theme
-        background #272931
+        # background #27293188  # i3bar --transparency
+        background #262a32
         statusline #dedede
         separator #2d2d2d
 
-        focused_workspace  #5294e2 #5294e2 #eeeeee
+        focused_workspace  #4D586E #4D586E #D3DAE3
         active_workspace   #272931 #272931 #dedede
         inactive_workspace #272931 #272931 #888888
         urgent_workspace   #333333 #900000 #ffffff
