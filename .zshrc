@@ -75,6 +75,16 @@ else
   export EDITOR='mvim'
 fi
 
+
+
+# SPAAAAAAAAAAAAAAAAACE
+# (
+#     (dfc -c always 2>/dev/null | grep --colo=never /dev/sda7) &
+# )
+# (bash and zsh suppress start/end background job messages in subshells
+
+
+
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 

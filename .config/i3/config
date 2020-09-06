@@ -103,14 +103,27 @@ bindsym $mod+F1      exec ~/bin/edit_i3config
 # bindsym XF86AudioRaiseVolume exec --no-startup-id dunstify -r 5678 -h int:value:`ponymix increase 5` volume
 # bindsym XF86AudioLowerVolume exec --no-startup-id dunstify -r 5678 -h int:value:`ponymix decrease 5` volume
 
-bindsym $mod+KP_Add      exec --no-startup-id light -A 5 && dunstify -r 1234 -h int:value:`light` brightness
-bindsym $mod+KP_Subtract exec --no-startup-id light -U 5 && dunstify -r 1234 -h int:value:`light` brightness
-bindsym $mod+KP_Enter    exec --no-startup-id playerctl play-pause
-bindsym XF86AudioPlay    exec --no-startup-id playerctl play-pause
-bindsym XF86AudioPrev    exec --no-startup-id playerctl previous
-bindsym XF86AudioNext    exec --no-startup-id playerctl next
-bindsym $mod+KP_Multiply exec --no-startup-id playerctl previous
-bindsym $mod+KP_Divide   exec --no-startup-id playerctl next
+# Sometimes Fn+F2 and Fn+F3 are too far away when I use my laptop as a secondary monitor
+bindsym $mod+KP_Add            exec --no-startup-id light -A 5 && dunstify -r 1234 -h int:value:`light` brightness
+bindsym $mod+KP_Subtract       exec --no-startup-id light -U 5 && dunstify -r 1234 -h int:value:`light` brightness
+
+# External monitor brightness
+# Steps to make this work:
+#   # pacman -S ddcutil
+#   # tee /etc/modules-load.d/i2c.conf <<< 'i2c-dev'
+#   # groupadd --system i2c
+#   # usermod $USER -aG i2c
+#   # cp /usr/share/ddcutil/data/45-ddcutil-i2c.rules /etc/udev/rules.d
+bindsym $mod+Shift+KP_Add      exec --no-startup-id ddcutil setvcp 10 + 20 && dunstify -r 1235 'LG brightness' "$(ddcutil getvcp 10)"
+bindsym $mod+Shift+KP_Subtract exec --no-startup-id ddcutil setvcp 10 - 20 && dunstify -r 1235 'LG brightness' "$(ddcutil getvcp 10)"
+
+# Control music players (and Spotify?) with playerctl
+bindsym $mod+KP_Enter          exec --no-startup-id playerctl play-pause
+bindsym XF86AudioPlay          exec --no-startup-id playerctl play-pause
+bindsym XF86AudioPrev          exec --no-startup-id playerctl previous
+bindsym XF86AudioNext          exec --no-startup-id playerctl next
+bindsym $mod+KP_Multiply       exec --no-startup-id playerctl previous
+bindsym $mod+KP_Divide         exec --no-startup-id playerctl next
 
 
 

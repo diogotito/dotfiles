@@ -17,5 +17,5 @@ export PYTHONRC="$HOME/.pythonrc"
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export DOTNET_ROOT=/opt/dotnet
 export MSBuildSDKsPath="/opt/dotnet/sdk/2.2.108/Sdks/";
-
+export MOZ_WEBRENDER=1
 

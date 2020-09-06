@@ -32,6 +32,7 @@ alias lesse='less +G -eX'
 alias lecat='less -EX +G'
 
 alias df='dfc'
+alias dfcr='dfc -c always 2>/dev/null | grep --colo=never /dev/sda7'
 
 alias xclip="xclip -selection clipbooard"
 
