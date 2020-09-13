@@ -29,7 +29,7 @@
 	],
 	"auto_find_in_selection": true,
 	"bold_folder_labels": true,
-	"color_scheme": "Packages/Theme - Monokai Pro/Monokai Pro (Filter Spectrum).sublime-color-scheme",
+	"color_scheme": "Packages/Visual Studio Bold Color Scheme/Visual Studio Bold.tmTheme",
 	"dictionary": "Packages/LanguagePortuguese/Portuguese (European).dic",
 	"draw_centered": false,
 	"font_size": 11,

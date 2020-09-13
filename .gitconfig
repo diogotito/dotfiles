@@ -8,5 +8,9 @@
 [gui]
 	recentrepo = /home/diogo/asdf/godot/Flappy Godot
 	recentrepo = /home/diogo/git/teledraw
+	recentrepo = /home/diogo/git/new_pycharm_project
 [credential]
 	helper = /usr/lib/git-core/git-credential-libsecret
+[guitool "Terminal here"]
+	cmd = xfce4-terminal
+	noconsole = yes

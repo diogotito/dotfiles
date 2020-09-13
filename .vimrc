@@ -84,7 +84,7 @@ set spelllang=en,pt
 
 " Mappings
 nnoremap gb :ls<CR>:b<space>
-nnoremap <Tab> <C-6>
+nnoremap <Tab> 
 inoremap jk <esc>
 inoremap kj <esc>
 

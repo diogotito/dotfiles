@@ -71,7 +71,8 @@ exec --no-startup-id evrouter /dev/input/by-id/usb-Razer_Razer_*
 
 bindsym $mod+Shift+Ctrl+b exec chromium app="$(xclip -selection clipboard -o)"
 bindsym $mod+b exec --no-startup-id clipman-inhibit ~/git/bitwarden-rofi/bwmenu
-bindsym $mod+t exec --no-startup-id ~/git/todofi.sh/todofi.sh -d ~/.todo/config
+# bindsym $mod+t exec --no-startup-id ~/git/todofi.sh/todofi.sh -d ~/.todo/config
+bindsym $mod+t exec --no-startup-id de.manuel_kehl.go-for-it
 bindsym $mod+Shift+b exec firefox
 bindsym $mod+f exec thunar
 bindsym $mod+Shift+f exec nautilus --name=floating-nautilus
@@ -116,6 +117,7 @@ bindsym $mod+KP_Subtract       exec --no-startup-id light -U 5 && dunstify -r 12
 #   # cp /usr/share/ddcutil/data/45-ddcutil-i2c.rules /etc/udev/rules.d
 bindsym $mod+Shift+KP_Add      exec --no-startup-id ddcutil setvcp 10 + 20 && dunstify -r 1235 'LG brightness' "$(ddcutil getvcp 10)"
 bindsym $mod+Shift+KP_Subtract exec --no-startup-id ddcutil setvcp 10 - 20 && dunstify -r 1235 'LG brightness' "$(ddcutil getvcp 10)"
+bindsym $mod+Shift+KP_Enter    exec i3-input -P "[$(ddcutil getvcp 10 | cut -d: -f2)]                       Brightness> " -l 3 -F 'exec ddcutil setvcp 10 %s'
 
 # Control music players (and Spotify?) with playerctl
 bindsym $mod+KP_Enter          exec --no-startup-id playerctl play-pause
@@ -220,6 +222,7 @@ for_window [title="^Godot Engine - " instance="Godot_Engine"] floating disable, 
 for_window [title="^Godot Engine - Project Manager" instance="Godot_Engine"] floating enable, border normal, move position center
 for_window [title="^VLsub|VLSub"]                  floating enable, border normal, move position center
 for_window [title="Parse Tree Inspector"]          floating enable, resize set 900 600, move position center, border normal
+for_window [title="Go For It!"]                    floating enable, resize set 900 600, move position center
 for_window [instance="floating-nautilus"]          floating enable, resize set 900 600, move position center
 for_window [class="Tk"]                            floating enable, border normal
 # for_window [title="(?i)Hello World"]               floating enable, border normal, move position center

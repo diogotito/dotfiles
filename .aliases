@@ -101,6 +101,11 @@ alias pacro='sudo pacman -Rns $(pacman -Qtdq)' # Remove orphan packages
 ## -d, --deps        packages installed as dependencies (-t + -d = orphans)
 ## -q, --quiet       show less information
 
+function pacbins() {
+    pacman -Ql "$1" | grep /bin/
+}
+alias bins=pacbins
+
 
 # Workflow specific aliases
 

@@ -35,7 +35,7 @@ DISABLE_AUTO_UPDATE="true"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -62,6 +62,8 @@ plugins=(git fzf zsh-abbr)
 
 
 # User configuration
+
+# setopt COMPLETE_ALIASES  # breaks 'z' completions?
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -126,9 +128,10 @@ function rr() {
 
 unalias run-help
 function run-help() {
-    if ! man "$@"; then
-        $1 --help || $1 -h
-    fi
+    man "$@" \
+        || $1 --help \
+        || $1 -h \
+        || /usr/share/zsh/functions/Misc/run-help "$@"
 }
 
 export TERMINAL="xfce4-terminal"
@@ -149,6 +152,7 @@ bindkey -s '^[L' 'exa --long -F --git^M'
 bindkey -s '^[F' 'thunar .\n'
 bindkey -s '\e[18~' 'mkdir '  # Binds F7
 bindkey -s '^[S' '^p^asudo ^e'
+bindkey -s '^[s' '^Udfc -c always 2>/dev/null | grep --colo=never /dev/sda7^M'
 
 # woooooooooooooooooooooooooooooow
 bindkey -s '^[r' 'rr\n'
@@ -199,15 +203,46 @@ EOF
     bindkey -s '^X^P' 'zathura --fork "$(locate "$HOME/*.pdf" | fzf -m)"\nexit\n'
 fi
 
+
+###
+#
+#  https://wiki.archlinux.org/index.php/zsh#File_manager_key_binds
+#
+###
+
+cdUndoKey() {
+  popd
+  zle       reset-prompt
+  print
+  ls
+  zle       reset-prompt
+}
+
+cdParentKey() {
+  pushd ..
+  zle      reset-prompt
+  print
+  ls
+  zle       reset-prompt
+}
+
+zle -N                 cdParentKey
+zle -N                 cdUndoKey
+bindkey '^[[1;3A'      cdParentKey
+bindkey '^[[1;3D'      cdUndoKey
+
+###
+
+
 # Exercism completions
 if [ -f ~/.config/exercism/exercism_completion.zsh ]; then
     . ~/.config/exercism/exercism_completion.zsh 
 fi
 
 # Powerline
-F=/usr/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh
-powerline-daemon -q
-[ -f $F ] && . $F
+# F=/usr/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh
+# powerline-daemon -q
+# [ -f $F ] && . $F
 
 # Ruby gems
 if which ruby >/dev/null && which gem >/dev/null; then
