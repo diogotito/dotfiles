@@ -18,6 +18,9 @@ filetype plugin indent on
 
 nnoremap <C-n> :NERDTreeToggle<CR>
 
+let g:zim_notebook="$HOME\\Todo_txt\\zimwiki"
+let g:zim_notebooks_dir="$HOME\\Todo_txt\\zimwiki"
+
 let g:rustfmt_autosave = 1
 let g:rust_clip_command = 'xclip -selection clipboard'
 
@@ -89,6 +92,16 @@ inoremap jk <esc>
 inoremap kj <esc>
 
 nnoremap <esc>t :vertical rightbelow terminal<CR>
+nnoremap <esc>s :w<CR>
+nnoremap <esc>w :w<CR>
+nnoremap <esc>S :w!<CR>
+nnoremap <esc>W :w!<CR>
+nnoremap <esc>r :e<CR>
+nnoremap <esc>e :e<CR>
+nnoremap <esc>R :e!<CR>
+nnoremap <esc>E :e!<CR>
+
+
 
 " Refinements {{{
 " set ttyfast

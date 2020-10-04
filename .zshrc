@@ -153,6 +153,7 @@ bindkey -s '^[F' 'thunar .\n'
 bindkey -s '\e[18~' 'mkdir '  # Binds F7
 bindkey -s '^[S' '^p^asudo ^e'
 bindkey -s '^[s' '^Udfc -c always 2>/dev/null | grep --colo=never /dev/sda7^M'
+bindkey -s '^[N' '^umkdir "^y" && cd "^y"^M'
 
 # woooooooooooooooooooooooooooooow
 bindkey -s '^[r' 'rr\n'

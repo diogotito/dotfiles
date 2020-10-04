@@ -28,9 +28,9 @@ exec --no-startup-id autorandr quarto
 exec_always --no-startup-id nitrogen --restore
 exec --no-startup-id sleep 2s; nitrogen --restore
 exec --no-startup-id dunst
-exec --no-startup-id picom
+# exec --no-startup-id picom
 
-exec --no-startup-id sleep 2s; conky
+exec --no-startup-id sleep 5s; conky
 
 exec --no-startup-id setxkbmap -option grp:win_space_toggle
 
@@ -43,6 +43,8 @@ exec --no-startup-id sleep 0.1s; xfce4-clipman                # Makes the 'Copy 
 exec --no-startup-id sleep 0.1s; xfce4-power-manager          # Makes battery & brightness work like in XFCE4
 exec --no-startup-id sleep 0.1s; polychromatic-tray-applet
 exec --no-startup-id sleep 0.1s; syncthing-gtk
+exec --no-startup-id sleep 0.1s; flameshot
+exec --no-startup-id sleep 0.1s; solarized-zim
 # exec --no-startup-id sleep 0.1s; birdtray                     # Thunderbird tray
 exec_always --no-startup-id "killall xxkb; sleep 0.05s; xxkb" # xxkb sux
 
@@ -72,18 +74,21 @@ exec --no-startup-id evrouter /dev/input/by-id/usb-Razer_Razer_*
 bindsym $mod+Shift+Ctrl+b exec chromium app="$(xclip -selection clipboard -o)"
 bindsym $mod+b exec --no-startup-id clipman-inhibit ~/git/bitwarden-rofi/bwmenu
 # bindsym $mod+t exec --no-startup-id ~/git/todofi.sh/todofi.sh -d ~/.todo/config
-bindsym $mod+t exec --no-startup-id de.manuel_kehl.go-for-it
+# bindsym $mod+t exec --no-startup-id de.manuel_kehl.go-for-it
 bindsym $mod+Shift+b exec firefox
 bindsym $mod+f exec thunar
-bindsym $mod+Shift+f exec nautilus --name=floating-nautilus
+# bindsym $mod+Shift+f exec nautilus --name=floating-nautilus
 bindsym $mod+Shift+s exec --no-startup-id subl, [class="Sublime"] focus
 bindsym $mod+Shift+c exec code --reuse-window, [class="code-oss"] focus
 bindsym $mod+Shift+d exec darkblue xfce4-terminal --drop-down
 bindsym $mod+Shift+t exec telegram-desktop, [class="Telegram"] focus
-bindsym Print        exec xfce4-screenshooter
-bindsym Shift+Print  exec qdbus com.deepin.Screenshot /com/deepin/Screenshot StartScreenshot
+bindsym Print        exec flameshot gui
+bindsym Shift+Print  exec flameshot launcher
 bindsym $mod+Shift+v exec xfce4-popup-clipman
 bindsym $mod+Ctrl+b  exec chromium-app
+bindsym $mod+z       exec solarized-zim
+# bindsym $mod+z       [class="Zim"] scratchpad show
+
 
 bindsym $mod+Shift+x exec i3-msg $(rofi -dmenu \
                                          -p 'i3-msg ' -input ~/i3-commands.txt \
@@ -141,6 +146,19 @@ set $<CMD>         exec --no-startup-id
 set $>             -e
 set $</CMD>        ; mode "default"
 
+set $LAUNCH_Spotify "[LAUNCH » Spotify]   (G)UI  (T)UI"
+
+mode $LAUNCH_Spotify {
+    bindsym S exec spotify
+    bindsym G exec spotify
+    bindsym T $<CMD "Spotify TUI (spt)" $> "spt" $</CMD>
+
+    bindsym BackSpace mode $LAUNCH_main
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+
 set $LAUNCH_main "[LAUNCH]   (B)Python  (C)hromium  (H)top  (P)ing  (M)usic  (O)pen a PDF  (S)potify                     [FIX]   (K)eyboard layout   (X) compositor  (R)estore wallpaper"
 bindsym Mod1+F2 mode $LAUNCH_main
 
@@ -162,8 +180,9 @@ mode $LAUNCH_main {
 
     bindsym C exec "chromium"; mode default
 
-    bindsym S exec "spotify"; mode default
+    bindsym S mode $LAUNCH_Spotify
 
+    bindsym BackSpace mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -193,7 +212,7 @@ mode $LAUNCH_calculator {
 bindsym $mod+semicolon [urgent="latest"] focus
 for_window [urgent="latest"] focus
 
-for_window [title="i3 config$"]                       border normal
+for_window [title="i3 config$"]                       border normal, sticky enable
 for_window [title="TODO.txt$"]                        border normal
 for_window [class="^mGBA$"]                           border normal
 for_window [class="Git-gui"]                          border normal
@@ -226,6 +245,7 @@ for_window [title="Go For It!"]                    floating enable, resize set 9
 for_window [instance="floating-nautilus"]          floating enable, resize set 900 600, move position center
 for_window [class="Tk"]                            floating enable, border normal
 # for_window [title="(?i)Hello World"]               floating enable, border normal, move position center
+for_window [class="TelegramDesktop" title="Media Viewer"] fullscreen disable, floating enable, move position 0 0
 
 for_window [title="i3 config$"] move position center
 
@@ -233,15 +253,19 @@ for_window [class="Blender"]       focus child, layout tabbed, focus
 for_window [class="Emacs"]         focus child, layout tabbed, focus
 for_window [class="Thunderbird"]   focus child, layout tabbed, focus
 for_window [class="jetbrains-idea-ce"] layout tabbed
+for_window [class="jetbrains-pycharm"] layout tabbed
 for_window [class="jetbrains-pycharm" title="win0"] floating enable
 
 assign [title="Mozilla Firefox$"]  → $workspace_2
-assign [class="code-oss"]    → $workspace_5
+assign [class="Zim"]               → $workspace_3
+assign [class="code-oss"]          → $workspace_5
+assign [class="code-oss"]          → $workspace_5
 assign [class="Code"]              → $workspace_5
 assign [title="Cloud9$"]           → $workspace_5
 assign [class="Blender"]           → $workspace_5
 assign [class="Eclipse"]           → $workspace_5
 assign [class="jetbrains-idea-ce"] → $workspace_5
+assign [class="jetbrains-pycharm"] → $workspace_5
 assign [class="^mGBA$"]            → $workspace_6
 assign [class="Chromium"]          → $workspace_6
 assign [class="Steam"]             → $workspace_6
@@ -249,6 +273,7 @@ assign [class="Caprine"]           → $workspace_7
 assign [class="TelegramDesktop"]   → $workspace_7
 assign [class="Thunderbird"]       → $workspace_7
 assign [title="TODO.txt"]          → $workspace_7
+assign [title="WhatsApp$"]         → $workspace_7
 assign [instance="Godot_Engine"]   → $workspace_6
 
 
@@ -258,6 +283,8 @@ assign [instance="Godot_Engine"]   → $workspace_6
 #----------------------------------------------------------------------------###
 
 focus_on_window_activation focus
+
+popup_during_fullscreen smart
 
 # The "smart" setting hides borders on workspaces with only one window visible,
 # but keeps them on workspaces with multiple windows visible
@@ -323,14 +350,15 @@ bindsym $mod+Shift+q kill
 
 bindsym $mod+p exec rofi -sidebar-mode -show drun
 bindsym $mod+Shift+w exec rofi -sidebar-mode -show window
+# bindsym Mod1+Tab exec rofi -sidebar-mode -show window
+bindsym Mod1+Tab workspace back_and_forth
 bindsym $mod+Shift+p exec --no-startup-id xfce4-appfinder-category.sh "All Applications"
 # bindsym Mod1+F3 exec --no-startup-id xfce4-appfinder
 bindsym $mod+Shift+Control+p exec --no-startup-id i3-dmenu-desktop
 
 # Preserve my Alt+Tabbing habit from using stacking window managers :D
-bindsym $super+Tab workspace back_and_forth
 bindsym $mod+minus scratchpad show
-bindsym Mod1+Tab workspace back_and_forth
+bindsym $mod+Tab workspace back_and_forth
 
 # Make the currently focused window a SCRATCHPAD
 bindsym $mod+Shift+minus move scratchpad
@@ -503,12 +531,16 @@ systemctl suspend\n\
 systemctl reboot\n\
 gksu \'efibootmgr --bootnext=0\' && systemctl reboot   # windows')
 
+    # Bar mouse bindings
+
+    # bindsym button1 scratchpad show 
+
     bindsym button3 exec --no-startup-id \
             xfce4-appfinder-category.sh "Bookmarks" && \
                 i3-msg move position mouse && i3-msg border none
 
     bindsym button8 layout toggle split
-    bindsym button9 layout tabbed
+    bindsym button9 layout toggle tabbed stacking
 }
 
 
@@ -615,3 +647,27 @@ mode "$mode_gaps_inner" {
         bindsym Escape mode "$mode_gaps"
 }
 
+
+#----------------------------------------------------------------------------###
+# Workflow ModEst                                                              #
+#----------------------------------------------------------------------------###
+ 
+workspace "2: Web" output HDMI-1 LVDS-1
+workspace "5: Code" output HDMI-1 LVDS-1
+workspace "6: Test" output LVDS-1
+workspace "7: Chat" output LVDS-1
+
+exec --no-startup-id ~/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox
+exec --no-startup-id /usr/bin/flatpak run --branch=stable --arch=x86_64 --command=de.manuel_kehl.go-for-it de.manuel_kehl.go-for-it
+exec --no-startup-id nautilus --name=floating-nautilus
+
+bindsym $mod+t [title="Go For It!"] scratchpad show
+bindsym $mod+Shift+f [instance="floating-nautilus"] scratchpad show
+
+for_window [instance="floating-nautilus"] move scratchpad
+for_window [title="Go For It!"] move scratchpad
+
+for_window [class="jetbrains-pycharm"] mark i
+for_window [class="Chromium"]          mark c
+
+for_window [class="jetbrains-pycharm"] [title="JetBrains Toolbox"] kill
