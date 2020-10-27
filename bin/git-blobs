@@ -1,5 +1,5 @@
 #!/bin/bash
-# Lists heavy blobs in the git repo, sorted by size
+# Lists heavy blobs in a git repo, sorted by size
 # https://medium.com/@prankulgarg/want-to-remove-large-files-blobs-from-git-history-permanently-4723e72a84e1
 
 git rev-list --objects --all \
@@ -7,5 +7,4 @@ git rev-list --objects --all \
     | awk '/^blob/ {print substr($0,6)}' \
     | sort -r --numeric-sort --key=2 \
     | cut --complement --characters=13-40 \
-    | numfmt --field=2 --to=iec-i --suffix=B --padding=7 --round=nearest \
-    | eval "$(git config --get core.pager)"
+    | numfmt --field=2 --to=iec-i --suffix=B --padding=7 --round=nearest
