@@ -22,45 +22,36 @@ WORKSPACE_CATEGORIES = {
 }
 
 
+# asyncio isn't adding any real value to this script, isn't it?
 async def main():
     bus = SessionBus()
     xfconf = bus.get("org.xfce.Xfconf")
     i3 = await Connection(auto_reconnect=True).connect()
 
-    def convenient_settings(category):
-        SETTINGS = {
-            "/last/category": Variant("s", category),
-            "/enable-service": Variant("b", True),
-            "/single-window": Variant("b", True),
-        }
-        for property, value in SETTINGS.items():
+    def xfce4_appfinder_settings(settings):
+        for property, value in settings.items():
             xfconf.SetProperty("xfce4-appfinder", property, value)
 
     async def open_xfce4_appfinder(workspace_name=""):
-        await i3.command('[class="Xfce4-appfinder"] '
-                         'move --no-auto-back-and-forth container to '
-                         'workspace current')
-
         try:
-            # force xfce4-appfinder to load my chosen workspace category
-            bus.get("org.xfce.Appfinder").OpenWindow(True, workspace_name)
-            await i3.command('[class="Xfce4-appfinder"] kill')
             bus.get("org.xfce.Appfinder").OpenWindow(True, workspace_name)
         except:
             await i3.command("exec xfce4-appfinder")
 
     async def on_workspace_focus(_i3, event):
+        await i3.command('[class="Xfce4-appfinder"] kill')
+
         if event.current.focus:
-            # Focus stack isn't empty --> workspace isn't empty, so ignore it.
             return
 
-        new_workspace_num = event.current.num
-        new_workspace_name = event.current.name
-
-        if new_workspace_num in WORKSPACE_CATEGORIES:
-            category = WORKSPACE_CATEGORIES[new_workspace_num]
-            convenient_settings(category)
-            await open_xfce4_appfinder(new_workspace_name)
+        if event.current.num in WORKSPACE_CATEGORIES:
+            category = WORKSPACE_CATEGORIES[event.current.num]
+            xfce4_appfinder_settings({
+                "/last/category": Variant("s", category),
+                "/enable-service": Variant("b", True),
+                "/single-window": Variant("b", True),
+            })
+            await open_xfce4_appfinder(event.current.name)
 
     i3.on(Event.WORKSPACE_FOCUS, on_workspace_focus)
     await i3.main()
