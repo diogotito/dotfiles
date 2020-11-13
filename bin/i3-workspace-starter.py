@@ -27,19 +27,24 @@ async def main():
     xfconf = bus.get("org.xfce.Xfconf")
     i3 = await Connection(auto_reconnect=True).connect()
 
-    def convenient_settings():
-        v_true = Variant("b", True)
-        xfconf.SetProperty("xfce4-appfinder", "/enable-service", v_true)
-        xfconf.SetProperty("xfce4-appfinder", "/single-window", v_true)
+    def convenient_settings(category):
+        SETTINGS = {
+            "/last/category": Variant("s", category),
+            "/enable-service": Variant("b", True),
+            "/single-window": Variant("b", True),
+        }
+        for property, value in SETTINGS.items():
+            xfconf.SetProperty("xfce4-appfinder", property, value)
 
     async def open_xfce4_appfinder(workspace_name=""):
-        convenient_settings()
-
         await i3.command('[class="Xfce4-appfinder"] '
                          'move --no-auto-back-and-forth container to '
-                         f'workspace number {workspace_name}')
+                         'workspace current')
 
         try:
+            # force xfce4-appfinder to load my chosen workspace category
+            bus.get("org.xfce.Appfinder").OpenWindow(True, workspace_name)
+            await i3.command('[class="Xfce4-appfinder"] kill')
             bus.get("org.xfce.Appfinder").OpenWindow(True, workspace_name)
         except:
             await i3.command("exec xfce4-appfinder")
@@ -54,8 +59,7 @@ async def main():
 
         if new_workspace_num in WORKSPACE_CATEGORIES:
             category = WORKSPACE_CATEGORIES[new_workspace_num]
-            xfconf.SetProperty("xfce4-appfinder", "/last/category",
-                               Variant("s", category))
+            convenient_settings(category)
             await open_xfce4_appfinder(new_workspace_name)
 
     i3.on(Event.WORKSPACE_FOCUS, on_workspace_focus)
