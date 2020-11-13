@@ -23,18 +23,8 @@ WORKSPACE_CATEGORIES = {
 
 bus = SessionBus()
 xfconf = bus.get("org.xfce.Xfconf")
-
-
-def xfce4_appfinder_settings(settings):
-    for property, value in settings.items():
-        xfconf.SetProperty("xfce4-appfinder", property, value)
-
-
-async def open_xfce4_appfinder(i3, workspace_name=""):
-    try:
-        bus.get("org.xfce.Appfinder").OpenWindow(True, workspace_name)
-    except:
-        await i3.command("exec xfce4-appfinder")
+xfconf.SetProperty("xfce4-appfinder", "/enable-service", Variant("b", True))
+xfconf.SetProperty("xfce4-appfinder", "/single-window", Variant("b", True))
 
 
 async def on_workspace_focus(i3, event):
@@ -44,13 +34,12 @@ async def on_workspace_focus(i3, event):
         return
 
     if event.current.num in WORKSPACE_CATEGORIES:
-        category = WORKSPACE_CATEGORIES[event.current.num]
-        xfce4_appfinder_settings({
-            "/last/category": Variant("s", category),
-            "/enable-service": Variant("b", True),
-            "/single-window": Variant("b", True),
-        })
-        await open_xfce4_appfinder(i3, event.current.name)
+        category = Variant("s", WORKSPACE_CATEGORIES[event.current.num])
+        xfconf.SetProperty("xfce4-appfinder", "/last/category", category)
+        try:
+            bus.get("org.xfce.Appfinder").OpenWindow(True, event.current.name)
+        except:
+            await i3.command("exec xfce4-appfinder")
 
 
 async def main():
