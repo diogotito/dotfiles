@@ -27,13 +27,8 @@ xfconf.SetProperty("xfce4-appfinder", "/enable-service", Variant("b", True))
 xfconf.SetProperty("xfce4-appfinder", "/single-window", Variant("b", True))
 
 
-async def close_appfinder(i3, _event=None):
-    await i3.command('[class="Xfce4-appfinder"] kill')
-    i3.off(close_appfinder)
-
-
 async def on_workspace_focus(i3, event):
-    await close_appfinder(i3)
+    await i3.command('[class="Xfce4-appfinder"] kill')
 
     if event.current.focus:
         return
@@ -42,19 +37,14 @@ async def on_workspace_focus(i3, event):
         category = Variant("s", WORKSPACE_CATEGORIES[event.current.num])
         xfconf.SetProperty("xfce4-appfinder", "/last/category", category)
         try:
-            startup_id = f'i3-workspace-starter'
-            bus.get("org.xfce.Appfinder").OpenWindow(True, startup_id)
+            bus.get("org.xfce.Appfinder").OpenWindow(True, event.current.name)
         except:
             await i3.command("exec xfce4-appfinder")
-
-    await asyncio.sleep(0.02)
-    i3.on(Event.WINDOW_FOCUS, close_appfinder)
 
 
 async def main():
     i3 = await Connection(auto_reconnect=True).connect()
     i3.on(Event.WORKSPACE_FOCUS, on_workspace_focus)
-    i3.on(Event.WORKSPACE_INIT, close_appfinder)
     await i3.main()
 
 
