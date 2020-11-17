@@ -37,14 +37,22 @@ async def on_workspace_focus(i3, event):
         category = Variant("s", WORKSPACE_CATEGORIES[event.current.num])
         xfconf.SetProperty("xfce4-appfinder", "/last/category", category)
         try:
-            bus.get("org.xfce.Appfinder").OpenWindow(True, event.current.name)
+            bus.get("org.xfce.Appfinder").OpenWindow(True, 'i3wspy')
         except:
-            await i3.command("exec xfce4-appfinder")
+            # The xfce4-appfinder service isn't running. Start it up.
+            await i3.command("exec --no-startup-id xfce4-appfinder")
+
+
+async def on_window_focus(i3, event):
+    if event.container.window_class != "Xfce4-appfinder":
+        for appfinder in (await i3.get_tree()).find_classed("Xfce4-appfinder"):
+            await appfinder.command("kill")
 
 
 async def main():
     i3 = await Connection(auto_reconnect=True).connect()
     i3.on(Event.WORKSPACE_FOCUS, on_workspace_focus)
+    i3.on(Event.WINDOW_FOCUS, on_window_focus)
     await i3.main()
 
 
