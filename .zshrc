@@ -58,7 +58,8 @@ export HISTFILE=~/.zsh_history
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # plugins=(git)
-plugins=(git fzf zsh-abbr)
+# plugins=(git fzf zsh-abbr)
+plugins=(git fzf)
 
 
 # User configuration
@@ -233,6 +234,14 @@ bindkey '^[[1;3A'      cdParentKey
 bindkey '^[[1;3D'      cdUndoKey
 
 ###
+
+
+# I don't want the FZF plugin to override some default keybindings I happend to use
+bindkey '^R' history-incremental-pattern-search-backward
+bindkey '^T' transpose-chars
+
+bindkey '^X^R' fzf-history-widget
+bindkey '^X^T' fzf-file-widget
 
 
 # Exercism completions
