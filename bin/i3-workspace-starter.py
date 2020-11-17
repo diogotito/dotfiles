@@ -45,8 +45,7 @@ async def on_workspace_focus(i3, event):
 
 async def on_window_focus(i3, event):
     if event.container.window_class != "Xfce4-appfinder":
-        for appfinder in (await i3.get_tree()).find_classed("Xfce4-appfinder"):
-            await appfinder.command("kill")
+        await i3.command('[class="Xfce4-appfinder"] kill')
 
 
 async def main():
