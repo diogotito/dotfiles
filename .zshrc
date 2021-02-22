@@ -243,6 +243,10 @@ bindkey '^T' transpose-chars
 bindkey '^X^R' fzf-history-widget
 bindkey '^X^T' fzf-file-widget
 
+bindkey -s '^X^I' '^usource ~/bin/ipad^m'
+
+bindkey -s '^X^N' '^unmcli connection up ^i'
+bindkey -s '^X^M' '^unmcli connection down ^i'
 
 # Exercism completions
 if [ -f ~/.config/exercism/exercism_completion.zsh ]; then
@@ -275,8 +279,24 @@ export BW_SESSION="0zAJ8dcK6vJT3UewqnHmjs+xS8Q0QIxeb3K+onCtpIxb/3GPGnrq3WSryAT5g
 
 export PATH=/home/diogo/.local/bin:/home/diogo/.emacs.d/bin:$PATH
 
+# Dyalog APL
+DYALOG=$HOME/apps/dyalog-apl
+if [ -d $DYALOG ]; then
+        PATH="$DYALOG:$PATH"
+fi
+
 source /home/diogo/.config/broot/launcher/bash/br
 
 # Starship
 eval "$(starship init zsh)"
+
+# if [[ -n "$SSH_CONNECTION" ]]; then
+#     source bin/ipad
+# fi
+
+if [[ -n "$TMUX" ]]; then
+    # tmux in iPad setup
+    bindkey -s '^X^N' '^usudo nmcli connection up ^i'
+    bindkey -s '^X^M' '^usudo nmcli connection down ^i'
+fi
 

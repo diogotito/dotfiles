@@ -19,12 +19,12 @@ alias open=xdg-open # macOS has it right
 alias razer="xinput set-prop 'pointer:Razer Razer DeathAdder Chroma' 'libinput Accel Speed'"
 
 alias record-small='ffmpeg -video_size 1366x768 -framerate 10 -f x11grab -i :0.0 VIDEO.mp4'
-alias record-big='ffmpeg -video_size 1920x1080 -framerate 10 -f x11grab -i :0.0+1366,0 test.mp4'
+alias record-big='ffmpeg -video_size 1920x1080 -framerate 10 -f x11grab -i :0.0+0,0 test.mp4'
 
 alias cls='tput reset'
 # alias ls='ls --color=auto'
 # alias ll='ls --color=auto -lF'
-alias ls=exa
+alias ls='exa -F'
 alias ll='exa -lF --git --header'
 alias du='du -h'
 
@@ -43,7 +43,8 @@ alias cu='nmcli connection up'
 
 # App specific aliases
 
-alias webcam='mplayer tv://device=/dev/video01'  # least delay?
+# alias webcam='mplayer tv://device=/dev/video01'  # least delay?
+alias webcam='mpv --demuxer-lavf-format=video4linux2 --demuxer-lavf-o-set=input_format=mjpeg av://v4l2:/dev/video0'
 # or 'mpv /dev/video0'
 # or 'ffplay /dev/video0'
 # or just use guvcview - It features a standalone video window and

@@ -24,9 +24,17 @@ let g:zim_notebooks_dir="$HOME\\Todo_txt\\zimwiki"
 let g:rustfmt_autosave = 1
 let g:rust_clip_command = 'xclip -selection clipboard'
 
+let g:instant_markdown_autostart = 0
+
 let g:ale_fixers = {
-\   'sh': [ 'shfmt' ],
+\   'sh': [ 'shellcheck' ],
 \}
+nmap <silent> [r <Plug>(ale_previous_wrap)
+nmap <silent> ]r <Plug>(ale_next_wrap)
+let g:ale_completion_enable = 1  " Desativar quando quiser experimentar o Deoplete
+let g:ale_completion_autoimport = 1
+set omnifunc=ale#completion#OmniFunc
+
 
 " User interface
 color dracula
@@ -45,7 +53,7 @@ if has("gui_running")
 	color dracula
     let g:airline_theme = 'cool'
     set guioptions-=T  " toolbar
-    set guioptions-=m  " menubar
+    " set guioptions-=m  " menubar
     set guifont=Source\ Code\ Pro\ 12,Fixed\ 12
 end
 
@@ -90,6 +98,8 @@ nnoremap gb :ls<CR>:b<space>
 nnoremap <Tab> 
 inoremap jk <esc>
 inoremap kj <esc>
+nnoremap <C-j> j<C-e>j<C-e>j<C-e>
+nnoremap <C-k> k<C-y>k<C-y>k<C-y>
 
 nnoremap <esc>t :vertical rightbelow terminal<CR>
 nnoremap <esc>s :w<CR>
