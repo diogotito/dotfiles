@@ -2,20 +2,22 @@
 
 module Flaggable
   attr_reader :flags
+
   def flag_prefix;
     "--"
   end
+
   def method_missing(flag, value=nil)
+    flag = flag.to_s.gsub '_', '-'
     if value.nil?
       @flags << "#{flag_prefix}#{flag}"
-    elsif flag.to_s.end_with? "="
-      # "--name-flag=value"
-      @flags << "#{flag_prefix}#{flag}#{value}"
     else
-      # "--name-flag" and "value" separated
-      @flags << "#{flag_prefix}#{flag}" \
-             << "#{value}"
+      @flags << "#{flag_prefix}#{flag}=#{value}"
     end
+  end
+
+  def spaaaaaaaaaace!(flag, value)
+    @flags << "#{flag_prefix}#{flag.to_s}" << value.to_s
   end
 end
 
@@ -40,33 +42,44 @@ def misc_flags(&block)
   }
 end
 
-puts '-----------------------------------------'
-mf = misc_flags do |_|
-  espaco 'separado'
-  _.igual = 'agarrado'
+def flags_for what, &block
+  Module.new {
+    extend Flaggable
+    @flags = []
+    singleton_class.define_method(:flag_prefix) {
+      "--#{what}-"
+    }
+    instance_eval &block
+    self
+  }
 end
-pp mf
-pp mf.flags
-puts '-----------------------------------------'
 
+#                                                
+#  Apagar os 2 primeiros argumentos para correr  
+#                                                
 exec "printf", "[%s]\\n", "i3lock", *[
-  Flags.new('bar') do |bar|
-    bar.base_width = 10
-    bar.color = "262a3277"
-    bar.direction = 2
-    bar.max_height = 25
-    bar.pos = "0:10"
-    bar.step = 2
-  end,
+  flags_for('bar') {
+    base_width 10
+    color "262a3277"
+    direction 2
+    max_height 25
+    pos "0:10"
+    step 2
+  },
+  flags_for('date') {
+    color "1793D188"
+  },
+  misc_flags {
+    spaaaaaaaaaace! :blur, 5
+    bar_indicator
+    clock
+    composite
+  },
 ].collect(&:flags).flatten
 
 puts '-'*30
 pp %w(i3lock
-    --bar-indicator
-    --blur 5
     --bshl-color=4D586E
-    --clock
-    --composite
     --date-color=1793D188
     --greeter-text="${1:-$0}" --greeter-align=2 --greeter-pos="w-25:h-25"
     --ind-pos=683:75
