@@ -1,23 +1,42 @@
 #!/usr/bin/ruby
 
-module Flaggable
-  attr_reader :flags
+FULL = 0
+BEFORE_PARENTHESIS = 1
+INSIDE_PARENTHESIS = 2
 
-  def flag_prefix;
+BOTH = 2
+RIGHT = 2
+
+module Flaggable
+  def flags
+    @flags ||= []
+  end
+
+  def flag_prefix
     "--"
+  end
+
+  def pos(x, y)
+    x = "w#{x}" if x < 0
+    y = "h#{y}" if y < 0
+    flags << "#{flag_prefix}pos=#{x}:#{y}"
+  end
+
+  def rgb(r, g, b, a=255)
+    ((r << 24) | (g << 16) | (b << 8) | a).to_s 16
   end
 
   def method_missing(flag, value=nil)
     flag = flag.to_s.gsub '_', '-'
     if value.nil?
-      @flags << "#{flag_prefix}#{flag}"
+      flags << "#{flag_prefix}#{flag}"
     else
-      @flags << "#{flag_prefix}#{flag}=#{value}"
+      flags << "#{flag_prefix}#{flag}=#{value}"
     end
   end
 
   def spaaaaaaaaaace!(flag, value)
-    @flags << "#{flag_prefix}#{flag.to_s}" << value.to_s
+    flags << "#{flag_prefix}#{flag.to_s}" << value.to_s
   end
 end
 
@@ -33,62 +52,73 @@ class Flags
   end
 end
 
-def misc_flags(&block)
+def such_dry(the_other_block, &block)
   Module.new {
     extend Flaggable
-    @flags = []
-    instance_eval &block
+    singleton_class.instance_eval &block if block_given?
+    instance_eval &the_other_block
     self
   }
 end
 
+def misc_flags(&block)
+  such_dry block
+end
+
 def flags_for what, &block
-  Module.new {
-    extend Flaggable
-    @flags = []
-    singleton_class.define_method(:flag_prefix) {
-      "--#{what}-"
+  prefixes = ["--#{what}-"]
+  such_dry(block) { |m|
+    define_method(:flag_prefix) { prefixes.join }
+    define_method(:_) { |name, &block|
+      prefixes.push name
+      instance_eval &block
+      prefixes.pop
     }
-    instance_eval &block
-    self
   }
 end
 
 #                                                
 #  Apagar os 2 primeiros argumentos para correr  
 #                                                
+
 exec "printf", "[%s]\\n", "i3lock", *[
-  flags_for('bar') {
-    base_width 10
-    color "262a3277"
-    direction 2
-    max_height 25
-    pos "0:10"
-    step 2
-  },
-  flags_for('date') {
-    color "1793D188"
-  },
   misc_flags {
-    spaaaaaaaaaace! :blur, 5
     bar_indicator
     clock
     composite
+    bshl_color '4D586E'
+    keyhl_color '5294E2'
+    keylayout FULL
+    layout_color '1793D188'
+    redraw_thread
+    refresh_rate 0.1
+    spaaaaaaaaaace! :blur, 5
+  },
+  flags_for('ind') {
+    pos 683, 75
+  },
+  flags_for('bar') {
+    base_width 10
+    color rgb 0x26, 0x2a, 0x32, 0x77
+    direction BOTH
+    max_height 25
+    pos 0, 10
+    step 2
+  },
+  flags_for('date') {
+    color rgb 0x17, 0x93, 0xD1, 0x88
+  },
+  flags_for('greeter') {
+    text 'I :heart: Ruby!'
+    align RIGHT
+    pos -25, -25
+  },
+  flags_for('time') {
+    color '1793D1'
+    _('outline') {
+      color '262a3288'
+      width 1
+    }
   },
 ].collect(&:flags).flatten
-
-puts '-'*30
-pp %w(i3lock
-    --bshl-color=4D586E
-    --date-color=1793D188
-    --greeter-text="${1:-$0}" --greeter-align=2 --greeter-pos="w-25:h-25"
-    --ind-pos=683:75
-    --keyhl-color=5294E2
-    --keylayout 0
-    --layout-color=1793D188
-    --redraw-thread
-    --refresh-rate=0.1
-    --time-color=1793D1ff
-    --timeoutline-color 262a3288
-    --timeoutline-width=1)
 
