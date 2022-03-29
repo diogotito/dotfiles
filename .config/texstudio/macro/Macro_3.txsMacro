@@ -1,0 +1,14 @@
+{
+    "abbrev": "M",
+    "description": [
+        ""
+    ],
+    "formatVersion": 1,
+    "menu": "",
+    "name": "M",
+    "shortcut": "",
+    "tag": [
+        ""
+    ],
+    "trigger": "NN"
+}

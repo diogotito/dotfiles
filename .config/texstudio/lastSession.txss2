@@ -1,0 +1,119 @@
+{
+    "InternalPDFViewer": {
+        "Embedded": true,
+        "File": "../../git/tese-mestrado-modest-texstudio/src/main.pdf"
+    },
+    "Session": {
+        "Bookmarks": [
+        ],
+        "CurrentFile": "../../git/tese-mestrado-modest-texstudio/src/tex/conteudo/3_trabalho.tex",
+        "FileVersion": 1,
+        "Files": [
+            {
+                "Col": 21,
+                "EditorGroup": 0,
+                "FileName": "../../git/tese-mestrado-modest-texstudio/src/main.tex",
+                "FirstLine": 0,
+                "FoldedLines": "",
+                "Line": 21
+            },
+            {
+                "Col": 1,
+                "EditorGroup": 0,
+                "FileName": "../../git/tese-mestrado-modest-texstudio/src/tex/conteudo.tex",
+                "FirstLine": 0,
+                "FoldedLines": "",
+                "Line": 4
+            },
+            {
+                "Col": 0,
+                "EditorGroup": 0,
+                "FileName": "../../git/tese-mestrado-modest-texstudio/src/tex/conteudo/4_discussao.tex",
+                "FirstLine": 0,
+                "FoldedLines": "",
+                "Line": 2
+            },
+            {
+                "Col": 0,
+                "EditorGroup": 0,
+                "FileName": "../../git/tese-mestrado-modest-texstudio/src/tex/conteudo/5_avaliacao_utilizadores.tex",
+                "FirstLine": 0,
+                "FoldedLines": "",
+                "Line": 10
+            },
+            {
+                "Col": 51,
+                "EditorGroup": 0,
+                "FileName": "../../git/tese-mestrado-modest-texstudio/src/tex/conteudo/3_trabalho.tex",
+                "FirstLine": 218,
+                "FoldedLines": "",
+                "Line": 239
+            },
+            {
+                "Col": 123,
+                "EditorGroup": 0,
+                "FileName": "../../git/tese-mestrado-modest-texstudio/src/tex/conteudo/2_trabalho_relacionado.tex",
+                "FirstLine": 0,
+                "FoldedLines": "",
+                "Line": 29
+            },
+            {
+                "Col": 21,
+                "EditorGroup": 0,
+                "FileName": "../../git/tese-mestrado-modest-texstudio/src/tex/conteudo/1_introducao.tex",
+                "FirstLine": 0,
+                "FoldedLines": "",
+                "Line": 1
+            },
+            {
+                "Col": 3,
+                "EditorGroup": 0,
+                "FileName": "../../git/tese-mestrado-modest-texstudio/src/tex/pecas/3_comparativo_bibliotecas.tex",
+                "FirstLine": 0,
+                "FoldedLines": "",
+                "Line": 74
+            },
+            {
+                "Col": 0,
+                "EditorGroup": 0,
+                "FileName": "../../git/tese-mestrado-modest-texstudio/src/tex/apendices.tex",
+                "FirstLine": 0,
+                "FoldedLines": "",
+                "Line": 0
+            },
+            {
+                "Col": 0,
+                "EditorGroup": 0,
+                "FileName": "../../git/tese-mestrado-modest-texstudio/src/tex/resumo_ing.tex",
+                "FirstLine": 0,
+                "FoldedLines": "",
+                "Line": 0
+            },
+            {
+                "Col": 106,
+                "EditorGroup": 0,
+                "FileName": "../../git/tese-mestrado-modest-texstudio/src/tex/lstlistings_javascript.tex",
+                "FirstLine": 0,
+                "FoldedLines": "",
+                "Line": 39
+            },
+            {
+                "Col": 0,
+                "EditorGroup": 0,
+                "FileName": "../../git/tese-mestrado-modest-texstudio/src/pic/vis/diagrama-cordal/diagrama_custom_components.eps_tex",
+                "FirstLine": 0,
+                "FoldedLines": "",
+                "Line": 55
+            },
+            {
+                "Col": 0,
+                "EditorGroup": 0,
+                "FileName": "../../git/tese-mestrado-modest-texstudio/src/pic/vis/diagrama-cordal/diagrama_custom_components.tex",
+                "FirstLine": 0,
+                "FoldedLines": "",
+                "Line": 0
+            }
+        ],
+        "MasterFile": "../../git/tese-mestrado-modest-texstudio/src/main.tex"
+    }
+}

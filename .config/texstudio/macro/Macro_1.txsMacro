@@ -1,0 +1,14 @@
+{
+    "abbrev": "verb",
+    "description": [
+        ""
+    ],
+    "formatVersion": 1,
+    "menu": "",
+    "name": "verb",
+    "shortcut": "",
+    "tag": [
+        "\\verb|%||"
+    ],
+    "trigger": "vv"
+}
