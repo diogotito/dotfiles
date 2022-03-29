@@ -1,0 +1,1607 @@
+SET UTF-8
+TRY '-ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzÁÂÉÍÓÚàáâãçèéêíóôõú
+FLAG NUMBER
+
+PFX 1 Y 1
+PFX 1   0     re         .
+
+PFX 2 Y 4
+PFX 2   0               anti            [^hirs]         PFSEM=anti+
+PFX 2   0               antir           r               PFSEM=anti+
+PFX 2   0               antis           s               PFSEM=anti+
+PFX 2   0               anti-           [hi]            PFSEM=anti+
+
+PFX 3 Y 1
+PFX 3   0     de          .
+
+PFX 4 Y 1
+PFX 4   0     dis         .
+
+PFX 5 Y 1
+PFX 5   0               pré-            .               PFSEM=pre+
+
+PFX 6 Y 1
+PFX 6   0     con         .
+
+PFX 7 Y 3
+PFX 7   0               ultra           .               PFSEM=ultra+
+PFX 7   0               super           .               PFSEM=super+
+PFX 7   0               hiper           .               PFSEM=hiper+
+
+PFX 8 Y 1
+PFX 8   0     in         .
+
+PFX 9 Y 4
+PFX 9   0               in              [^plmr]         PFSEM=not+
+PFX 9   0               im              p               PFSEM=not+
+PFX 9   0               i               [lm]            PFSEM=not+
+PFX 9   0               ir              r               PFSEM=not+
+
+PFX 10 Y 1
+PFX 10   0     pro         .
+
+PFX 11 Y 1
+PFX 11   0               pós-            .               PFSEM=pos+
+
+PFX 12 Y 2
+PFX 12   0               re              [^s]            PFSEM=outra+
+PFX 12   0               res             s               PFSEM=outra+
+
+PFX 13 Y 2
+PFX 13   0               des             [^h]            PFSEM=not+
+PFX 13   h               des             h               PFSEM=not+
+
+PFX 14 Y 6
+PFX 14   0               bi              .               PFSEM=2+
+PFX 14   0               tris            s               PFSEM=3+
+PFX 14   0               tri             [^s]            PFSEM=3+
+PFX 14   0               tetra           .               PFSEM=4+
+PFX 14   0               penta           .               PFSEM=5+
+PFX 14   0               hexa            .               PFSEM=6+
+
+PFX 15 Y 1
+PFX 15   0     un         .
+
+PFX 16 Y 1
+PFX 16   0               vice-           .               PFSEM=vice+
+
+PFX 17 Y 2
+PFX 17   0               sub-            [bhr]           PFSEM=sub+
+PFX 17   0               sub             [^bhr]          PFSEM=sub+
+
+PFX 18 Y 1
+PFX 18   0               ex-             .               PFSEM=ex+
+
+REP 121
+REP nt n't
+REP alot a_lot
+REP avengence a_vengeance
+REP ninties 1990s
+REP teached taught
+REP rised rose
+REP a ei
+REP ei a
+REP a ey
+REP ey a
+REP ai ie
+REP ie ai
+REP are air
+REP are ear
+REP are eir
+REP air are
+REP air ere
+REP ere air
+REP ere ear
+REP ere eir
+REP ear are
+REP ear air
+REP ear ere
+REP eir are
+REP eir ere
+REP ch te
+REP te ch
+REP ch ti
+REP ti ch
+REP ch tu
+REP tu ch
+REP ch s
+REP s ch
+REP ch k
+REP k ch
+REP f ph
+REP ph f
+REP gh f
+REP f gh
+REP i igh
+REP igh i
+REP i uy
+REP uy i
+REP i ee
+REP ee i
+REP j di
+REP di j
+REP j gg
+REP gg j
+REP j ge
+REP ge j
+REP s ti
+REP ti s
+REP s ci
+REP ci s
+REP k cc
+REP cc k
+REP k qu
+REP qu k
+REP kw qu
+REP o eau
+REP eau o
+REP o ew
+REP ew o
+REP oo ew
+REP ew oo
+REP ew ui
+REP ui ew
+REP oo ui
+REP ui oo
+REP ew u
+REP u ew
+REP oo u
+REP u oo
+REP u oe
+REP oe u
+REP u ieu
+REP ieu u
+REP ue ew
+REP ew ue
+REP uff ough
+REP oo ieu
+REP ieu oo
+REP ier ear
+REP ear ier
+REP ear air
+REP air ear
+REP w qu
+REP qu w
+REP z ss
+REP ss z
+REP shun tion
+REP shun sion
+REP shun cion
+REP tion ssion
+REP ys ies
+REP u ough
+REP por pro
+REP pre per
+REP damente mente
+REP mente damente
+REP iz íz
+REP cao ção
+REP ç ss
+REP ss ç
+REP c ss
+REP ss c
+REP ch x
+REP x ch
+REP cç x
+REP x cç
+REP íti ití
+REP ití íti
+REP issí íssi
+REP ilí íli
+REP íli ilí
+REP ífi ifí
+REP ifí ífi
+REP nume mune
+REP coen quen
+REP concerteza com_certeza
+
+SFX 19 Y 3
+SFX 19   0     able       [^aeiou]
+SFX 19   0     able       ee
+SFX 19   e     able       [^aeiou]e
+
+SFX 20 Y 2
+SFX 20   r               damente         [ia]r           +FSEM=vmente,CAT=adv,SUBCAT=modo
+SFX 20   er              idamente        er              +FSEM=vmente,CAT=adv,SUBCAT=modo
+
+SFX 21 Y 6
+SFX 21   ionar           ção             cionar          +CAT=nc,G=f,N=s,FSEM=cao
+SFX 21   ir              cção            air             +CAT=nc,G=f,N=s,FSEM=cao
+SFX 21   ir              ção             uir             +CAT=nc,G=f,N=s,FSEM=cao
+SFX 21   ionar           ções            cionar          +CAT=nc,G=f,N=p,FSEM=cao
+SFX 21   ir              cções           air             +CAT=nc,G=f,N=p,FSEM=cao
+SFX 21   ir              ções            uir             +CAT=nc,G=f,N=p,FSEM=cao
+
+SFX 22 Y 4
+SFX 22   0     d          e
+SFX 22   y     ied        [^aeiou]y
+SFX 22   0     ed         [^ey]
+SFX 22   0     ed         [aeiou]y
+
+SFX 23 Y 4
+SFX 23   r               dor             [aei]r          +CAT=a_nc,G=m,N=s,FSEM=dor
+SFX 23   r               dora            [aei]r          +CAT=a_nc,G=f,N=s,FSEM=dor
+SFX 23   r               dores           [aei]r          +CAT=a_nc,G=m,N=p,FSEM=dor
+SFX 23   r               doras           [aei]r          +CAT=a_nc,G=f,N=p,FSEM=dor
+
+SFX 24 Y 2
+SFX 24   e     ing        e
+SFX 24   0     ing        [^e]
+
+SFX 25 Y 29
+SFX 25   o               ice             [^çgc]o         +CAT=nc,G=f,FSEM=ice
+SFX 25   ço              cice            ço              +CAT=nc,G=f,FSEM=ice
+SFX 25   go              guice           go              +CAT=nc,G=f,FSEM=ice
+SFX 25   co              quice           co              +CAT=nc,G=f,FSEM=ice
+SFX 25   a               ice             [^çgc]a         +CAT=nc,G=f,FSEM=ice
+SFX 25   ça              cice            ça              +CAT=nc,G=f,FSEM=ice
+SFX 25   ga              guice           ga              +CAT=nc,G=f,FSEM=ice
+SFX 25   ca              quice           ca              +CAT=nc,G=f,FSEM=ice
+SFX 25   e               ice             e               +CAT=nc,G=f,FSEM=ice
+SFX 25   0               ice             r               +CAT=nc,G=f,FSEM=ice
+SFX 25   0               ice             [^v][^q]l       +CAT=nc,G=f,FSEM=ice
+SFX 25   vel             bilice          [^áí]vel        +CAT=nc,G=f,FSEM=ice
+SFX 25   ável            abilice         ável            +CAT=nc,G=f,FSEM=ice
+SFX 25   ível            ibilice         ível            +CAT=nc,G=f,FSEM=ice
+SFX 25   z               cice            z               +CAT=nc,G=f,FSEM=ice
+SFX 25   o               ices            [^çgc]o         +CAT=nc,G=f,N=p,FSEM=ice
+SFX 25   ço              cices           ço              +CAT=nc,G=f,N=p,FSEM=ice
+SFX 25   go              guices          go              +CAT=nc,G=f,N=p,FSEM=ice
+SFX 25   co              quices          co              +CAT=nc,G=f,N=p,FSEM=ice
+SFX 25   a               ices            [^çgc]a         +CAT=nc,G=f,N=p,FSEM=ice
+SFX 25   ça              cices           ça              +CAT=nc,G=f,N=p,FSEM=ice
+SFX 25   ga              guices          ga              +CAT=nc,G=f,N=p,FSEM=ice
+SFX 25   ca              quices          ca              +CAT=nc,G=f,N=p,FSEM=ice
+SFX 25   0               ices            [^v][^q]l       +CAT=nc,G=f,N=p,FSEM=ice
+SFX 25   e               ices            e               +CAT=nc,G=f,N=p,FSEM=ice
+SFX 25   0               ices            r               +CAT=nc,G=f,N=p,FSEM=ice
+SFX 25   vel             bilices         [^áí]vel        +CAT=nc,G=f,N=p,FSEM=ice
+SFX 25   ável            abilices        ável            +CAT=nc,G=f,N=p,FSEM=ice
+SFX 25   ível            ibilices        ível            +CAT=nc,G=f,N=p,FSEM=ice
+
+SFX 26 N 2
+SFX 26   y     ieth       y
+SFX 26   0     th         [^y]
+
+SFX 27 Y 39
+SFX 27   úrgico          urgicamente     úrgico          +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   0               amente          dor             +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   ório            oriamente       ório            +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   ário            ariamente       ário            +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   ático           aticamente      ático           +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   áctico          acticamente     áctico          +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   ónico           onicamente      ónico           +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   ógico           ogicamente      ógico           +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   ífero           iferamente      ífero           +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   ético           eticamente      ético           +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   ístico          isticamente     ístico          +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   íssimo          issimamente     íssimo          +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   ítico           iticamente      ítico           +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   áfico           aficamente      áfico           +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   étrico          etricamente     étrico          +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   ómico           omicamente      ómico           +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   érico           ericamente      érico           +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   ótico           oticamente      ótico           +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   áceo            aceamente       áceo            +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   ástico          asticamente     ástico          +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   ício            iciamente       ício            +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   ífico           ificamente      ífico           +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   íaco            iacamente       íaco            +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   ólico           olicamente      ólico           +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   órico           oricamente      órico           +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   énico           enicamente      énico           +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   ódico           odicamente      ódico           +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   ópico           opicamente      ópico           +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   álico           alicamente      álico           +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   érmico          ermicamente     érmico          +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   ívoro           ivoramente      ívoro           +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   ábico           abicamente      ábico           +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   ófilo           ofilamente      ófilo           +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   élico           elicamente      élico           +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   émico           emicamente      émico           +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   ónio            oniamente       ónio            +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   ásico           asicamente      ásico           +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   ágico           agicamente      ágico           +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 27   ócil            ocilmente       ócil            +FSEM=mente,CAT=adv,SUBCAT=modo
+
+SFX 28 Y 2
+SFX 28   e     ings       e
+SFX 28   0     ings       [^e]
+
+SFX 29 Y 14
+SFX 29   r               cionismo        [ai]r           +CAT=nc,FSEM=ismo
+SFX 29   er              icionismo       er              +CAT=nc,FSEM=ismo
+SFX 29   ar              ómetro          ar              +CAT=nc,FSEM=ometro
+SFX 29   ar              ódromo          ar              +CAT=nc,FSEM=odromo
+SFX 29   a               ódromo          a               +CAT=nc,FSEM=odromo
+SFX 29   o               ódromo          o               +CAT=nc,FSEM=odromo
+SFX 29   e               ódromo          e               +CAT=nc,FSEM=odromo
+SFX 29   e               ita             [^ã]e           +CAT=nc,G=f,GR=dimito
+SFX 29   a               ita             [^ã]a           +CAT=nc,G=f,GR=dimito
+SFX 29   0               zita            ão              +CAT=nc,G=f,GR=dimito
+SFX 29   0               zita            ãe              +CAT=nc,G=f,GR=dimito
+SFX 29   e               ito             [^ã]e           +CAT=nc,GR=dimito
+SFX 29   o               ito             [^ã]o           +CAT=nc,GR=dimito
+SFX 29   0               zito            ão              +CAT=nc,GR=dimito
+
+SFX 30 Y 259
+SFX 30   ir              o               uir             +P=1,N=s,T=p
+SFX 30   r               o               air             +P=1,N=s,T=p
+SFX 30   r               s               [ua]ir          +P=2,N=s,T=p
+SFX 30   ir              i               [ua]ir          +P=3,N=s,T=p
+SFX 30   ir              ímos            [ua]ir          +P=1,N=p,T=p
+SFX 30   ir              ís              [ua]ir          +P=2,N=p,T=p
+SFX 30   ir              em              [ua]ir          +P=3,N=p,T=p
+SFX 30   ir              ía              [ua]ir          +P=1_3,N=s,T=pi
+SFX 30   ir              ías             [ua]ir          +P=2,N=s,T=pi
+SFX 30   ir              íamos           [ua]ir          +P=1,N=p,T=pi
+SFX 30   ir              íeis            [ua]ir          +P=2,N=p,T=pi
+SFX 30   ir              íam             [ua]ir          +P=3,N=p,T=pi
+SFX 30   ir              í               [ua]ir          +P=1,N=s,T=pp
+SFX 30   ir              íste            [ua]ir          +P=2,N=s,T=pp
+SFX 30   r               u               [ua]ir          +P=3,N=s,T=pp
+SFX 30   ir              ímos            [ua]ir          +P=1,N=p,T=pp
+SFX 30   ir              ístes           [ua]ir          +P=2,N=p,T=pp
+SFX 30   ir              íram            [ua]ir          +P=3,N=p,T=pp
+SFX 30   ir              íra             [ua]ir          +P=1_3,N=s,T=pmp
+SFX 30   ir              íras            [ua]ir          +P=2,N=s,T=pmp
+SFX 30   ir              íramos          [ua]ir          +P=1,N=p,T=pmp
+SFX 30   ir              íreis           [ua]ir          +P=2,N=p,T=pmp
+SFX 30   ir              íram            [ua]ir          +P=3,N=p,T=pmp
+SFX 30   0               ei              [ua]ir          +P=1,N=s,T=f
+SFX 30   0               ás              [ua]ir          +P=2,N=s,T=f
+SFX 30   0               á               [ua]ir          +P=3,N=s,T=f
+SFX 30   0               emos            [ua]ir          +P=1,N=p,T=f
+SFX 30   0               eis             [ua]ir          +P=2,N=p,T=f
+SFX 30   0               ão              [ua]ir          +P=3,N=p,T=f
+SFX 30   ir              a               uir             +P=1_3,N=s,T=pc
+SFX 30   ir              as              uir             +P=2,N=s,T=pc
+SFX 30   ir              amos            uir             +P=1,N=p,T=pc
+SFX 30   ir              ais             uir             +P=2,N=p,T=pc
+SFX 30   ir              am              uir             +P=3,N=p,T=pc
+SFX 30   r               a               air             +P=1_3,N=s,T=pc
+SFX 30   r               as              air             +P=2,N=s,T=pc
+SFX 30   r               amos            air             +P=1,N=p,T=pc
+SFX 30   r               ais             air             +P=2,N=p,T=pc
+SFX 30   r               am              air             +P=3,N=p,T=pc
+SFX 30   ir              ísse            [ua]ir          +P=1_3,N=s,T=pic
+SFX 30   ir              ísses           [ua]ir          +P=2,N=s,T=pic
+SFX 30   ir              íssemos         [ua]ir          +P=1,N=p,T=pic
+SFX 30   ir              ísseis          [ua]ir          +P=2,N=p,T=pic
+SFX 30   ir              íssem           [ua]ir          +P=3,N=p,T=pic
+SFX 30   ir              íres            [ua]ir          +P=2,N=s,T=fc
+SFX 30   0               mos             [ua]ir          +P=1,N=p,T=fc
+SFX 30   ir              írdes           [ua]ir          +P=2,N=p,T=fc
+SFX 30   ir              írem            [ua]ir          +P=3,N=p,T=fc
+SFX 30   0               ia              [ua]ir          +P=1_3,N=s,T=c
+SFX 30   0               ias             [ua]ir          +P=2,N=s,T=c
+SFX 30   0               íamos           [ua]ir          +P=1,N=p,T=c
+SFX 30   0               íeis            [ua]ir          +P=2,N=p,T=c
+SFX 30   0               iam             [ua]ir          +P=3,N=p,T=c
+SFX 30   ir              i               [ua]ir          +P=2,N=s,T=i
+SFX 30   r               a               air             +P=3,N=s,T=i
+SFX 30   ir              a               uir             +P=3,N=s,T=i
+SFX 30   r               amos            air             +P=1,N=p,T=i
+SFX 30   ir              amos            uir             +P=1,N=p,T=i
+SFX 30   ir              í               [ua]ir          +P=2,N=p,T=i
+SFX 30   r               am              air             +P=3,N=p,T=i
+SFX 30   ir              am              uir             +P=3,N=p,T=i
+SFX 30   r               ndo             [ua]ir          +T=g
+SFX 30   ir              ído             [^q][ua]ir      +G=m,N=s,T=ppa
+SFX 30   ir              ída             [^q][ua]ir      +G=f,N=s,T=ppa
+SFX 30   ir              ídos            [^q][ua]ir      +G=m,N=p,T=ppa
+SFX 30   ir              ídas            [^q][ua]ir      +G=f,N=p,T=ppa
+SFX 30   ir              ido             quir            +G=m,N=s,T=ppa
+SFX 30   ir              ida             quir            +G=f,N=s,T=ppa
+SFX 30   ir              idos            quir            +G=m,N=p,T=ppa
+SFX 30   ir              idas            quir            +G=f,N=p,T=ppa
+SFX 30   r               nho             por             +P=1,N=s,T=p
+SFX 30   or              ões             por             +P=2,N=s,T=p
+SFX 30   or              õe              por             +P=3,N=s,T=p
+SFX 30   r               mos             por             +P=1,N=p,T=p
+SFX 30   r               ndes            por             +P=2,N=p,T=p
+SFX 30   or              õem             por             +P=3,N=p,T=p
+SFX 30   or              unha            por             +P=1_3,N=s,T=pi
+SFX 30   or              unhas           por             +P=2,N=s,T=pi
+SFX 30   or              únhamos         por             +P=1,N=p,T=pi
+SFX 30   or              únheis          por             +P=2,N=p,T=pi
+SFX 30   or              unham           por             +P=3,N=p,T=pi
+SFX 30   or              us              por             +P=1,N=s,T=pp
+SFX 30   or              useste          por             +P=2,N=s,T=pp
+SFX 30   or              ôs              por             +P=3,N=s,T=pp
+SFX 30   or              usemos          por             +P=1,N=p,T=pp
+SFX 30   or              usestes         por             +P=2,N=p,T=pp
+SFX 30   or              useram          por             +P=3,N=p,T=pp
+SFX 30   or              usera           por             +P=1_3,N=s,T=pmp
+SFX 30   or              useras          por             +P=2,N=s,T=pmp
+SFX 30   or              uséramos        por             +P=1,N=p,T=pmp
+SFX 30   or              uséreis         por             +P=2,N=p,T=pmp
+SFX 30   or              useram          por             +P=3,N=p,T=pmp
+SFX 30   0               ei              por             +P=1,N=s,T=f
+SFX 30   0               ás              por             +P=2,N=s,T=f
+SFX 30   0               á               por             +P=3,N=s,T=f
+SFX 30   0               emos            por             +P=1,N=p,T=f
+SFX 30   0               eis             por             +P=2,N=p,T=f
+SFX 30   0               ão              por             +P=3,N=p,T=f
+SFX 30   r               nha             por             +P=1_3,N=s,T=pc
+SFX 30   r               nhas            por             +P=2,N=s,T=pc
+SFX 30   r               nhamos          por             +P=1,N=p,T=pc
+SFX 30   r               nhais           por             +P=2,N=p,T=pc
+SFX 30   r               nham            por             +P=3,N=p,T=pc
+SFX 30   or              usesse          por             +P=1_3,N=s,T=pic
+SFX 30   or              usesses         por             +P=2,N=s,T=pic
+SFX 30   or              uséssemos       por             +P=1,N=p,T=pic
+SFX 30   or              usésseis        por             +P=2,N=p,T=pic
+SFX 30   or              usessem         por             +P=3,N=p,T=pic
+SFX 30   or              user            por             +P=1,N=s,T=fc
+SFX 30   or              useres          por             +P=2,N=s,T=fc
+SFX 30   or              user            por             +P=3,N=s,T=fc
+SFX 30   or              usermos         por             +P=1,N=p,T=fc
+SFX 30   or              userdes         por             +P=2,N=p,T=fc
+SFX 30   or              userem          por             +P=3,N=p,T=fc
+SFX 30   0               ia              por             +P=1_3,N=s,T=c
+SFX 30   0               ias             por             +P=2,N=s,T=c
+SFX 30   0               íamos           por             +P=1,N=p,T=c
+SFX 30   0               íeis            por             +P=2,N=p,T=c
+SFX 30   0               iam             por             +P=3,N=p,T=c
+SFX 30   or              õe              por             +P=2,N=s,T=i
+SFX 30   r               nha             por             +P=3,N=s,T=i
+SFX 30   r               nhamos          por             +P=1,N=p,T=i
+SFX 30   r               nde             por             +P=2,N=p,T=i
+SFX 30   r               nham            por             +P=3,N=p,T=i
+SFX 30   r               ndo             por             +T=g
+SFX 30   r               sto             por             +G=m,N=s,T=ppa
+SFX 30   r               sta             por             +G=f,N=s,T=ppa
+SFX 30   r               stos            por             +G=m,N=p,T=ppa
+SFX 30   r               stas            por             +G=f,N=p,T=ppa
+SFX 30   0               es              por             +P=2,N=s,T=ip
+SFX 30   0               mos             por             +P=1,N=p,T=ip
+SFX 30   0               des             por             +P=2,N=p,T=ip
+SFX 30   0               em              por             +P=3,N=p,T=ip
+SFX 30   zer             ço              fazer           +P=1,N=s,T=p
+SFX 30   r               s               fazer           +P=2,N=s,T=p
+SFX 30   zer             z               fazer           +P=3,N=s,T=p
+SFX 30   r               mos             fazer           +P=1,N=p,T=p
+SFX 30   r               is              fazer           +P=2,N=p,T=p
+SFX 30   r               m               fazer           +P=3,N=p,T=p
+SFX 30   er              ia              fazer           +P=1_3,N=s,T=pi
+SFX 30   er              ias             fazer           +P=2,N=s,T=pi
+SFX 30   er              íamos           fazer           +P=1,N=p,T=pi
+SFX 30   er              íeis            fazer           +P=2,N=p,T=pi
+SFX 30   er              iam             fazer           +P=3,N=p,T=pi
+SFX 30   azer            iz              fazer           +P=1,N=s,T=pp
+SFX 30   azer            izeste          fazer           +P=2,N=s,T=pp
+SFX 30   azer            ez              fazer           +P=3,N=s,T=pp
+SFX 30   azer            izemos          fazer           +P=1,N=p,T=pp
+SFX 30   azer            izestes         fazer           +P=2,N=p,T=pp
+SFX 30   azer            izeram          fazer           +P=3,N=p,T=pp
+SFX 30   azer            izera           fazer           +P=1_3,N=s,T=pmp
+SFX 30   azer            izeras          fazer           +P=2,N=s,T=pmp
+SFX 30   azer            izéramos        fazer           +P=1,N=p,T=pmp
+SFX 30   azer            izéreis         fazer           +P=2,N=p,T=pmp
+SFX 30   azer            izeram          fazer           +P=3,N=p,T=pmp
+SFX 30   zer             rei             fazer           +P=1,N=s,T=f
+SFX 30   zer             rás             fazer           +P=2,N=s,T=f
+SFX 30   zer             rá              fazer           +P=3,N=s,T=f
+SFX 30   zer             remos           fazer           +P=1,N=p,T=f
+SFX 30   zer             reis            fazer           +P=2,N=p,T=f
+SFX 30   zer             rão             fazer           +P=3,N=p,T=f
+SFX 30   zer             ça              fazer           +P=1_3,N=s,T=pc
+SFX 30   zer             ças             fazer           +P=2,N=s,T=pc
+SFX 30   zer             çamos           fazer           +P=1,N=p,T=pc
+SFX 30   zer             çais            fazer           +P=2,N=p,T=pc
+SFX 30   zer             çam             fazer           +P=3,N=p,T=pc
+SFX 30   azer            izesse          fazer           +P=1_3,N=s,T=pic
+SFX 30   azer            izesses         fazer           +P=2,N=s,T=pic
+SFX 30   azer            izéssemos       fazer           +P=1,N=p,T=pic
+SFX 30   azer            izésseis        fazer           +P=2,N=p,T=pic
+SFX 30   azer            izessem         fazer           +P=3,N=p,T=pic
+SFX 30   azer            izer            fazer           +P=1,N=s,T=fc
+SFX 30   azer            izeres          fazer           +P=2,N=s,T=fc
+SFX 30   azer            izer            fazer           +P=3,N=s,T=fc
+SFX 30   azer            izermos         fazer           +P=1,N=p,T=fc
+SFX 30   azer            izerdes         fazer           +P=2,N=p,T=fc
+SFX 30   azer            izerem          fazer           +P=3,N=p,T=fc
+SFX 30   zer             ria             fazer           +P=1_3,N=s,T=c
+SFX 30   zer             rias            fazer           +P=2,N=s,T=c
+SFX 30   zer             ríamos          fazer           +P=1,N=p,T=c
+SFX 30   zer             ríeis           fazer           +P=2,N=p,T=c
+SFX 30   zer             riam            fazer           +P=3,N=p,T=c
+SFX 30   zer             z               fazer           +P=2,N=s,T=i
+SFX 30   zer             ça              fazer           +P=3,N=s,T=i
+SFX 30   zer             çamos           fazer           +P=1,N=p,T=i
+SFX 30   r               i               fazer           +P=2,N=p,T=i
+SFX 30   zer             çam             fazer           +P=3,N=p,T=i
+SFX 30   r               ndo             fazer           +T=g
+SFX 30   azer            eito            fazer           +G=m,N=s,T=ppa
+SFX 30   azer            eita            fazer           +G=f,N=s,T=ppa
+SFX 30   azer            eitos           fazer           +G=m,N=p,T=ppa
+SFX 30   azer            eitas           fazer           +G=f,N=p,T=ppa
+SFX 30   0               es              fazer           +P=2,N=s,T=ip
+SFX 30   0               mos             fazer           +P=1,N=p,T=ip
+SFX 30   0               des             fazer           +P=2,N=p,T=ip
+SFX 30   0               em              fazer           +P=3,N=p,T=ip
+SFX 30   zer             go              dizer           +P=1,N=s,T=p
+SFX 30   r               s               dizer           +P=2,N=s,T=p
+SFX 30   zer             z               dizer           +P=3,N=s,T=p
+SFX 30   r               mos             dizer           +P=1,N=p,T=p
+SFX 30   r               is              dizer           +P=2,N=p,T=p
+SFX 30   r               m               dizer           +P=3,N=p,T=p
+SFX 30   er              ia              dizer           +P=1_3,N=s,T=pi
+SFX 30   er              ias             dizer           +P=2,N=s,T=pi
+SFX 30   er              íamos           dizer           +P=1,N=p,T=pi
+SFX 30   er              íeis            dizer           +P=2,N=p,T=pi
+SFX 30   er              iam             dizer           +P=3,N=p,T=pi
+SFX 30   zer             sse             dizer           +P=1,N=s,T=pp
+SFX 30   zer             sseste          dizer           +P=2,N=s,T=pp
+SFX 30   zer             sse             dizer           +P=3,N=s,T=pp
+SFX 30   zer             ssemos          dizer           +P=1,N=p,T=pp
+SFX 30   zer             ssestes         dizer           +P=2,N=p,T=pp
+SFX 30   zer             sseram          dizer           +P=3,N=p,T=pp
+SFX 30   zer             ssera           dizer           +P=1_3,N=s,T=pmp
+SFX 30   zer             sseras          dizer           +P=2,N=s,T=pmp
+SFX 30   zer             sséramos        dizer           +P=1,N=p,T=pmp
+SFX 30   zer             sséreis         dizer           +P=2,N=p,T=pmp
+SFX 30   zer             sseram          dizer           +P=3,N=p,T=pmp
+SFX 30   zer             rei             dizer           +P=1,N=s,T=f
+SFX 30   zer             rás             dizer           +P=2,N=s,T=f
+SFX 30   zer             rá              dizer           +P=3,N=s,T=f
+SFX 30   zer             remos           dizer           +P=1,N=p,T=f
+SFX 30   zer             reis            dizer           +P=2,N=p,T=f
+SFX 30   zer             rão             dizer           +P=3,N=p,T=f
+SFX 30   zer             ga              dizer           +P=1_3,N=s,T=pc
+SFX 30   zer             gas             dizer           +P=2,N=s,T=pc
+SFX 30   zer             gamos           dizer           +P=1,N=p,T=pc
+SFX 30   zer             gais            dizer           +P=2,N=p,T=pc
+SFX 30   zer             gam             dizer           +P=3,N=p,T=pc
+SFX 30   zer             ssesse          dizer           +P=1_3,N=s,T=pic
+SFX 30   zer             ssesses         dizer           +P=2,N=s,T=pic
+SFX 30   zer             sséssemos       dizer           +P=1,N=p,T=pic
+SFX 30   zer             ssésseis        dizer           +P=2,N=p,T=pic
+SFX 30   zer             ssessem         dizer           +P=3,N=p,T=pic
+SFX 30   zer             sser            dizer           +P=1,N=s,T=fc
+SFX 30   zer             sseres          dizer           +P=2,N=s,T=fc
+SFX 30   zer             sser            dizer           +P=3,N=s,T=fc
+SFX 30   zer             ssermos         dizer           +P=1,N=p,T=fc
+SFX 30   zer             sserdes         dizer           +P=2,N=p,T=fc
+SFX 30   zer             sserem          dizer           +P=3,N=p,T=fc
+SFX 30   zer             ria             dizer           +P=1_3,N=s,T=c
+SFX 30   zer             rias            dizer           +P=2,N=s,T=c
+SFX 30   zer             ríamos          dizer           +P=1,N=p,T=c
+SFX 30   zer             ríeis           dizer           +P=2,N=p,T=c
+SFX 30   zer             riam            dizer           +P=3,N=p,T=c
+SFX 30   zer             z               dizer           +P=2,N=s,T=i
+SFX 30   zer             ga              dizer           +P=3,N=s,T=i
+SFX 30   zer             gamos           dizer           +P=1,N=p,T=i
+SFX 30   r               i               dizer           +P=2,N=p,T=i
+SFX 30   zer             gam             dizer           +P=3,N=p,T=i
+SFX 30   r               ndo             dizer           +T=g
+SFX 30   zer             to              dizer           +G=m,N=s,T=ppa
+SFX 30   zer             ta              dizer           +G=f,N=s,T=ppa
+SFX 30   zer             tos             dizer           +G=m,N=p,T=ppa
+SFX 30   zer             tas             dizer           +G=f,N=p,T=ppa
+SFX 30   0               es              dizer           +P=2,N=s,T=ip
+SFX 30   0               mos             dizer           +P=1,N=p,T=ip
+SFX 30   0               des             dizer           +P=2,N=p,T=ip
+SFX 30   0               em              dizer           +P=3,N=p,T=ip
+
+SFX 31 Y 1
+SFX 31   0     ment       .
+
+SFX 32 Y 77
+SFX 32   0               -lhe            .               +DP=3,DN=s
+SFX 32   0               -lho            .               +DP=3,DN=s,AP=3,AN=s,AG=m
+SFX 32   0               -lha            .               +DP=3,DN=s,AP=3,AN=s,AG=f
+SFX 32   0               -lhes           .               +DP=3,DN=p
+SFX 32   0               -lhos           .               +DP=3,DN=s,AP=3,AN=p,AG=m
+SFX 32   0               -lhas           .               +DP=3,DN=s,AP=3,AN=p,AG=f
+SFX 32   0               -lhe-ei         r               +DP=3,DN=s,P=1,N=s,T=f
+SFX 32   0               -lhe-eis        r               +DP=3,DN=s,P=2,N=p,T=f
+SFX 32   0               -lhe-emos       r               +DP=3,DN=s,P=1,N=p,T=f
+SFX 32   0               -lhe-á          r               +DP=3,DN=s,P=3,N=s,T=f
+SFX 32   0               -lhe-ás         r               +DP=3,DN=s,P=2,N=s,T=f
+SFX 32   0               -lhe-ão         r               +DP=3,DN=s,P=3,N=p,T=f
+SFX 32   0               -lhe-iam        r               +DP=3,DN=s,P=3,N=p,T=c
+SFX 32   0               -lhe-íamos      r               +DP=3,DN=s,P=1,N=p,T=c
+SFX 32   0               -lhe-ia         r               +DP=3,DN=s,P=1_3,N=s,T=c
+SFX 32   0               -lhe-ias        r               +DP=3,DN=s,P=2,N=s,T=c
+SFX 32   0               -lhes-ei        r               +DP=3,DN=p,P=1,N=s,T=f
+SFX 32   0               -lhes-eis       r               +DP=3,DN=p,P=2,N=p,T=f
+SFX 32   0               -lhes-emos      r               +DP=3,DN=p,P=1,N=p,T=f
+SFX 32   0               -lhes-á         r               +DP=3,DN=p,P=3,N=s,T=f
+SFX 32   0               -lhes-ás        r               +DP=3,DN=p,P=2,N=s,T=f
+SFX 32   0               -lhes-ão        r               +DP=3,DN=p,P=3,N=p,T=f
+SFX 32   0               -lhes-iam       r               +DP=3,DN=p,P=3,N=p,T=c
+SFX 32   0               -lhes-íamos     r               +DP=3,DN=p,P=1,N=p,T=c
+SFX 32   0               -lhes-ia        r               +DP=3,DN=p,P=1_3,N=s,T=c
+SFX 32   0               -lhes-ias       r               +DP=3,DN=p,P=2,N=s,T=c
+SFX 32   0               -me             .               +AP=1,AN=s
+SFX 32   0               -te             .               +AP=2,AN=s
+SFX 32   0               -se             .               +AP=3,AN=_
+SFX 32   ns              m-nos           ns              +AP=1,AN=p
+SFX 32   s               -nos            mos             +AP=1,AN=p
+SFX 32   0               -nos            [^náo]s         +AP=1,AN=p
+SFX 32   0               -nos            [^sá]           +AP=1,AN=p
+SFX 32   0               -vos            .               +AP=2,AN=p
+SFX 32   0               -me-ei          r               +AP=1,AN=s,P=1,N=s,T=f
+SFX 32   0               -me-eis         r               +AP=1,AN=s,P=2,N=p,T=f
+SFX 32   0               -me-emos        r               +AP=1,AN=s,P=1,N=p,T=f
+SFX 32   0               -me-á           r               +AP=1,AN=s,P=3,N=s,T=f
+SFX 32   0               -me-ás          r               +AP=1,AN=s,P=2,N=s,T=f
+SFX 32   0               -me-ão          r               +AP=1,AN=s,P=3,N=p,T=f
+SFX 32   0               -me-iam         r               +AP=1,AN=s,P=3,N=p,T=c
+SFX 32   0               -me-íamos       r               +AP=1,AN=s,P=1,N=p,T=c
+SFX 32   0               -me-ia          r               +AP=1,AN=s,P=1_3,N=s,T=c
+SFX 32   0               -me-ias         r               +AP=1,AN=s,P=2,N=s,T=c
+SFX 32   0               -te-ei          r               +AP=2,AN=s,P=1,N=s,T=f
+SFX 32   0               -te-emos        r               +AP=2,AN=s,P=1,N=p,T=f
+SFX 32   0               -te-á           r               +AP=2,AN=s,P=3,N=s,T=f
+SFX 32   0               -te-ás          r               +AP=2,AN=s,P=2,N=s,T=f
+SFX 32   0               -te-ão          r               +AP=2,AN=s,P=3,N=p,T=f
+SFX 32   0               -te-ias         r               +AP=2,AN=s,P=2,N=s,T=c
+SFX 32   0               -te-iam         r               +AP=2,AN=s,P=3,N=p,T=c
+SFX 32   0               -te-íamos       r               +AP=2,AN=s,P=1,N=p,T=c
+SFX 32   0               -te-ia          r               +AP=2,AN=s,P=1_3,N=s,T=c
+SFX 32   0               -nos-emos       r               +AP=1,AN=p,P=1,N=p,T=f
+SFX 32   0               -nos-eis        r               +AP=1,AN=p,P=2,N=p,T=f
+SFX 32   0               -nos-á          r               +AP=1,AN=p,P=3,N=s,T=f
+SFX 32   0               -nos-ás         r               +AP=1,AN=p,P=2,N=s,T=f
+SFX 32   0               -nos-ão         r               +AP=1,AN=p,P=3,N=p,T=f
+SFX 32   0               -nos-íamos      r               +AP=1,AN=p,P=1,N=p,T=c
+SFX 32   0               -nos-iam        r               +AP=1,AN=p,P=3,N=p,T=c
+SFX 32   0               -nos-ia         r               +AP=1,AN=p,P=1_3,N=s,T=c
+SFX 32   0               -nos-ias        r               +AP=1,AN=p,P=2,N=s,T=c
+SFX 32   0               -se-ia          r               +AP=3,AN=s,P=3,N=s,T=c
+SFX 32   0               -se-ão          r               +AP=3,AN=p,P=3,N=p,T=f
+SFX 32   0               -se-iam         r               +AP=3,AN=p,P=3,N=p,T=c
+SFX 32   0               -se-á           r               +AP=3,AN=s,P=3,N=s,T=f
+SFX 32   0               -vos-eis        r               +AP=2,AN=p,P=2,N=p,T=f
+SFX 32   0               -vos-emos       r               +AP=2,AN=p,P=1,N=p,T=f
+SFX 32   0               -vos-á          r               +AP=2,AN=p,P=3,N=s,T=f
+SFX 32   0               -vos-ei         r               +AP=2,AN=p,P=1,N=s,T=f
+SFX 32   0               -vos-ás         r               +AP=2,AN=p,P=2,N=s,T=f
+SFX 32   0               -vos-ão         r               +AP=2,AN=p,P=3,N=p,T=f
+SFX 32   0               -vos-íeis       r               +AP=2,AN=p,P=2,N=p,T=c
+SFX 32   0               -vos-íamos      r               +AP=2,AN=p,P=1,N=p,T=c
+SFX 32   0               -vos-iam        r               +AP=2,AN=p,P=3,N=p,T=c
+SFX 32   0               -vos-ia         r               +AP=2,AN=p,P=1_3,N=s,T=c
+SFX 32   0               -vos-ias        r               +AP=2,AN=p,P=2,N=s,T=c
+
+SFX 33 Y 1
+SFX 33   0     's         .
+
+SFX 34 Y 4
+SFX 34   r               mento           [ai]r           +CAT=nc,G=m,N=s,FSEM=mento
+SFX 34   er              imento          er              +CAT=nc,G=m,N=s,FSEM=mento
+SFX 34   r               mentos          [ai]r           +CAT=nc,G=m,N=p,FSEM=mento
+SFX 34   er              imentos         er              +CAT=nc,G=m,N=p,FSEM=mento
+
+SFX 35 Y 3
+SFX 35   e     ion        e
+SFX 35   y     ication    y
+SFX 35   0     en         [^ey]
+
+SFX 36 Y 8
+SFX 36   r               díssimo         [ia]r           +CAT=adj,GR=sup,G=m,N=s
+SFX 36   r               díssima         [ia]r           +CAT=adj,GR=sup,G=f,N=s
+SFX 36   r               díssimas        [ia]r           +CAT=adj,GR=sup,G=f,N=p
+SFX 36   r               díssimos        [ia]r           +CAT=adj,GR=sup,G=m,N=p
+SFX 36   er              idíssimo        er              +CAT=adj,GR=sup,G=m,N=s
+SFX 36   er              idíssima        er              +CAT=adj,GR=sup,G=f,N=s
+SFX 36   er              idíssimas       er              +CAT=adj,GR=sup,G=f,N=p
+SFX 36   er              idíssimos       er              +CAT=adj,GR=sup,G=m,N=p
+
+SFX 37 Y 3
+SFX 37   y     iness      [^aeiou]y
+SFX 37   0     ness       [aeiou]y
+SFX 37   0     ness       [^y]
+
+SFX 38 Y 114
+SFX 38   0               -o              [aeiouéê]       +G=m,AN=s
+SFX 38   ns              m-lo            ns              +G=m,AN=s
+SFX 38   s               -lo             [^ná]s          +G=m,AN=s
+SFX 38   0               -no             m               +G=m,AN=s
+SFX 38   0               -a              [aeiouéê]       +G=f,AN=s
+SFX 38   ns              m-la            ns              +G=f,AN=s
+SFX 38   s               -la             [^ná]s          +G=f,AN=s
+SFX 38   0               -na             m               +G=f,AN=s
+SFX 38   0               -os             [aeiouéê]       +G=m,AN=p
+SFX 38   ns              m-los           ns              +G=m,AN=p
+SFX 38   s               -los            [^ná]s          +G=m,AN=p
+SFX 38   0               -nos            m               +G=m,AN=p
+SFX 38   0               -as             [aeiouéê]       +G=f,AN=p
+SFX 38   ns              m-las           ns              +G=f,AN=p
+SFX 38   s               -las            [^ná]s          +G=f,AN=p
+SFX 38   0               -nas            m               +G=f,AN=p
+SFX 38   z               -lo             [iu]z           +G=m,AN=s
+SFX 38   z               -la             [iu]z           +G=f,AN=s
+SFX 38   z               -los            [iu]z           +G=m,AN=p
+SFX 38   z               -las            [iu]z           +G=f,AN=p
+SFX 38   az              á-lo            az              +G=m,AN=s
+SFX 38   az              á-la            az              +G=f,AN=s
+SFX 38   az              á-los           az              +G=m,AN=p
+SFX 38   az              á-las           az              +G=f,AN=p
+SFX 38   ez              ê-lo            ez              +G=m,AN=s
+SFX 38   ez              ê-la            ez              +G=f,AN=s
+SFX 38   ez              ê-los           ez              +G=m,AN=p
+SFX 38   ez              ê-las           ez              +G=f,AN=p
+SFX 38   ar              á-lo            ar              +AG=m,AN=s
+SFX 38   ar              á-la            ar              +AG=f,AN=s
+SFX 38   ar              á-los           ar              +AG=m,AN=p
+SFX 38   ar              á-las           ar              +AG=f,AN=p
+SFX 38   ar              á-lo-ei         ar              +P=1,N=s,T=f
+SFX 38   ar              á-lo-ás         ar              +P=2,N=s,T=f
+SFX 38   ar              á-lo-á          ar              +P=3,N=s,T=f
+SFX 38   ar              á-lo-emos       ar              +P=1,N=p,T=f
+SFX 38   ar              á-lo-eis        ar              +P=2,N=p,T=f
+SFX 38   ar              á-lo-ão         ar              +P=3,N=p,T=f
+SFX 38   ar              á-lo-ia         ar              +P=1_3,N=s,T=c
+SFX 38   ar              á-lo-ias        ar              +P=2,N=s,T=c
+SFX 38   ar              á-lo-íamos      ar              +P=1,N=p,T=c
+SFX 38   ar              á-lo-íeis       ar              +P=2,N=p,T=c
+SFX 38   ar              á-lo-iam        ar              +P=3,N=p,T=c
+SFX 38   er              ê-lo            er              +G=m,N=s
+SFX 38   er              ê-la            er              +G=f,N=s
+SFX 38   er              ê-los           er              +G=m,N=p
+SFX 38   er              ê-las           er              +G=f,N=p
+SFX 38   er              ê-lo-ei         er              +P=1,N=s,T=f
+SFX 38   er              ê-lo-ás         er              +P=2,N=s,T=f
+SFX 38   er              ê-lo-á          er              +P=3,N=s,T=f
+SFX 38   er              ê-lo-emos       er              +P=1,N=p,T=f
+SFX 38   er              ê-lo-eis        er              +P=2,N=p,T=f
+SFX 38   er              ê-lo-ão         er              +P=3,N=p,T=f
+SFX 38   er              ê-lo-ia         er              +P=1_3,N=s,T=c
+SFX 38   er              ê-lo-ias        er              +P=2,N=s,T=c
+SFX 38   er              ê-lo-íamos      er              +P=1,N=p,T=c
+SFX 38   er              ê-lo-íeis       er              +P=2,N=p,T=c
+SFX 38   er              ê-lo-iam        er              +P=3,N=p,T=c
+SFX 38   zer             -lo-ei          dizer           +P=1,N=s,T=f
+SFX 38   zer             -lo-ás          dizer           +P=2,N=s,T=f
+SFX 38   zer             -lo-á           dizer           +P=3,N=s,T=f
+SFX 38   zer             -lo-emos        dizer           +P=1,N=p,T=f
+SFX 38   zer             -lo-eis         dizer           +P=2,N=p,T=f
+SFX 38   zer             -lo-ão          dizer           +P=3,N=p,T=f
+SFX 38   zer             -lo-ia          dizer           +P=1_3,N=s,T=c
+SFX 38   zer             -lo-ias         dizer           +P=2,N=s,T=c
+SFX 38   zer             -lo-íamos       dizer           +P=1,N=p,T=c
+SFX 38   zer             -lo-íeis        dizer           +P=2,N=p,T=c
+SFX 38   zer             -lo-iam         dizer           +P=3,N=p,T=c
+SFX 38   azer            á-lo            azer            +G=m,N=s
+SFX 38   azer            á-la            azer            +G=f,N=s
+SFX 38   azer            á-los           azer            +G=m,N=p
+SFX 38   azer            á-las           azer            +G=f,N=p
+SFX 38   azer            á-lo-ei         azer            +P=1,N=s,T=f
+SFX 38   azer            á-lo-ás         azer            +P=2,N=s,T=f
+SFX 38   azer            á-lo-á          azer            +P=3,N=s,T=f
+SFX 38   azer            á-lo-emos       azer            +P=1,N=p,T=f
+SFX 38   azer            á-lo-eis        azer            +P=2,N=p,T=f
+SFX 38   azer            á-lo-ão         azer            +P=3,N=p,T=f
+SFX 38   azer            á-lo-ia         azer            +P=1_3,N=s,T=c
+SFX 38   azer            á-lo-ias        azer            +P=2,N=s,T=c
+SFX 38   azer            á-lo-íamos      azer            +P=1,N=p,T=c
+SFX 38   azer            á-lo-íeis       azer            +P=2,N=p,T=c
+SFX 38   azer            á-lo-iam        azer            +P=3,N=p,T=c
+SFX 38   r               -lo             ir              +G=m,N=s
+SFX 38   r               -la             ir              +G=f,N=s
+SFX 38   r               -los            ir              +G=m,N=p
+SFX 38   r               -las            ir              +G=f,N=p
+SFX 38   r               -lo-ei          ir              +P=1,N=s,T=f
+SFX 38   r               -lo-ás          ir              +P=2,N=s,T=f
+SFX 38   r               -lo-á           ir              +P=3,N=s,T=f
+SFX 38   r               -lo-emos        ir              +P=1,N=p,T=f
+SFX 38   r               -lo-eis         ir              +P=2,N=p,T=f
+SFX 38   r               -lo-ão          ir              +P=3,N=p,T=f
+SFX 38   r               -lo-ia          ir              +P=1_3,N=s,T=c
+SFX 38   r               -lo-ias         ir              +P=2,N=s,T=c
+SFX 38   r               -lo-íamos       ir              +P=1,N=p,T=c
+SFX 38   r               -lo-íeis        ir              +P=2,N=p,T=c
+SFX 38   r               -lo-iam         ir              +P=3,N=p,T=c
+SFX 38   r               -lo             or              +G=m,N=s
+SFX 38   r               -la             or              +G=f,N=s
+SFX 38   r               -los            or              +G=m,N=p
+SFX 38   r               -las            or              +G=f,N=p
+SFX 38   r               -lo-ei          or              +P=1,N=s,T=f
+SFX 38   r               -lo-ás          or              +P=2,N=s,T=f
+SFX 38   r               -lo-á           or              +P=3,N=s,T=f
+SFX 38   r               -lo-emos        or              +P=1,N=p,T=f
+SFX 38   r               -lo-eis         or              +P=2,N=p,T=f
+SFX 38   r               -lo-ão          or              +P=3,N=p,T=f
+SFX 38   r               -lo-ia          or              +P=1_3,N=s,T=c
+SFX 38   r               -lo-ias         or              +P=2,N=s,T=c
+SFX 38   r               -lo-íamos       or              +P=1,N=p,T=c
+SFX 38   r               -lo-íeis        or              +P=2,N=p,T=c
+SFX 38   r               -lo-iam         or              +P=3,N=p,T=c
+
+SFX 39 Y 4
+SFX 39   0     r          e
+SFX 39   y     ier        [^aeiou]y
+SFX 39   0     er         [aeiou]y
+SFX 39   0     er         [^ey]
+
+SFX 40 Y 4
+SFX 40   y     ies        [^aeiou]y
+SFX 40   0     s          [aeiou]y
+SFX 40   0     es         [sxzh]
+SFX 40   0     s          [^sxzhy]
+
+SFX 41 N 4
+SFX 41   0     st         e
+SFX 41   y     iest       [^aeiou]y
+SFX 41   0     est        [aeiou]y
+SFX 41   0     est        [^ey]
+
+SFX 42 N 2
+SFX 42   e     ive        e
+SFX 42   0     ive        [^e]
+
+SFX 43 Y 12
+SFX 43   r               dinho           [ia]r           +CAT=adj,GR=dim,G=m,N=s
+SFX 43   r               dinha           [ia]r           +CAT=adj,GR=dim,G=f,N=s
+SFX 43   r               dinhas          [ia]r           +CAT=adj,GR=dim,G=f,N=p
+SFX 43   r               dinhos          [ia]r           +CAT=adj,GR=dim,G=m,N=p
+SFX 43   er              idinho          er              +CAT=adj,GR=dim,G=m,N=s
+SFX 43   er              idinha          er              +CAT=adj,GR=dim,G=f,N=s
+SFX 43   er              idinhas         er              +CAT=adj,GR=dim,G=f,N=p
+SFX 43   er              idinhos         er              +CAT=adj,GR=dim,G=m,N=p
+SFX 43   0               zinho           [^ã][eo]        +GR=dim
+SFX 43   0               inho            l               +GR=dim
+SFX 43   0               zinhos          [^ã][eo]        +N=p,GR=dim
+SFX 43   0               inhos           l               +N=p,GR=dim
+
+SFX 44 Y 3
+SFX 44   e     ions       e
+SFX 44   y     ications   y
+SFX 44   0     ens        [^ey]
+
+SFX 45 Y 135
+SFX 45   ar              o               [^-]ar          +P=1,N=s,T=p
+SFX 45   r               s               ar              +P=2,N=s,T=p
+SFX 45   ar              a               [^-]ar          +P=3,N=s,T=p
+SFX 45   r               mos             ar              +P=1,N=p,T=p
+SFX 45   r               is              ar              +P=2,N=p,T=p
+SFX 45   r               m               ar              +P=3,N=p,T=p
+SFX 45   ar              e               [^cgç]ar        +P=1_3,N=s,T=pc
+SFX 45   car             que             car             +P=1_3,N=s,T=pc
+SFX 45   gar             gue             gar             +P=1_3,N=s,T=pc
+SFX 45   çar             ce              çar             +P=1_3,N=s,T=pc
+SFX 45   ar              es              [^cgç]ar        +P=2,N=s,T=pc
+SFX 45   car             ques            car             +P=2,N=s,T=pc
+SFX 45   gar             gues            gar             +P=2,N=s,T=pc
+SFX 45   çar             ces             çar             +P=2,N=s,T=pc
+SFX 45   ar              emos            [^cgç]ar        +P=1,N=p,T=pc
+SFX 45   car             quemos          car             +P=1,N=p,T=pc
+SFX 45   gar             guemos          gar             +P=1,N=p,T=pc
+SFX 45   çar             cemos           çar             +P=1,N=p,T=pc
+SFX 45   ar              eis             [^cgç]ar        +P=2,N=p,T=pc
+SFX 45   car             queis           car             +P=2,N=p,T=pc
+SFX 45   gar             gueis           gar             +P=2,N=p,T=pc
+SFX 45   çar             ceis            çar             +P=2,N=p,T=pc
+SFX 45   ar              em              [^cgç]ar        +P=3,N=p,T=pc
+SFX 45   car             quem            car             +P=3,N=p,T=pc
+SFX 45   gar             guem            gar             +P=3,N=p,T=pc
+SFX 45   çar             cem             çar             +P=3,N=p,T=pc
+SFX 45   ar              a               [^-]ar          +P=2,N=s,T=i
+SFX 45   ar              e               [^cgç]ar        +P=3,N=s,T=i
+SFX 45   car             que             car             +P=3,N=s,T=i
+SFX 45   gar             gue             gar             +P=3,N=s,T=i
+SFX 45   çar             ce              çar             +P=3,N=s,T=i
+SFX 45   ar              emos            [^cgç]ar        +P=1,N=p,T=i
+SFX 45   car             quemos          car             +P=1,N=p,T=i
+SFX 45   gar             guemos          gar             +P=1,N=p,T=i
+SFX 45   çar             cemos           çar             +P=1,N=p,T=i
+SFX 45   r               i               ar              +P=2,N=p,T=i
+SFX 45   ar              em              [^cgç]ar        +P=3,N=p,T=i
+SFX 45   car             quem            car             +P=3,N=p,T=i
+SFX 45   gar             guem            gar             +P=3,N=p,T=i
+SFX 45   çar             cem             çar             +P=3,N=p,T=i
+SFX 45   er              o               [^cug-]er       +P=1,N=s,T=p
+SFX 45   cer             ço              cer             +P=1,N=s,T=p
+SFX 45   ger             jo              ger             +P=1,N=s,T=p
+SFX 45   guer            go              guer            +P=1,N=s,T=p
+SFX 45   r               s               er              +P=2,N=s,T=p
+SFX 45   er              e               er              +P=3,N=s,T=p
+SFX 45   r               mos             er              +P=1,N=p,T=p
+SFX 45   r               is              er              +P=2,N=p,T=p
+SFX 45   r               m               er              +P=3,N=p,T=p
+SFX 45   er              a               [^cug-]er       +P=1_3,N=s,T=pc
+SFX 45   cer             ça              cer             +P=1_3,N=s,T=pc
+SFX 45   ger             ja              ger             +P=1_3,N=s,T=pc
+SFX 45   guer            ga              guer            +P=1_3,N=s,T=pc
+SFX 45   er              as              [^cug]er        +P=2,N=s,T=pc
+SFX 45   cer             ças             cer             +P=2,N=s,T=pc
+SFX 45   ger             jas             ger             +P=2,N=s,T=pc
+SFX 45   guer            gas             guer            +P=2,N=s,T=pc
+SFX 45   er              amos            [^cug]er        +P=1,N=p,T=pc
+SFX 45   cer             çamos           cer             +P=1,N=p,T=pc
+SFX 45   ger             jamos           ger             +P=1,N=p,T=pc
+SFX 45   guer            gamos           guer            +P=1,N=p,T=pc
+SFX 45   er              ais             [^cug]er        +P=2,N=p,T=pc
+SFX 45   cer             çais            cer             +P=2,N=p,T=pc
+SFX 45   ger             jais            ger             +P=2,N=p,T=pc
+SFX 45   guer            gais            guer            +P=2,N=p,T=pc
+SFX 45   er              am              [^cug]er        +P=3,N=p,T=pc
+SFX 45   cer             çam             cer             +P=3,N=p,T=pc
+SFX 45   ger             jam             ger             +P=3,N=p,T=pc
+SFX 45   guer            gam             guer            +P=3,N=p,T=pc
+SFX 45   er              e               er              +P=2,N=s,T=i
+SFX 45   er              a               [^cug^-]er      +P=3,N=s,T=i
+SFX 45   cer             ça              cer             +P=3,N=s,T=i
+SFX 45   ger             ja              ger             +P=3,N=s,T=i
+SFX 45   guer            ga              guer            +P=3,N=s,T=i
+SFX 45   er              amos            [^cu]er         +P=1,N=p,T=i
+SFX 45   cer             çamos           cer             +P=1,N=p,T=i
+SFX 45   ger             jamos           ger             +P=1,N=p,T=i
+SFX 45   guer            gamos           guer            +P=1,N=p,T=i
+SFX 45   r               i               er              +P=2,N=p,T=i
+SFX 45   er              am              [^cug]er        +P=3,N=p,T=i
+SFX 45   cer             çam             cer             +P=3,N=p,T=i
+SFX 45   ger             jam             ger             +P=3,N=p,T=i
+SFX 45   guer            gam             guer            +P=3,N=p,T=i
+SFX 45   ir              o               [^cug-]ir       +P=1,N=s,T=p
+SFX 45   cir             ço              cir             +P=1,N=s,T=p
+SFX 45   gir             jo              gir             +P=1,N=s,T=p
+SFX 45   quir            co              quir            +P=1,N=s,T=p
+SFX 45   uir             o               guir            +P=1,N=s,T=p
+SFX 45   ir              es              ir              +P=2,N=s,T=p
+SFX 45   ir              e               ir              +P=3,N=s,T=p
+SFX 45   r               mos             ir              +P=1,N=p,T=p
+SFX 45   r               s               ir              +P=2,N=p,T=p
+SFX 45   ir              em              ir              +P=3,N=p,T=p
+SFX 45   ir              a               [^cug-]ir       +P=1_3,N=s,T=pc
+SFX 45   cir             ça              cir             +P=1_3,N=s,T=pc
+SFX 45   gir             ja              gir             +P=1_3,N=s,T=pc
+SFX 45   quir            ca              quir            +P=1_3,N=s,T=pc
+SFX 45   uir             a               guir            +P=1_3,N=s,T=pc
+SFX 45   ir              as              [^cug]ir        +P=2,N=s,T=pc
+SFX 45   cir             ças             cir             +P=2,N=s,T=pc
+SFX 45   gir             jas             gir             +P=2,N=s,T=pc
+SFX 45   quir            cas             quir            +P=2,N=s,T=pc
+SFX 45   uir             as              guir            +P=2,N=s,T=pc
+SFX 45   ir              amos            [^cug]ir        +P=1,N=p,T=pc
+SFX 45   cir             çamos           cir             +P=1,N=p,T=pc
+SFX 45   gir             jamos           gir             +P=1,N=p,T=pc
+SFX 45   quir            camos           quir            +P=1,N=p,T=pc
+SFX 45   uir             amos            guir            +P=1,N=p,T=pc
+SFX 45   ir              ais             [^cug]ir        +P=2,N=p,T=pc
+SFX 45   cir             çais            cir             +P=2,N=p,T=pc
+SFX 45   gir             jais            gir             +P=2,N=p,T=pc
+SFX 45   quir            cais            quir            +P=2,N=p,T=pc
+SFX 45   uir             ais             guir            +P=2,N=p,T=pc
+SFX 45   ir              am              [^cug]ir        +P=3,N=p,T=pc
+SFX 45   cir             çam             cir             +P=3,N=p,T=pc
+SFX 45   gir             jam             gir             +P=3,N=p,T=pc
+SFX 45   quir            cam             quir            +P=3,N=p,T=pc
+SFX 45   uir             am              guir            +P=3,N=p,T=pc
+SFX 45   ir              e               ir              +P=2,N=s,T=i
+SFX 45   ir              a               [^cug-]ir       +P=3,N=s,T=i
+SFX 45   cir             ça              cir             +P=3,N=s,T=i
+SFX 45   gir             ja              gir             +P=3,N=s,T=i
+SFX 45   quir            ca              quir            +P=3,N=s,T=i
+SFX 45   uir             a               guir            +P=3,N=s,T=i
+SFX 45   ir              amos            [^cug]ir        +P=1,N=p,T=i
+SFX 45   cir             çamos           cir             +P=1,N=p,T=i
+SFX 45   gir             jamos           gir             +P=1,N=p,T=i
+SFX 45   quir            camos           quir            +P=1,N=p,T=i
+SFX 45   uir             amos            guir            +P=1,N=p,T=i
+SFX 45   ir              i               ir              +P=2,N=p,T=i
+SFX 45   ir              am              [^cug]ir        +P=3,N=p,T=i
+SFX 45   cir             çam             cir             +P=3,N=p,T=i
+SFX 45   gir             jam             gir             +P=3,N=p,T=i
+SFX 45   quir            cam             quir            +P=3,N=p,T=i
+SFX 45   uir             am              guir            +P=3,N=p,T=i
+
+SFX 46 Y 1
+SFX 46   0     ly         .
+
+SFX 47 Y 130
+SFX 47   r               va              ar              +P=1_3,N=s,T=pi
+SFX 47   r               vas             ar              +P=2,N=s,T=pi
+SFX 47   ar              ávamos          ar              +P=1,N=p,T=pi
+SFX 47   ar              áveis           ar              +P=2,N=p,T=pi
+SFX 47   r               vam             ar              +P=3,N=p,T=pi
+SFX 47   ar              ei              [^cçg]ar        +P=1,N=s,T=pp
+SFX 47   car             quei            car             +P=1,N=s,T=pp
+SFX 47   gar             guei            gar             +P=1,N=s,T=pp
+SFX 47   çar             cei             çar             +P=1,N=s,T=pp
+SFX 47   r               ste             ar              +P=2,N=s,T=pp
+SFX 47   ar              ou              ar              +P=3,N=s,T=pp
+SFX 47   ar              ámos            ar              +P=1,N=p,T=pp
+SFX 47   r               stes            ar              +P=2,N=p,T=pp
+SFX 47   0               am              ar              +P=3,N=p,T=pp
+SFX 47   0               a               ar              +P=1_3,N=s,T=pmp
+SFX 47   0               as              ar              +P=2,N=s,T=pmp
+SFX 47   ar              áramos          ar              +P=1,N=p,T=pmp
+SFX 47   ar              áreis           ar              +P=2,N=p,T=pmp
+SFX 47   0               am              ar              +P=3,N=p,T=pmp
+SFX 47   0               ei              ar              +P=1,N=s,T=f
+SFX 47   0               ás              ar              +P=2,N=s,T=f
+SFX 47   0               á               ar              +P=3,N=s,T=f
+SFX 47   0               emos            ar              +P=1,N=p,T=f
+SFX 47   0               eis             ar              +P=2,N=p,T=f
+SFX 47   0               ão              ar              +P=3,N=p,T=f
+SFX 47   r               sse             ar              +P=1_3,N=s,T=pic
+SFX 47   r               sses            ar              +P=2,N=s,T=pic
+SFX 47   ar              ássemos         ar              +P=1,N=p,T=pic
+SFX 47   ar              ásseis          ar              +P=2,N=p,T=pic
+SFX 47   r               ssem            ar              +P=3,N=p,T=pic
+SFX 47   0               es              ar              +P=2,N=s,T=fc
+SFX 47   0               mos             ar              +P=1,N=p,T=fc
+SFX 47   0               des             ar              +P=2,N=p,T=fc
+SFX 47   0               em              ar              +P=3,N=p,T=fc
+SFX 47   0               ia              ar              +P=1_3,N=s,T=c
+SFX 47   0               ias             ar              +P=2,N=s,T=c
+SFX 47   0               íamos           ar              +P=1,N=p,T=c
+SFX 47   0               íeis            ar              +P=2,N=p,T=c
+SFX 47   0               iam             ar              +P=3,N=p,T=c
+SFX 47   r               ndo             ar              +T=g
+SFX 47   r               do              ar              +G=m,N=s,T=ppa
+SFX 47   r               da              ar              +G=f,N=s,T=ppa
+SFX 47   r               dos             ar              +G=m,N=p,T=ppa
+SFX 47   r               das             ar              +G=f,N=p,T=ppa
+SFX 47   er              ia              er              +P=1_3,N=s,T=pi
+SFX 47   er              ias             er              +P=2,N=s,T=pi
+SFX 47   er              íamos           er              +P=1,N=p,T=pi
+SFX 47   er              íeis            er              +P=2,N=p,T=pi
+SFX 47   er              iam             er              +P=3,N=p,T=pi
+SFX 47   er              i               er              +P=1,N=s,T=pp
+SFX 47   r               ste             er              +P=2,N=s,T=pp
+SFX 47   r               u               er              +P=3,N=s,T=pp
+SFX 47   r               mos             er              +P=1,N=p,T=pp
+SFX 47   r               stes            er              +P=2,N=p,T=pp
+SFX 47   0               am              er              +P=3,N=p,T=pp
+SFX 47   0               a               er              +P=1_3,N=s,T=pmp
+SFX 47   0               as              er              +P=2,N=s,T=pmp
+SFX 47   er              êramos          er              +P=1,N=p,T=pmp
+SFX 47   er              êreis           er              +P=2,N=p,T=pmp
+SFX 47   0               am              er              +P=3,N=p,T=pmp
+SFX 47   0               ei              er              +P=1,N=s,T=f
+SFX 47   0               ás              er              +P=2,N=s,T=f
+SFX 47   0               á               er              +P=3,N=s,T=f
+SFX 47   0               emos            er              +P=1,N=p,T=f
+SFX 47   0               eis             er              +P=2,N=p,T=f
+SFX 47   0               ão              er              +P=3,N=p,T=f
+SFX 47   r               sse             er              +P=1_3,N=s,T=pic
+SFX 47   r               sses            er              +P=2,N=s,T=pic
+SFX 47   er              êssemos         er              +P=1,N=p,T=pic
+SFX 47   er              êsseis          er              +P=2,N=p,T=pic
+SFX 47   r               ssem            er              +P=3,N=p,T=pic
+SFX 47   0               es              er              +P=2,N=s,T=fc
+SFX 47   0               mos             er              +P=1,N=p,T=fc
+SFX 47   0               des             er              +P=2,N=p,T=fc
+SFX 47   0               em              er              +P=3,N=p,T=fc
+SFX 47   0               ia              er              +P=1_3,N=s,T=c
+SFX 47   0               ias             er              +P=2,N=s,T=c
+SFX 47   0               íamos           er              +P=1,N=p,T=c
+SFX 47   0               íeis            er              +P=2,N=p,T=c
+SFX 47   0               iam             er              +P=3,N=p,T=c
+SFX 47   r               ndo             er              +T=g
+SFX 47   er              ido             er              +G=m,N=s,T=ppa
+SFX 47   er              ida             er              +G=f,N=s,T=ppa
+SFX 47   er              idos            er              +G=m,N=p,T=ppa
+SFX 47   er              idas            er              +G=f,N=p,T=ppa
+SFX 47   ever            ito             crever          +G=m,N=s,T=ppa
+SFX 47   ever            ita             crever          +G=f,N=s,T=ppa
+SFX 47   ever            itos            crever          +G=m,N=p,T=ppa
+SFX 47   ever            itas            crever          +G=f,N=p,T=ppa
+SFX 47   r               a               ir              +P=1_3,N=s,T=pi
+SFX 47   r               as              ir              +P=2,N=s,T=pi
+SFX 47   ir              íamos           ir              +P=1,N=p,T=pi
+SFX 47   ir              íeis            ir              +P=2,N=p,T=pi
+SFX 47   r               am              ir              +P=3,N=p,T=pi
+SFX 47   ir              i               ir              +P=1,N=s,T=pp
+SFX 47   r               ste             ir              +P=2,N=s,T=pp
+SFX 47   r               u               ir              +P=3,N=s,T=pp
+SFX 47   r               mos             ir              +P=1,N=p,T=pp
+SFX 47   r               stes            ir              +P=2,N=p,T=pp
+SFX 47   0               am              ir              +P=3,N=p,T=pp
+SFX 47   0               a               ir              +P=1_3,N=s,T=pmp
+SFX 47   0               as              ir              +P=2,N=s,T=pmp
+SFX 47   ir              íramos          ir              +P=1,N=p,T=pmp
+SFX 47   ir              íreis           ir              +P=2,N=p,T=pmp
+SFX 47   0               am              ir              +P=3,N=p,T=pmp
+SFX 47   0               ei              ir              +P=1,N=s,T=f
+SFX 47   0               ás              ir              +P=2,N=s,T=f
+SFX 47   0               á               ir              +P=3,N=s,T=f
+SFX 47   0               emos            ir              +P=1,N=p,T=f
+SFX 47   0               eis             ir              +P=2,N=p,T=f
+SFX 47   0               ão              ir              +P=3,N=p,T=f
+SFX 47   r               sse             ir              +P=1_3,N=s,T=pic
+SFX 47   r               sses            ir              +P=2,N=s,T=pic
+SFX 47   ir              íssemos         ir              +P=1,N=p,T=pic
+SFX 47   ir              ísseis          ir              +P=2,N=p,T=pic
+SFX 47   r               ssem            ir              +P=3,N=p,T=pic
+SFX 47   0               es              ir              +P=2,N=s,T=fc
+SFX 47   0               mos             ir              +P=1,N=p,T=fc
+SFX 47   0               des             ir              +P=2,N=p,T=fc
+SFX 47   0               em              ir              +P=3,N=p,T=fc
+SFX 47   0               ia              ir              +P=1_3,N=s,T=c
+SFX 47   0               ias             ir              +P=2,N=s,T=c
+SFX 47   0               íamos           ir              +P=1,N=p,T=c
+SFX 47   0               íeis            ir              +P=2,N=p,T=c
+SFX 47   0               iam             ir              +P=3,N=p,T=c
+SFX 47   r               ndo             ir              +T=g
+SFX 47   r               do              ir              +G=m,N=s,T=ppa
+SFX 47   r               da              ir              +G=f,N=s,T=ppa
+SFX 47   r               dos             ir              +G=m,N=p,T=ppa
+SFX 47   r               das             ir              +G=f,N=p,T=ppa
+
+SFX 48 Y 4
+SFX 48   0     rs         e
+SFX 48   y     iers       [^aeiou]y
+SFX 48   0     ers        [aeiou]y
+SFX 48   0     ers        [^ey]
+
+SFX 49 Y 48
+SFX 49   erir            iro             erir            +P=1,N=s,T=p
+SFX 49   ir              es              erir            +P=2,N=s,T=p
+SFX 49   ir              e               erir            +P=3,N=s,T=p
+SFX 49   r               mos             erir            +P=1,N=p,T=p
+SFX 49   r               s               erir            +P=2,N=p,T=p
+SFX 49   ir              em              erir            +P=3,N=p,T=p
+SFX 49   erir            ira             erir            +P=1_3,N=s,T=pc
+SFX 49   erir            iras            erir            +P=2,N=s,T=pc
+SFX 49   erir            iramos          erir            +P=1,N=p,T=pc
+SFX 49   erir            irais           erir            +P=2,N=p,T=pc
+SFX 49   erir            iram            erir            +P=3,N=p,T=pc
+SFX 49   ir              e               erir            +P=2,N=s,T=i
+SFX 49   erir            ira             erir            +P=3,N=s,T=i
+SFX 49   erir            iramos          erir            +P=1,N=p,T=i
+SFX 49   ir              i               erir            +P=2,N=p,T=i
+SFX 49   erir            iram            erir            +P=3,N=p,T=i
+SFX 49   ar              io              ear             +P=1,N=s,T=p
+SFX 49   ar              ias             ear             +P=2,N=s,T=p
+SFX 49   ar              ia              ear             +P=3,N=s,T=p
+SFX 49   r               mos             ear             +P=1,N=p,T=p
+SFX 49   r               is              ear             +P=2,N=p,T=p
+SFX 49   ar              iam             ear             +P=3,N=p,T=p
+SFX 49   ar              ie              ear             +P=1_3,N=s,T=pc
+SFX 49   ar              ies             ear             +P=2,N=s,T=pc
+SFX 49   ar              emos            ear             +P=1,N=p,T=pc
+SFX 49   ar              eis             ear             +P=2,N=p,T=pc
+SFX 49   ar              iem             ear             +P=3,N=p,T=pc
+SFX 49   ar              ia              ear             +P=2,N=s,T=i
+SFX 49   ar              ie              ear             +P=3,N=s,T=i
+SFX 49   ar              emos            ear             +P=1,N=p,T=i
+SFX 49   ar              ai              ear             +P=2,N=p,T=i
+SFX 49   ar              iem             ear             +P=3,N=p,T=i
+SFX 49   ir              o               uzir            +P=1,N=s,T=p
+SFX 49   ir              es              uzir            +P=2,N=s,T=p
+SFX 49   zir             z               uzir            +P=3,N=s,T=p
+SFX 49   r               mos             uzir            +P=1,N=p,T=p
+SFX 49   r               s               uzir            +P=2,N=p,T=p
+SFX 49   ir              em              uzir            +P=3,N=p,T=p
+SFX 49   ir              a               uzir            +P=1_3,N=s,T=pc
+SFX 49   ir              as              uzir            +P=2,N=s,T=pc
+SFX 49   ir              amos            uzir            +P=1,N=p,T=pc
+SFX 49   ir              ais             uzir            +P=2,N=p,T=pc
+SFX 49   ir              am              uzir            +P=3,N=p,T=pc
+SFX 49   zir             z               uzir            +P=2,N=s,T=i
+SFX 49   ir              a               uzir            +P=3,N=s,T=i
+SFX 49   ir              amos            uzir            +P=1,N=p,T=i
+SFX 49   ir              i               uzir            +P=2,N=p,T=i
+SFX 49   ir              am              uzir            +P=3,N=p,T=i
+
+SFX 50 Y 4
+SFX 50   0               s               ão              +N=p
+SFX 50   il              eis             il              +N=p
+SFX 50   os              as              entos           +G=f
+SFX 50   0               s               [^aeiouls]      +N=p
+
+SFX 51 Y 4
+SFX 51   o               0               ão              +G=f
+SFX 51   o               s               ão              +G=f,N=p
+SFX 51   0               ssa             e               +G=f
+SFX 51   0               ssas            e               +G=f,N=p
+
+SFX 52 Y 8
+SFX 52   r               ção             [ae]r           +CAT=nc,G=f,N=s,FSEM=cao
+SFX 52   r               ção             [^zg]ir         +CAT=nc,G=f,N=s,FSEM=cao
+SFX 52   zir             ção             zir             +CAT=nc,G=f,N=s,FSEM=cao
+SFX 52   r               sição           por             +CAT=nc,G=f,N=s,FSEM=cao
+SFX 52   r               ções            [ae]r           +CAT=nc,G=f,N=p,FSEM=cao
+SFX 52   r               ções            [^zg]ir         +CAT=nc,G=f,N=p,FSEM=cao
+SFX 52   zir             ções            zir             +CAT=nc,G=f,N=p,FSEM=cao
+SFX 52   r               sições          por             +CAT=nc,G=f,N=p,FSEM=cao
+
+SFX 53 Y 30
+SFX 53   o               idade           [^çgi]o         +CAT=nc,G=f,FSEM=dd
+SFX 53   ço              cidade          ço              +CAT=nc,G=f,FSEM=dd
+SFX 53   go              guidade         go              +CAT=nc,G=f,FSEM=dd
+SFX 53   o               edade           [^r]io          +CAT=nc,G=f,FSEM=dd
+SFX 53   o               edade           [^áó]rio        +CAT=nc,G=f,FSEM=dd
+SFX 53   ário            ariedade        ário            +CAT=nc,G=f,FSEM=dd
+SFX 53   ório            oriedade        ório            +CAT=nc,G=f,FSEM=dd
+SFX 53   e               idade           e               +CAT=nc,G=f,FSEM=dd
+SFX 53   0               idade           r               +CAT=nc,G=f,FSEM=dd
+SFX 53   0               idade           [^v][^q]l       +CAT=nc,G=f,FSEM=dd
+SFX 53   vel             bilidade        [^áíú]vel       +CAT=nc,G=f,FSEM=dd
+SFX 53   ável            abilidade       ável            +CAT=nc,G=f,FSEM=dd
+SFX 53   ível            ibilidade       ível            +CAT=nc,G=f,FSEM=dd
+SFX 53   úvel            ubilidade       úvel            +CAT=nc,G=f,FSEM=dd
+SFX 53   z               cidade          z               +CAT=nc,G=f,FSEM=dd
+SFX 53   o               idades          [^çgi]o         +CAT=nc,G=f,N=p,FSEM=dd
+SFX 53   ço              cidades         ço              +CAT=nc,G=f,N=p,FSEM=dd
+SFX 53   go              guidades        go              +CAT=nc,G=f,N=p,FSEM=dd
+SFX 53   o               edades          [^r]io          +CAT=nc,G=f,N=p,FSEM=dd
+SFX 53   o               edades          [^áó]rio        +CAT=nc,G=f,N=p,FSEM=dd
+SFX 53   ário            ariedades       ário            +CAT=nc,G=f,N=p,FSEM=dd
+SFX 53   ório            oriedades       ório            +CAT=nc,G=f,N=p,FSEM=dd
+SFX 53   e               idades          e               +CAT=nc,G=f,N=p,FSEM=dd
+SFX 53   0               idades          r               +CAT=nc,G=f,N=p,FSEM=dd
+SFX 53   0               idades          [^v][^q]l       +CAT=nc,G=f,N=p,FSEM=dd
+SFX 53   vel             bilidades       [^áí]vel        +CAT=nc,G=f,N=p,FSEM=dd
+SFX 53   ável            abilidades      ável            +CAT=nc,G=f,N=p,FSEM=dd
+SFX 53   ível            ibilidades      ível            +CAT=nc,G=f,N=p,FSEM=dd
+SFX 53   úvel            ubilidades      úvel            +CAR=nc,G=f,N=p,FSEM=dd
+SFX 53   z               cidades         z               +CAT=nc,G=f,N=p,FSEM=dd
+
+SFX 54 Y 2
+SFX 54   0               es              l               +N=p
+SFX 54   o               es              ão              +N=p
+
+SFX 55 Y 12
+SFX 55   o               a               [^ã]o           +G=f
+SFX 55   o               as              [^ã]o           +G=f,N=p
+SFX 55   0               a               [^aeiouscn]     +G=f
+SFX 55   0               as              [^aeiouscn]     +G=f,N=p
+SFX 55   0               a               [^ê]s           +G=f
+SFX 55   0               as              [^ê]s           +G=f,N=p
+SFX 55   ês              esa             ês              +G=f
+SFX 55   ês              esas            ês              +G=f,N=p
+SFX 55   ão              ona             ão              +G=f
+SFX 55   ão              onas            ão              +G=f,N=p
+SFX 55   e               a               e               +G=f
+SFX 55   e               as              e               +G=f,N=p
+
+SFX 56 Y 2
+SFX 56   ão              oa              ão              +G=f
+SFX 56   ão              oas             ão              +G=f,N=p
+
+SFX 57 Y 27
+SFX 57   o               inha            [^cgçãi]o       +G=f,GR=dim
+SFX 57   a               inha            [^çg]a          +G=f,GR=dim
+SFX 57   co              quinha          co              +G=f,GR=dim
+SFX 57   ço              cinha           ço              +G=f,GR=dim
+SFX 57   o               uinha           go              +G=f,GR=dim
+SFX 57   ca              quinha          ca              +G=f,GR=dim
+SFX 57   ça              cinha           ça              +G=f,GR=dim
+SFX 57   a               uinha           ga              +G=f,GR=dim
+SFX 57   á               azinha          á               +G=f,GR=dim
+SFX 57   ã               azinha          ã               +G=f,GR=dim
+SFX 57   0               zinha           ãe              +G=f,GR=dim
+SFX 57   e               inha            [^ã]e           +G=f,GR=dim
+SFX 57   0               zinha           [irunl]         +G=f,GR=dim
+SFX 57   m               nzinha          m               +G=m,GR=dim
+SFX 57   o               inhas           [^cgçãi]o       +G=f,N=p,GR=dim
+SFX 57   a               inhas           [^çg]a          +G=f,N=p,GR=dim
+SFX 57   ca              quinhas         ca              +G=f,N=p,GR=dim
+SFX 57   ça              cinhas          ça              +G=f,N=p,GR=dim
+SFX 57   a               uinhas          ga              +G=f,N=p,GR=dim
+SFX 57   co              quinhas         co              +G=f,N=p,GR=dim
+SFX 57   ço              cinhas          ço              +G=f,N=p,GR=dim
+SFX 57   o               uinhas          go              +G=f,N=p,GR=dim
+SFX 57   á               azinhas         á               +G=f,N=p,GR=dim
+SFX 57   ã               azinhas         ã               +G=f,N=p,GR=dim
+SFX 57   e               inhas           [^ã]e           +G=f,N=p,GR=dim
+SFX 57   0               zinhas          [irunl]         +G=f,N=p,GR=dim
+SFX 57   m               nzinhas         m               +G=m,N=p,GR=dim
+
+SFX 58 Y 24
+SFX 58   o               ismo            [^cçã]o         +FSEM=ismo
+SFX 58   co              quismo          co              +FSEM=ismo
+SFX 58   ço              cismo           ço              +FSEM=ismo
+SFX 58   ção             cionismo        ção             +FSEM=ismo
+SFX 58   a               ismo            [^icg]a         +FSEM=ismo
+SFX 58   a               smo             ia              +FSEM=ismo
+SFX 58   ca              quismo          ca              +FSEM=ismo
+SFX 58   ga              guismo          ga              +FSEM=ismo
+SFX 58   e               ismo            e               +FSEM=ismo
+SFX 58   0               ismo            [lr]            +FSEM=ismo
+SFX 58   ês              esismo          ês              +FSEM=ismo
+SFX 58   m               nismo           m               +FSEM=ismo
+SFX 58   o               ismos           [^cçã]o         +FSEM=ismo
+SFX 58   co              quismos         co              +FSEM=ismo
+SFX 58   ço              cismos          ço              +FSEM=ismo
+SFX 58   ção             cionismos       ção             +FSEM=ismo
+SFX 58   a               ismos           [^icg]a         +FSEM=ismo
+SFX 58   a               smos            ia              +FSEM=ismo
+SFX 58   ca              quismos         ca              +FSEM=ismo
+SFX 58   ga              guismos         ga              +FSEM=ismo
+SFX 58   e               ismos           e               +FSEM=ismo
+SFX 58   0               ismos           [lr]            +FSEM=ismo
+SFX 58   ês              esismos         ês              +FSEM=ismo
+SFX 58   m               nismos          m               +FSEM=ismo
+
+SFX 59 Y 25
+SFX 59   0               izar            l               +CAT=v,T=inf,FSEM=izar
+SFX 59   e               izar            e               +CAT=v,T=inf,FSEM=izar
+SFX 59   o               izar            o               +CAT=v,T=inf,FSEM=izar
+SFX 59   a               zar             ia              +CAT=v,T=inf,FSEM=izar
+SFX 59   a               izar            [^i]a           +CAT=v,T=inf,FSEM=izar
+SFX 59   0               izado           l               +CAT=v,T=ppa,G=m,N=s,FSEM=izar
+SFX 59   e               izado           e               +CAT=v,T=ppa,G=m,N=s,FSEM=izar
+SFX 59   o               izado           o               +CAT=v,T=ppa,G=m,N=s,FSEM=izar
+SFX 59   a               zado            ia              +CAT=v,T=ppa,G=m,N=s,FSEM=izar
+SFX 59   a               izado           [^i]a           +CAT=v,T=ppa,G=m,N=s,FSEM=izar
+SFX 59   0               izada           l               +CAT=v,T=ppa,G=f,N=s,FSEM=izar
+SFX 59   e               izada           e               +CAT=v,T=ppa,G=f,N=s,FSEM=izar
+SFX 59   o               izada           o               +CAT=v,T=ppa,G=f,N=s,FSEM=izar
+SFX 59   a               zada            ia              +CAT=v,T=ppa,G=f,N=s,FSEM=izar
+SFX 59   a               izada           [^i]a           +CAT=v,T=ppa,G=f,N=s,FSEM=izar
+SFX 59   0               izados          l               +CAT=v,T=ppa,G=m,N=p,FSEM=izar
+SFX 59   e               izados          e               +CAT=v,T=ppa,G=m,N=p,FSEM=izar
+SFX 59   o               izados          o               +CAT=v,T=ppa,G=m,N=p,FSEM=izar
+SFX 59   a               zados           ia              +CAT=v,T=ppa,G=m,N=p,FSEM=izar
+SFX 59   a               izados          [^i]a           +CAT=v,T=ppa,G=m,N=p,FSEM=izar
+SFX 59   0               izadas          l               +CAT=v,T=ppa,G=f,N=p,FSEM=izar
+SFX 59   e               izadas          e               +CAT=v,T=ppa,G=f,N=p,FSEM=izar
+SFX 59   o               izadas          o               +CAT=v,T=ppa,G=f,N=p,FSEM=izar
+SFX 59   a               zadas           ia              +CAT=v,T=ppa,G=f,N=p,FSEM=izar
+SFX 59   a               izados          [^i]a           +CAT=v,T=ppa,G=m,N=p,FSEM=izar
+
+SFX 60 Y 6
+SFX 60   o               a               [^ã]o           +G=f
+SFX 60   0               a               [^aeiouscn]     +G=f
+SFX 60   0               a               [^ê]s           +G=f
+SFX 60   ês              esa             ês              +G=f
+SFX 60   ão              ona             ão              +G=f
+SFX 60   e               a               e               +G=f
+
+SFX 61 Y 28
+SFX 61   o               inho            [^cgçãi]o       +GR=dim
+SFX 61   co              quinho          co              +GR=dim
+SFX 61   ço              cinho           ço              +GR=dim
+SFX 61   o               uinho           go              +GR=dim
+SFX 61   0               zinho           ão              +GR=dim
+SFX 61   e               inho            e               +G=m,GR=dim
+SFX 61   0               inho            [^ê][sz]        +G=m,GR=dim
+SFX 61   ês              esinho          ês              +GR=dim
+SFX 61   0               zinho           [irunl]         +G=m,GR=dim
+SFX 61   ó               ozinho          ó               +GR=dim
+SFX 61   ô               ozinho          ô               +GR=dim
+SFX 61   é               ezinho          é               +G=m,GR=dim
+SFX 61   ú               uzinho          ú               +GR=dim
+SFX 61   m               nzinho          m               +G=m,GR=dim
+SFX 61   o               inhos           [^cgçãi]o       +N=p,GR=dim
+SFX 61   co              quinhos         co              +N=p,GR=dim
+SFX 61   ço              cinhos          ço              +N=p,GR=dim
+SFX 61   o               uinhos          go              +N=p,GR=dim
+SFX 61   0               zinhos          ão              +N=p,GR=dim
+SFX 61   e               inhos           e               +G=m,N=p,GR=dim
+SFX 61   0               inhos           [^ê][sz]        +G=m,N=p,GR=dim
+SFX 61   ês              esinhos         ês              +N=p,GR=dim
+SFX 61   0               zinhos          [irunl]         +G=m,N=p,GR=dim
+SFX 61   ó               ozinhos         ó               +N=p,GR=dim
+SFX 61   ô               ozinhos         ô               +N=p,GR=dim
+SFX 61   é               ezinhos         é               +G=m,N=p,GR=dim
+SFX 61   ú               uzinhos         ú               +N=p,GR=dim
+SFX 61   m               nzinhos         m               +G=m,N=p,GR=dim
+
+SFX 62 Y 5
+SFX 62   o               amente          o               +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 62   0               amente          u               +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 62   0               mente           [^v][^q][^uo]   +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 62   ável            avelmente       ável            +FSEM=mente,CAT=adv,SUBCAT=modo
+SFX 62   ível            ivelmente       ível            +FSEM=mente,CAT=adv,SUBCAT=modo
+
+SFX 63 Y 6
+SFX 63   r               nte             [ae]r           +CAT=adj,G=_,N=s,FSEM=nte
+SFX 63   ir              ente            ir              +CAT=adj,G=_,N=s,FSEM=nte
+SFX 63   r               nente           or              +CAT=adj,G=_,N=s,FSEM=nte
+SFX 63   r               ntes            [ae]r           +CAT=adj,G=_,N=p,FSEM=nte
+SFX 63   ir              entes           ir              +CAT=adj,G=_,N=p,FSEM=nte
+SFX 63   r               nentes          or              +CAT=adj,G=_,N=p,FSEM=nte
+
+SFX 64 Y 4
+SFX 64   r               dela            [ai]r           +CAT=nc,G=f,N=s,FSEM=dela
+SFX 64   r               delas           [ai]r           +CAT=nc,G=f,N=p,FSEM=dela
+SFX 64   er              idela           er              +CAT=nc,G=f,N=s,FSEM=dela
+SFX 64   er              idelas          er              +CAT=nc,G=f,N=p,FSEM=dela
+
+SFX 65 Y 15
+SFX 65   0               s               [^ã][^lsmrnzx]  +N=p
+SFX 65   0               s               ãe              +N=p
+SFX 65   ão              ões             ão              +N=p
+SFX 65   l               is              [au]l           +N=p
+SFX 65   ol              óis             ol              +N=p
+SFX 65   el              éis             [^v]el          +N=p
+SFX 65   el              éis             [^áéíóú]vel     +N=p
+SFX 65   l               is              [áéíóú]vel      +N=p
+SFX 65   l               s               il              +N=p
+SFX 65   0               es              [^áéê]s         +N=p
+SFX 65   ás              ases            ás              +N=p
+SFX 65   és              eses            és              +N=p
+SFX 65   ês              eses            ês              +N=p
+SFX 65   m               ns              m               +N=p
+SFX 65   0               es              [rnzx]          +N=p
+
+SFX 66 Y 32
+SFX 66   ologia          ólogo           ologia          +CAT=a_nc,G=m,N=s
+SFX 66   ologia          óloga           ologia          +CAT=a_nc,G=f,N=s
+SFX 66   ologia          ólogos          ologia          +CAT=a_nc,G=m,N=p
+SFX 66   ologia          ólogas          ologia          +CAT=a_nc,G=f,N=p
+SFX 66   afia            áfico           afia            +CAT=adj,G=m,N=s
+SFX 66   afia            áfica           afia            +CAT=adj,G=f,N=s
+SFX 66   afia            áficos          afia            +CAT=adj,G=m,N=p
+SFX 66   afia            áficas          afia            +CAT=adj,G=f,N=p
+SFX 66   omania          ómano           omania          +CAT=a_nc,G=m,N=s
+SFX 66   omania          ómana           omania          +CAT=a_nc,G=m,N=s
+SFX 66   omania          ómanos          omania          +CAT=a_nc,G=m,N=s
+SFX 66   omania          ómanas          omania          +CAT=a_nc,G=m,N=s
+SFX 66   ofobia          ófobo           ofobia          +CAT=adj,G=m,N=s
+SFX 66   ofobia          ófoba           ofobia          +CAT=adj,G=f,N=s
+SFX 66   ofobia          ófobos          ofobia          +CAT=adj,G=m,N=p
+SFX 66   ofobia          ófobas          ofobia          +CAT=adj,G=f,N=p
+SFX 66   ofilia          ófilo           ofilia          +CAT=adj,G=m,N=s
+SFX 66   ofilia          ófila           ofilia          +CAT=adj,G=f,N=s
+SFX 66   ofilia          ófilos          ofilia          +CAT=adj,G=m,N=p
+SFX 66   ofilia          ófilas          ofilia          +CAT=adj,G=f,N=p
+SFX 66   ídio            ida             cídio           +CAT=adj,G=_,N=s
+SFX 66   ídio            idas            cídio           +CAT=adj,G=_,N=p
+SFX 66   ia              a               patia           +CAT=adj,G=_,N=s
+SFX 66   ia              as              patia           +CAT=adj,G=_,N=p
+SFX 66   ura             or              cultura         +CAT=a_nc,G=m,N=s
+SFX 66   ura             ora             cultura         +CAT=a_nc,G=m,N=s
+SFX 66   ura             ores            cultura         +CAT=a_nc,G=m,N=s
+SFX 66   ura             oras            cultura         +CAT=a_nc,G=m,N=s
+SFX 66   cia             ta              cracia          +CAT=a_nc,G=_,N=s
+SFX 66   cia             tas             cracia          +CAT=a_nc,G=_,N=p
+SFX 66   smo             sta             eísmo           +CAT=adj,G=_,N=s
+SFX 66   smo             stas            eísmo           +CAT=adj,G=_,N=p
+
+SFX 67 Y 46
+SFX 67   ogia            ógico           logia           +CAT=adj,G=m,N=s
+SFX 67   ogia            ógica           logia           +CAT=adj,G=f,N=s
+SFX 67   ogia            ógicos          logia           +CAT=adj,G=m,N=p
+SFX 67   ogia            ógicas          logia           +CAT=adj,G=f,N=p
+SFX 67   ografia         ógrafo          ografia         +CAT=a_nc,G=m,N=s
+SFX 67   ografia         ógrafa          ografia         +CAT=a_nc,G=f,N=s
+SFX 67   ografia         ógrafos         ografia         +CAT=a_nc,G=m,N=p
+SFX 67   ografia         ógrafas         ografia         +CAT=a_nc,G=f,N=p
+SFX 67   omia            ómico           nomia           +CAT=adj,G=m,N=s
+SFX 67   omia            ómica           nomia           +CAT=adj,G=f,N=s
+SFX 67   omia            ómicos          nomia           +CAT=adj,G=m,N=p
+SFX 67   omia            ómicas          nomia           +CAT=adj,G=f,N=p
+SFX 67   ia              íaco            mania           +CAT=adj,G=m,N=s
+SFX 67   ia              íaca            mania           +CAT=adj,G=m,N=s
+SFX 67   ia              íacos           mania           +CAT=adj,G=m,N=s
+SFX 67   ia              íacas           mania           +CAT=adj,G=m,N=s
+SFX 67   acia            ático           cracia          +CAT=adj,G=m,N=s
+SFX 67   acia            ática           cracia          +CAT=adj,G=f,N=s
+SFX 67   acia            áticos          cracia          +CAT=adj,G=m,N=p
+SFX 67   acia            áticas          cracia          +CAT=adj,G=f,N=p
+SFX 67   icultura        ícola           icultura        +CAT=adj,G=_,N=s
+SFX 67   icultura        ícolas          icultura        +CAT=adj,G=_,N=p
+SFX 67   arquia          árquico         arquia          +CAT=adj,G=m,N=s
+SFX 67   arquia          árquica         arquia          +CAT=adj,G=f,N=s
+SFX 67   arquia          árquicos        arquia          +CAT=adj,G=m,N=p
+SFX 67   arquia          árquicas        arquia          +CAT=adj,G=f,N=p
+SFX 67   obia            óbico           fobia           +CAT=adj,G=m,N=s
+SFX 67   obia            óbica           fobia           +CAT=adj,G=f,N=s
+SFX 67   obia            óbicos          fobia           +CAT=adj,G=m,N=p
+SFX 67   obia            óbicas          fobia           +CAT=adj,G=f,N=p
+SFX 67   atia            ático           patia           +CAT=adj,G=m,N=s
+SFX 67   atia            ática           patia           +CAT=adj,G=f,N=s
+SFX 67   atia            áticos          patia           +CAT=adj,G=m,N=p
+SFX 67   atia            áticas          patia           +CAT=adj,G=f,N=p
+SFX 67   etria           étrico          metria          +CAT=adj,G=m,N=s
+SFX 67   etria           étrica          metria          +CAT=adj,G=m,N=s
+SFX 67   etria           étricos         metria          +CAT=adj,G=f,N=p
+SFX 67   etria           étricas         metria          +CAT=adj,G=f,N=p
+SFX 67   orfia           órfico          morfia          +CAT=adj,G=m,N=s
+SFX 67   orfia           órfica          morfia          +CAT=adj,G=f,N=s
+SFX 67   orfia           órficos         morfia          +CAT=adj,G=m,N=p
+SFX 67   orfia           órficas         morfia          +CAT=adj,G=f,N=p
+SFX 67   morfismo        mórfico         morfismo        +CAT=adj,G=m,N=s
+SFX 67   morfismo        mórfica         morfismo        +CAT=adj,G=f,N=s
+SFX 67   morfismo        mórficos        morfismo        +CAT=adj,G=m,N=p
+SFX 67   morfismo        mórficas        morfismo        +CAT=adj,G=f,N=p
+
+SFX 68 Y 36
+SFX 68   o               íssimo          [^cçg]o         +GR=sup,G=m,N=s
+SFX 68   co              quíssimo        co              +GR=sup,G=m,N=s
+SFX 68   ço              císsimo         ço              +GR=sup,G=m,N=s
+SFX 68   go              guíssimo        go              +GR=sup,G=m,N=s
+SFX 68   e               íssimo          e               +GR=sup,G=m,N=s
+SFX 68   0               íssimo          [lr]            +GR=sup,G=m,N=s
+SFX 68   ês              esíssimo        ês              +GR=sup,G=m,N=s
+SFX 68   z               císsimo         z               +GR=sup,G=m,N=s
+SFX 68   ável            abilíssimo      ável            +GR=sup,G=m,N=s
+SFX 68   o               íssima          [^cçg]o         +GR=sup,G=f,N=s
+SFX 68   co              quíssima        co              +GR=sup,G=f,N=s
+SFX 68   ço              císsima         ço              +GR=sup,G=f,N=s
+SFX 68   go              guíssima        go              +GR=sup,G=f,N=s
+SFX 68   e               íssima          e               +GR=sup,G=f,N=s
+SFX 68   0               íssima          [lr]            +GR=sup,G=f,N=s
+SFX 68   ês              esíssima        ês              +GR=sup,G=f,N=s
+SFX 68   z               císsima         z               +GR=sup,G=f,N=s
+SFX 68   ável            abilíssima      ável            +GR=sup,G=f,N=s
+SFX 68   o               íssimos         [^cçg]o         +GR=sup,N=p
+SFX 68   co              quíssimos       co              +GR=sup,N=p
+SFX 68   ço              císsimos        ço              +GR=sup,N=p
+SFX 68   go              guíssimos       go              +GR=sup,N=p
+SFX 68   e               íssimos         e               +GR=sup,N=p
+SFX 68   0               íssimos         [lr]            +GR=sup,N=p
+SFX 68   ês              esíssimos       ês              +GR=sup,N=p
+SFX 68   z               císsimos        z               +GR=sup,N=p
+SFX 68   ável            abilíssimos     ável            +GR=sup,N=p
+SFX 68   o               íssimas         [^cçg]o         +GR=sup,G=f,N=p
+SFX 68   co              quíssimas       co              +GR=sup,G=f,N=p
+SFX 68   ço              císsimas        ço              +GR=sup,G=f,N=p
+SFX 68   go              guíssimas       go              +GR=sup,G=f,N=p
+SFX 68   e               íssimas         e               +GR=sup,G=f,N=p
+SFX 68   0               íssimas         [lr]            +GR=sup,G=f,N=p
+SFX 68   ês              esíssimas       ês              +GR=sup,G=f,N=p
+SFX 68   z               císsimas        z               +GR=sup,G=f,N=p
+SFX 68   ável            abilíssimas     ável            +GR=sup,G=f,N=p
+
+SFX 69 Y 24
+SFX 69   o               ista            [^cçãi]o        +CAT=a_nc,FSEM=ista
+SFX 69   co              quista          co              +CAT=a_nc,FSEM=ista
+SFX 69   ço              cista           ço              +CAT=a_nc,FSEM=ista
+SFX 69   ção             cionista        ção             +CAT=a_nc,FSEM=ista
+SFX 69   são             sionista        são             +CAT=a_nc,FSEM=ista
+SFX 69   io              ísta            io              +CAT=a_nc,FSEM=ista
+SFX 69   a               ista            [^içg]a         +CAT=a_nc,FSEM=ista
+SFX 69   a               sta             ia              +CAT=a_nc,FSEM=ista
+SFX 69   ça              cista           ça              +CAT=a_nc,FSEM=ista
+SFX 69   a               uista           ga              +CAT=a_nc,FSEM=ista
+SFX 69   e               ista            e               +CAT=a_nc,FSEM=ista
+SFX 69   0               ista            [lr]            +CAT=a_nc,FSEM=ista
+SFX 69   o               istas           [^cçã]o         +CAT=a_nc,N=p,FSEM=ista
+SFX 69   co              quistas         co              +CAT=a_nc,N=p,FSEM=ista
+SFX 69   ço              cistas          ço              +CAT=a_nc,N=p,FSEM=ista
+SFX 69   ção             cionistas       ção             +CAT=a_nc,N=p,FSEM=ista
+SFX 69   são             sionistas       são             +CAT=a_nc,N=p,FSEM=ista
+SFX 69   io              ístas           io              +CAT=a_nc,N=p,FSEM=ista
+SFX 69   a               istas           [^içg]a         +CAT=a_nc,N=p,FSEM=ista
+SFX 69   a               stas            ia              +CAT=a_nc,N=p,FSEM=ista
+SFX 69   ça              cistas          ça              +CAT=a_nc,N=p,FSEM=ista
+SFX 69   a               uistas          ga              +CAT=a_nc,N=p,FSEM=ista
+SFX 69   e               istas           e               +CAT=a_nc,N=p,FSEM=ista
+SFX 69   0               istas           [lr]            +CAT=a_nc,N=p,FSEM=ista
+
+SFX 70 Y 6
+SFX 70   ar              ável            ar              +CAT=adj,G=_,N=s,FSEM=vel
+SFX 70   er              ível            er              +CAT=adj,G=_,N=s,FSEM=vel
+SFX 70   ir              ível            ir              +CAT=adj,G=_,N=s,FSEM=vel
+SFX 70   ar              áveis           ar              +CAT=adj,G=_,N=p,FSEM=vel
+SFX 70   er              íveis           er              +CAT=adj,G=_,N=p,FSEM=vel
+SFX 70   ir              íveis           ir              +CAT=adj,G=_,N=p,FSEM=vel
+
+SFX 71 Y 20
+SFX 71   0               so              o               +CAT=adj,G=m,N=s,FSEM=oso
+SFX 71   0               sa              o               +CAT=adj,G=f,N=s,FSEM=oso
+SFX 71   0               sos             o               +CAT=adj,G=m,N=p,FSEM=oso
+SFX 71   0               sas             o               +CAT=adj,G=f,N=p,FSEM=oso
+SFX 71   a               oso             a               +CAT=adj,G=m,N=s,FSEM=oso
+SFX 71   a               osa             a               +CAT=adj,G=f,N=s,FSEM=oso
+SFX 71   a               osos            a               +CAT=adj,G=m,N=p,FSEM=oso
+SFX 71   a               osas            a               +CAT=adj,G=f,N=p,FSEM=oso
+SFX 71   ção             cioso           ção             +CAT=adj,G=m,N=s,FSEM=oso
+SFX 71   ção             ciosa           ção             +CAT=adj,G=f,N=s,FSEM=oso
+SFX 71   ção             ciosos          ção             +CAT=adj,G=m,N=p,FSEM=oso
+SFX 71   ção             ciosas          ção             +CAT=adj,G=f,N=p,FSEM=oso
+SFX 71   e               oso             e               +CAT=adj,G=m,N=s,FSEM=oso
+SFX 71   e               osa             e               +CAT=adj,G=f,N=s,FSEM=oso
+SFX 71   e               osos            e               +CAT=adj,G=m,N=p,FSEM=oso
+SFX 71   e               osas            e               +CAT=adj,G=f,N=p,FSEM=oso
+SFX 71   0               oso             [^aeiou]        +CAT=adj,G=m,N=s,FSEM=oso
+SFX 71   0               osa             [^aeiou]        +CAT=adj,G=f,N=s,FSEM=oso
+SFX 71   0               osos            [^aeiou]        +CAT=adj,G=m,N=p,FSEM=oso
+SFX 71   0               osas            [^aeiou]        +CAT=adj,G=f,N=p,FSEM=oso
+
+SFX 72 Y 4
+SFX 72   o               eiro            o               +G=m,N=s,FSEM=eiro
+SFX 72   o               eiros           o               +G=m,N=p,FSEM=eiro
+SFX 72   a               eira            a               +G=f,N=s,FSEM=eiro
+SFX 72   a               eiras           a               +G=f,N=p,FSEM=eiro
+
+SFX 73 Y 6
+SFX 73   0               zinho           [^ã][eo]        +GR=dim
+SFX 73   0               inho            l               +GR=dim
+SFX 73   0               zinha           [^ã][eo]        +G=f,GR=dim
+SFX 73   0               inha            l               +G=f,GR=dim
+SFX 73   0               zinhos          [^ã][eo]        +N=p,GR=dim
+SFX 73   0               inhos           l               +N=p,GR=dim
+
