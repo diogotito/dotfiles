@@ -1,18 +1,19 @@
 {
-    "abbrev": "todo",
+    "abbrev": "newglossaryentry",
     "description": [
-        ""
+        "New glossary entry com \\newglossaryentry"
     ],
     "formatVersion": 1,
     "menu": "",
-    "name": "To-do framed",
-    "shortcut": "Ctrl+M, Ctrl+T",
+    "name": "New glossary entry",
+    "shortcut": "",
     "tag": [
-        "\\begin{framed}\r",
-        "\t\\begin{itemize}\r",
-        "\t\t\\item %|\r",
-        "\t\\end{itemize}\r",
-        "\\end{framed}"
+        "\\newglossaryentry{acr:%<LABEL%>}{",
+        "\tname=%<NAME%:cutInsert%>,",
+        "\tdescription={",
+        "\t\t%<DESC%>",
+        "\t}",
+        "}"
     ],
-    "trigger": "ttodo"
+    "trigger": ""
 }

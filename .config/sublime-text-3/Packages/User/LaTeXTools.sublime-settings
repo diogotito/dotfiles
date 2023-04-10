@@ -21,7 +21,7 @@
 	// Fill-helper autocompletion trigger for environment names after \begin{ and \end{
 	// this requires the LaTeX-cwl package and might not have a complete list of all environments.
 	// You can also use toggle: C-l,t,a,e
-	"env_auto_trigger": false,
+	"env_auto_trigger": true,
 
 	// Fill-helper autocompletion trigger for glossary entries \gls{ and \acrfull{
 	"glossary_auto_trigger": true,
@@ -157,7 +157,7 @@
 	// "selected"  to show a phantom only for the currently selected includegraphics command
 	// "hover"     to show a popup if you hover over an includegraphics command
 	// "none"      to disable image preview
-	"preview_image_mode": "hover",
+	"preview_image_mode": "all",
 
 	// The image size in the preview popup.
 	// These are the outer dimensions of the maximal size.

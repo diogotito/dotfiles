@@ -36,6 +36,8 @@ alias ls='ls -F --color=auto'
 # export PATH=$PATH:$(ruby -rubygems -e \
 # 	'puts Gem.default_path.map {|p| p + "/bin"} .join ":"')
 
+# export npm_config_prefix="$HOME/.local"
+
 rr() {
     ranger --choosedir="$HOME/.rangerdir" "$@"
     cd "$(cat ~/.rangerdir)"

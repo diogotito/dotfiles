@@ -1,0 +1,7 @@
+input 5426:67:Razer_Razer_DeathAdder_Chroma {
+    accel_profile flat
+    pointer_accel -0.90
+}
+
+
+

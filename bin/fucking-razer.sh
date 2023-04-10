@@ -4,13 +4,17 @@ set -Eeuxo pipefail
 # set +xe
 
 
-
-
-xinput | grep DeathAdder            \
-       | grep pointer               \
-       | grep -v "Consumer Control" \
-       | cut -d $'\t' -f 2          \
-       | cut -d = -f 2              \
+#------------------------------------------
+# Razer DeathAdder
+#------------------------------------------
+# xinput | grep DeathAdder            \
+#        | grep pointer               \
+#------------------------------------------
+# whatever this gaming mouse is
+#------------------------------------------
+xinput | grep 'SINOWEALTH Game Mouse' \
+       | cut -d $'\t' -f 2            \
+       | cut -d = -f 2                \
        | while read -r mouse_id; do
              xinput set-prop "$mouse_id" 'libinput Accel Speed' "${1:--1.00}" \
                  && break
@@ -22,6 +26,7 @@ xinput | grep DeathAdder            \
 #         system("xinput set-prop " $3 " \"libinput Accel Speed\" $speed")
 #     }'
 
+qdbus org.razer /org/razer/device/SI1542121721077 razer.device.dpi.setDPI "${2:-3000}" "${2:-3000}"
 
 # echo "xinput device ID: $MOUSE_ID"
 

@@ -2,7 +2,7 @@ require 'cairo'
 local json = require ("dkjson")
 local http_util = require("http.util")
 
--- Variables we are interested in
+-- "Variables" we are interested in
 local router_variables = setmetatable({
     network_provider = '',
     signalbar = 0,
@@ -26,6 +26,15 @@ local router_variables = setmetatable({
     }
 })
 
+-- Turn every "variable" into a Lua function that can be called from the Conky
+-- configuration like this: ${lua variable}
+
+for k in next, router_variables do
+    _ENV['conky_' .. k] = function()
+        return router_variables[k]
+    end
+end
+
 
 -- Build a special cURL command that can communicate with the damn router
 --   * A plain cURL command (as given by Conky's "${curl ...}") won't do :(
@@ -47,15 +56,6 @@ local query    <const> = http_util.dict_to_query({
 
 local curl_cmd <const> = curl_fmt:format(referer, base_uri, query)
 
-
--- Turn every "variable" into a Lua function that can be called from the Conky
--- configuration like this: ${lua variable}
-
-for k in next, router_variables do
-    _ENV['conky_' .. k] = function()
-        return router_variables[k]
-    end
-end
 
 
 --
@@ -108,6 +108,18 @@ function conky_thrpt_KB()
     return ("%.3f KiB"):format(conky_thrpt() / 2^10)
 end
 
+-- Now Lua has bare words! (ok **Conky** `${lua …}` has bare words)
+-- setmetatable(_G, {__index = function(table, key, a, b, c, ...)
+--     print("O QUE EH QUE ESTAS A ACEDER 👀", table, key, ' -- ', a, b, c, ...)
+--     if key == "conky_window" then
+--         return nil
+--     end
+--     if string.match(key, "^conky_") then
+--         return function(a, b, c, d, e)
+--             return key:sub(7) .. "<" .. (a or "-") .. "|" .. (b or "-") .. "|" .. (c or "-") .. "|" .. (d or "-") .. "|" .. (e or "-") .. "|" .. ">"
+--         end
+--     end
+-- end})
 
 
 -- Pretty JSON

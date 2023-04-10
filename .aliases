@@ -1,6 +1,6 @@
 #############################################################################################
 # POSIX-compatible shell agnostic aliases
-# (either useful day-to-day or just some cool tricks)
+# (either useful for day-to-day usage or just some cool tricks)
 #############################################################################################
 
 alias sudo='sudo '
@@ -11,10 +11,18 @@ alias zshrc='vim ~/.zshrc'
 alias vimrc='vim ~/.vimrc'
 alias xconfig='vim ~/.xmonad/xmonad.hs'
 
+#############################################################################################
+## Git
+#############################################################################################
+alias gap='git add --patch'
 alias config='git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
 alias conf='git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
 
+
 alias open=xdg-open # macOS has it right
+
+# XFCE4 Terminal already does this with Ctrl+Shift+N
+alias x='xfce4-terminal --working-directory="$(pwd)"'
 
 alias razer="xinput set-prop 'pointer:Razer Razer DeathAdder Chroma' 'libinput Accel Speed'"
 
@@ -37,11 +45,28 @@ alias dfcr='dfc -c always 2>/dev/null | grep --colo=never /dev/sda7'
 alias xclip="xclip -selection clipbooard"
 
 
-alias pp='ping -c 4 archlinux.org'
+alias pp='ping -c 4 1.1.1.1'
 alias cu='nmcli connection up'
+
+##################################################################
+## Good to have:
+##################################################################
+
+function copy-image-as-base64() {
+    base64 -w0 "$1" | \
+        sed 's|^|data:image/png;base64,|' | \
+        tee >(xclip -selection CLIPBOARD) && \
+        notify-send \
+            'Copied "'"$1"'" as base64 to clipboard' \
+            $'It looks like this:\n'"$(xclip -selection CLIPBOARD -out)"
+
+}
 
 
 # App specific aliases
+
+# Simplified docker ps that fits in half my screen
+alias dps="docker ps --format 'table {{.Names}}	{{.Ports}}	{{.Status}}'"
 
 # alias webcam='mplayer tv://device=/dev/video01'  # least delay?
 alias webcam='mpv --demuxer-lavf-format=video4linux2 --demuxer-lavf-o-set=input_format=mjpeg av://v4l2:/dev/video0'
@@ -52,8 +77,24 @@ alias webcam='mpv --demuxer-lavf-format=video4linux2 --demuxer-lavf-o-set=input_
 
 alias wdmycloud='smbclient -N -U tito% //wdmycloud/tito'
 
-alias t=todo.sh
+# watchexec, fast, with my favourite flags
+function we() {
+    watchexec --clear --shell=bash "$@"
+}
 
+# Todo.txt
+function t() {
+    if [[ $# -eq 0 ]]; then
+        todo.sh ls
+        seq $COLUMNS | tr -d '[[:digit:]]' | tr '[[:space:]]' '-'
+        t -h | sed -En 's/^    (\w+)\|?(\w+)?.*/\1\n\2/p' | column
+    else
+        todo.sh "$@"
+    fi
+}
+alias tm='todo.sh ls @ModEst'
+
+# PDF viewer
 alias zathura='zathura --fork'
 
 alias clips='rlwrap clips'
@@ -88,7 +129,8 @@ function nvm() {
 # Arch linux specific aliases
 
 alias pacsizes="expac -H M --timefmt='%Y-%m-%d' '%m\t%l\t%-30v%n' | sort -rn | less"
-alias yolo="yay --noconfirm"
+alias yay=paru
+alias yolo="paru --noconfirm"
 alias pacram="mkdir -p /tmp/pkg && sudo pacman --cachedir /tmp/pkg"
 
 alias pacro='sudo pacman -Rns $(pacman -Qtdq)' # Remove orphan packages

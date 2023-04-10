@@ -1,14 +1,18 @@
 {
-    "abbrev": "m",
+    "abbrev": "todo",
     "description": [
         ""
     ],
     "formatVersion": 1,
     "menu": "",
-    "name": "m",
-    "shortcut": "",
+    "name": "To-do framed",
+    "shortcut": "Ctrl+M, Ctrl+T",
     "tag": [
-        "m"
+        "\\begin{framed}\r",
+        "\t\\begin{itemize}\r",
+        "\t\t\\item %|\r",
+        "\t\\end{itemize}\r",
+        "\\end{framed}"
     ],
-    "trigger": "nn"
+    "trigger": "ttodo"
 }

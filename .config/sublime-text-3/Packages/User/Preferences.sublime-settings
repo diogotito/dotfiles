@@ -20,40 +20,49 @@
 	[
 		{
 			"characters": ".",
-			"selector": "source.python"
+			"selector": "source.python",
 		},
 		{
 			"characters": "\\",
-			"selector": "text.tex.latex"
+			"selector": "text.tex.latex",
 		}
 	],
 	"auto_find_in_selection": true,
 	"bold_folder_labels": true,
-	"color_scheme": "Packages/Visual Studio Bold Color Scheme/Visual Studio Bold.tmTheme",
+	"color_scheme": "GitHub Light.sublime-color-scheme",
 	"dictionary": "Packages/LanguagePortuguese/Portuguese (European).dic",
 	"draw_centered": false,
-	"font_size": 11,
 	"gutter": true,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
+		"Anaconda",
 	],
 	"ignored_words":
 	[
 		"operá"
 	],
+	"font_size": 10,
+	"font_face": "Fira Code",
 	"line_numbers": true,
-	"line_padding_bottom": 2,
-	"line_padding_top": 2,
-	"overlay_scroll_bars": "system",
+	"line_padding_bottom": 0,
+	"line_padding_top": 0,
+	"overlay_scroll_bars": "enabled",
 	"rulers":
 	[
 		80
 	],
-	"theme": "Adaptive.sublime-theme",
+	"theme": "Default.sublime-theme",
 	"ui_native_titlebar": false,
 	"ui_separator": true,
 	"ui_wide_scrollbars": false,
-	"vintageous_use_ctrl_keys": false
+	"vintageous_use_ctrl_keys": false,
+	"dark_color_scheme": "Packages/Dracula Color Scheme/Dracula.tmTheme",
+	"light_color_scheme": "Packages/Pandoc Academic/ColorScheme/The-Wine-Light-Sand.tmTheme",
+	"remember_workspace": false,
+	/*"bold_folder_labels": true,*/
+	// Highlight active indent
+	"indent_guide_options": [ "draw_normal", "draw_active"],
+	"material_theme_contrast_mode": true,
 }

@@ -19,12 +19,12 @@ from pydbus import SessionBus
 
 # Each numbered workspace is associated with an application category
 WORKSPACE_CATEGORIES = {
-    1: "Accesssories",
-    2: "Chromium Apps",
-    3: "Office",
+    1: "Bookmarks",
+    2: "Bookmarks",
+    3: "Bookmarks",
     4: "Bookmarks",
     5: "Development",
-    6: "Games",
+    6: "Bookmarks",
     7: "Internet",
     8: "Settings",
     9: "System",
@@ -55,7 +55,7 @@ async def on_workspace_focus(i3, event):
         try:
             # Open a new appfinder window in the new category
             bus.get("org.xfce.Appfinder").OpenWindow(True, 'such_fast')
-        except:
+        except Exception:
             # The xfce4-appfinder service isn't running. Start it up.
             await i3.command("exec --no-startup-id xfce4-appfinder")
 

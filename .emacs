@@ -6,12 +6,21 @@
 (tool-bar-mode -1)
 (menu-bar-mode 1)
 (scroll-bar-mode 1)
-(global-hl-line-mode t)
-(global-display-line-numbers-mode 1)
-(line-number-mode t)
-(column-number-mode t)
+;(global-hl-line-mode t)
+; (global-display-line-numbers-mode 1)
+;(line-number-mode t)
+;(column-number-mode t)
 
+;;
+;; My maps
+;;
 
+(defun 21st-century-join ()
+  (interactive)
+  (join-line 1))
+
+(global-set-key (kbd "C-S-j") '21st-century-join)
+ 
 ;;
 ;; Programming languages
 ;;
@@ -21,6 +30,10 @@
   (require 'haskell-interactive-mode)
   (require 'haskell-process)
   (add-hook 'haskell-mode-hook 'interactive-haskell-mode))
+
+(use-package latex-extra
+  :config
+  (add-hook 'LaTeX-mode-hook #'latex-extra-mode))
 
 
 ;;
@@ -132,3 +145,31 @@
     (evil-leader/set-key-for-mode 'zim-wiki-mode "z" 'zim-wiki-hydra/body)
     )
 (put 'narrow-to-region 'disabled nil)
+
+
+;; EVIL MODE
+
+; (use-package evil
+;   :ensure t
+;   :init
+;   (setq evil-want-keybinding nil)
+;   :config
+;   (evil-mode 1)
+;   (define-key evil-insert-state-map "jj" 'evil-normal-state)
+;   (define-key evil-insert-state-map "jk" 'evil-normal-state)
+;   (define-key evil-insert-state-map "kj" 'evil-normal-state))
+; 
+; (use-package evil-args
+;   :ensure t)
+; 
+; (use-package evil-commentary
+;   :ensure t)
+; 
+; (use-package evil-exchange
+;   :ensure t)
+; 
+; (use-package evil-collection
+;   :ensure t)
+; 
+; (use-package evil-magit
+;   :ensure t)

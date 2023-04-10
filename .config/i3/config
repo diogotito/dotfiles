@@ -1,4 +1,5 @@
-# vim: foldmethod=expr foldlevel=1 nowrap
+
+# vim: foldmethod=expr foldlevel=1 foldcolumn=2 nowrap
 # vim: fde=v\:lnum>5&&!(getline(v\:lnum)=~'###'\|\|getline(v\:lnum+1)=~'###')
 # vim: cursorline number
 
@@ -18,19 +19,37 @@ set $super Mod4
 # OCD
 set $bar_height 25
 
-
+set $ROFI rofi -yoffset 25
+# set $FANCY_LOCK i3lock --blur 5 --indicator --clock --time-color=1793D1ff --date-color=1793D1ff
+set $FANCY_LOCK i3lock \
+                  --composite \
+                  --blur 5 \
+                  --indicator \
+                  --ignore-empty-password \
+                  --clock \
+                  --time-color=66CCfcff \
+                  --date-color=1793D1ff \
+                  --greeter-text="$(i3status 2>/dev/null | sed q | cut -d '|' -f 3-7)" \
+                  --greeter-size=24 \
+                  --greeter-font='Fira Code' \
+                  --pass-media --pass-screen --pass-volume \
+                  --pointer=win
 
 #----------------------------------------------------------------------------###
 # 2 - Startup                                                                  #
 #----------------------------------------------------------------------------###
 
+exec --no-startup-id sleep 2s; xset r rate 200 25
+
 exec --no-startup-id autorandr quarto
-exec_always --no-startup-id nitrogen --restore
+exec_always --no-startup-id nitrogen --restore && sleep 2s && nitrogen --restore
 exec --no-startup-id sleep 2s; nitrogen --restore
 exec --no-startup-id dunst
 # exec --no-startup-id picom
 
-exec --no-startup-id sleep 5s; conky
+# TODO conky
+# exec --no-startup-id sleep 0.8s; conky & sleep 0.4s; pkill -SIGUSR2 conky
+exec --no-startup-id ~/.config/conky/start_router_monitor.sh
 
 exec --no-startup-id setxkbmap -option grp:win_space_toggle
 
@@ -41,10 +60,10 @@ exec --no-startup-id sleep 0.1s; nm-applet                    # Network Manager 
 exec --no-startup-id sleep 0.1s; redshift-gtk                 # Make me sleepy before 1 AM
 exec --no-startup-id sleep 0.1s; xfce4-clipman                # Makes the 'Copy to clipboard' option appear
 exec --no-startup-id sleep 0.1s; xfce4-power-manager          # Makes battery & brightness work like in XFCE4
-exec --no-startup-id sleep 0.1s; polychromatic-tray-applet
+exec --no-startup-id sleep 0.1s; xinput | grep -qi razer && polychromatic-tray-applet
 exec --no-startup-id sleep 0.1s; syncthing-gtk
 exec --no-startup-id sleep 0.1s; flameshot
-exec --no-startup-id sleep 0.1s; solarized-zim
+exec --no-startup-id sleep 0.1s; solarized-zim --plugin trayicon
 # exec --no-startup-id sleep 0.1s; birdtray                     # Thunderbird tray
 exec_always --no-startup-id "killall xxkb; sleep 0.05s; xxkb" # xxkb sux
 
@@ -59,20 +78,28 @@ exec --no-startup-id thunar --daemon              # Makes Thunar open quicker (l
 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
+exec --no-startup-id xss-lock -- $FANCY_LOCK
+
 # O:)
 # exec --no-startup-id emacs --daemon
 
 exec_always --no-startup-id fucking-razer.sh
 exec --no-startup-id evrouter /dev/input/by-id/usb-Razer_Razer_*
 
+# My script!!!
+# exec --no-startup-id python ~/bin/i3-workspace-starter.py
+
+# Rofi under right click
+exec_always --no-startup-id xclickroot -3 $ROFI -sidebar-mode -show drun -hover-select
 
 
 #----------------------------------------------------------------------------###
 # 3 - Application shortcuts                                                    #
 #----------------------------------------------------------------------------###
 
+bindsym Mod1+Shift+a exec alacritty
 bindsym $mod+Shift+Ctrl+b exec chromium app="$(xclip -selection clipboard -o)"
-bindsym $mod+b exec --no-startup-id clipman-inhibit ~/git/bitwarden-rofi/bwmenu
+bindsym $mod+b exec --no-startup-id ROFIICONSENABLED=false clipman-inhibit ~/git/bitwarden-rofi/bwmenu
 # bindsym $mod+t exec --no-startup-id ~/git/todofi.sh/todofi.sh -d ~/.todo/config
 # bindsym $mod+t exec --no-startup-id de.manuel_kehl.go-for-it
 bindsym $mod+Shift+b exec firefox
@@ -86,11 +113,10 @@ bindsym Print        exec flameshot gui
 bindsym Shift+Print  exec flameshot launcher
 bindsym $mod+Shift+v exec xfce4-popup-clipman
 bindsym $mod+Ctrl+b  exec chromium-app
-bindsym $mod+z       exec solarized-zim
-# bindsym $mod+z       [class="Zim"] scratchpad show
+bindsym $mod+z       exec i3-msg '[class="Zim"] focus' || solarized-zim
 
 
-bindsym $mod+Shift+x exec i3-msg $(rofi -dmenu \
+bindsym $mod+Shift+x exec i3-msg $($ROFI -dmenu \
                                          -p 'i3-msg ' -input ~/i3-commands.txt \
                                      | tee --append ~/i3-commands.txt) && \
                                    sort --unique ~/i3-commands.txt \
@@ -108,6 +134,10 @@ bindsym $mod+F1      exec ~/bin/edit_i3config
 
 # bindsym XF86AudioRaiseVolume exec --no-startup-id dunstify -r 5678 -h int:value:`ponymix increase 5` volume
 # bindsym XF86AudioLowerVolume exec --no-startup-id dunstify -r 5678 -h int:value:`ponymix decrease 5` volume
+
+bindsym $mod+Ctrl+d           exec --no-startup-id dunstctl close
+bindsym $mod+Ctrl+Shift+grave exec --no-startup-id dunstctl set-paused toggle
+
 
 # Sometimes Fn+F2 and Fn+F3 are too far away when I use my laptop as a secondary monitor
 bindsym $mod+KP_Add            exec --no-startup-id light -A 5 && dunstify -r 1234 -h int:value:`light` brightness
@@ -159,7 +189,7 @@ mode $LAUNCH_Spotify {
 }
 
 
-set $LAUNCH_main "[LAUNCH]   (B)Python  (C)hromium  (H)top  (P)ing  (M)usic  (O)pen a PDF  (S)potify                     [FIX]   (K)eyboard layout   (X) compositor  (R)estore wallpaper"
+set $LAUNCH_main "                    [LAUNCH]   (B)Python  (C)hromium  (H)top  (P)ing  (M)usic  (O)pen a PDF  (S)potify                     [FIX]   (K)eyboard layout   (X) compositor  (R)estore wallpaper                    "
 bindsym Mod1+F2 mode $LAUNCH_main
 
 mode $LAUNCH_main {
@@ -173,7 +203,10 @@ mode $LAUNCH_main {
     bindsym K $<CMD> "setxkbmap -layout us,pt -variant , -option '' -option grp:win_space_toggle" $</CMD>
 
     # fix picom (sometimes it offsets the screens in a weird way)
-    bindsym X $<CMD> "killall picom; picom -b" $</CMD>
+    bindsym X exec --no-startup-id pkill picom || picom -b
+
+    # gamemode
+    bindsym G $<CMD> gamemode-tmux $</CMD>
 
     # fix wallpaper
     bindsym R $<CMD> nitrogen --restore $</CMD>
@@ -187,7 +220,7 @@ mode $LAUNCH_main {
     bindsym Escape mode "default"
 }
 
-for_window [title="^bpython$"] $LAUNCH_window 
+# for_window [title="^bpython$"] $LAUNCH_window 
 for_window [title="^Open PDF$"] $LAUNCH_window
 for_window [title="^Pinging something somewhere$"] $LAUNCH_window
 for_window [title="^Task Manager \(htop\)$"] $LAUNCH_window, resize set 1300 600, move position center
@@ -218,10 +251,10 @@ for_window [class="^mGBA$"]                           border normal
 for_window [class="Git-gui"]                          border normal
 for_window [class="Gitk"]                             border normal
 for_window [title="Application Finder"]               border none, resize set 900 400
-for_window [class="jetbrains-toolbox"]                border none, floating enable; exec i3-msg move down 25 px
+for_window [class="jetbrains-toolbox"]                border none, floating enable; exec --no-startup-id i3-msg move down $bar_height px
 for_window [class="Firefox" title="Mozilla Firefox$"] border pixel
 
-for_window [title="ZSH Launcher"]                  border normal, floating enable, resize set 900 400, move position center
+for_window [title="ZSH Launcher"]                  border pixel, floating enable, resize set 900 400, move position center
 
 for_window [class="Firefox" title="Scratchpad"]    floating enable, resize set 900 600
 for_window [title="Application Finder"]            floating enable, border pixel
@@ -231,50 +264,64 @@ for_window [class="Terminator"]                    floating enable
 # for_window [title="^Developer Tools"]            floating enable, border normal
 for_window [class="firefox" instance="Devtools"]   floating enable, border normal
 for_window [class="^mGBA$"]                        floating enable
-for_window [title="i3 config$"]                    floating enable
+for_window [title="i3 config$"]                    floating enable, resize set 1100 700
 for_window [title="Network Connections"]           floating enable
 for_window [title="Nitrogen"]                      floating enable, border normal, move position center
+for_window [class="feh"]                           floating enable
 # for_window [title="Variety Images"]                floating enable
-for_window [instance="Godot_Engine"]               floating enable, border normal, move position center
+for_window [instance="^Godot_Engine$"]             floating enable, border normal, move position center
 for_window [class="love"]                          floating enable, border normal, move position center
-for_window [title="^Godot Engine - " instance="Godot_Engine"] floating disable, border pixel
 for_window [title="^Godot Engine - Project Manager" instance="Godot_Engine"] floating enable, border normal, move position center
+for_window [title="^Godot Engine - " instance="Godot_Engine"] floating disable, border pixel
 for_window [title="^VLsub|VLSub"]                  floating enable, border normal, move position center
 for_window [title="Parse Tree Inspector"]          floating enable, resize set 900 600, move position center, border normal
 for_window [title="Go For It!"]                    floating enable, resize set 900 600, move position center
 for_window [instance="floating-nautilus"]          floating enable, resize set 900 600, move position center
+for_window [class="org.gnome.NautilusPreviewer"]   floating enable, move position center
 for_window [class="Tk"]                            floating enable, border normal
 # for_window [title="(?i)Hello World"]               floating enable, border normal, move position center
 for_window [class="TelegramDesktop" title="Media Viewer"] fullscreen disable, floating enable, move position 0 0
 
 for_window [title="i3 config$"] move position center
 
-for_window [class="Blender"]       focus child, layout tabbed, focus
-for_window [class="Emacs"]         focus child, layout tabbed, focus
-for_window [class="Thunderbird"]   focus child, layout tabbed, focus
-for_window [class="jetbrains-idea-ce"] layout tabbed
-for_window [class="jetbrains-pycharm"] layout tabbed
+for_window [class="Blender"]           focus child, layout tabbed, focus
+for_window [class="Emacs"]             focus child, layout tabbed, focus
+for_window [class="Thunderbird"]       focus child, layout tabbed, focus
+for_window [class="jetbrains-idea-ce"] focus child, layout tabbed, focus
+for_window [class="jetbrains-pycharm"] focus child, layout tabbed, focus
 for_window [class="jetbrains-pycharm" title="win0"] floating enable
+for_window [class="jetbrains-pycharm" title="Welcome to PyCharm"] floating enable
+for_window [class="yakuake"] floating enable
 
-assign [title="Mozilla Firefox$"]  → $workspace_2
-assign [class="Zim"]               → $workspace_3
-assign [class="code-oss"]          → $workspace_5
-assign [class="code-oss"]          → $workspace_5
-assign [class="Code"]              → $workspace_5
-assign [title="Cloud9$"]           → $workspace_5
-assign [class="Blender"]           → $workspace_5
-assign [class="Eclipse"]           → $workspace_5
-assign [class="jetbrains-idea-ce"] → $workspace_5
-assign [class="jetbrains-pycharm"] → $workspace_5
-assign [class="^mGBA$"]            → $workspace_6
-assign [class="Chromium"]          → $workspace_6
-assign [class="Steam"]             → $workspace_6
-assign [class="Caprine"]           → $workspace_7
-assign [class="TelegramDesktop"]   → $workspace_7
-assign [class="Thunderbird"]       → $workspace_7
-assign [title="TODO.txt"]          → $workspace_7
-assign [title="WhatsApp$"]         → $workspace_7
-assign [instance="Godot_Engine"]   → $workspace_6
+for_window [class="Xfce4-appfinder"] border pixel
+for_window [window_role="xfce4-terminal-dropdown"] border pixel, exec --no-startup-id i3-msg move down $bar_height px
+
+for_window [title="^TeXstudio$" window_type="splash"] border none, exec darkblue bin/lt
+# While I'm not connected to a big screen
+# for_window [title="^Configure TeXstudio$"] resize set 900 600, move position center
+
+assign [title="Mozilla Firefox$"]    → $workspace_2
+
+assign [class="Zim"]      → $workspace_8
+assign [class="obsidian"] → $workspace_8
+assign [class="Logseq"]   → $workspace_8
+
+# assign [class="code-oss"]            → $workspace_5
+# assign [class="Code"]                → $workspace_5
+assign [title="Cloud9$"]             → $workspace_5
+assign [class="Blender"]             → $workspace_5
+assign [class="Eclipse"]             → $workspace_5
+assign [class="jetbrains-idea-ce"]   → $workspace_5
+assign [class="jetbrains-pycharm"]   → $workspace_5
+assign [class="^mGBA$"]              → $workspace_6
+assign [class="Chromium"]            → $workspace_6
+assign [class="Steam"]               → $workspace_6
+assign [class="Caprine"]             → $workspace_7
+assign [class="TelegramDesktop"]     → $workspace_7
+assign [class="Thunderbird"]         → $workspace_7
+assign [title="TODO.txt"]            → $workspace_7
+assign [title="WhatsApp$"]           → $workspace_7
+assign [instance="Godot_Engine"]     → $workspace_6
 
 
 
@@ -289,7 +336,7 @@ popup_during_fullscreen smart
 # The "smart" setting hides borders on workspaces with only one window visible,
 # but keeps them on workspaces with multiple windows visible
 
-hide_edge_borders smart
+hide_edge_borders both  # smart, horizontal, vertical, both, smart
 
 # default|stacking|tabbed
 workspace_layout default
@@ -314,7 +361,12 @@ for_window [tiling] title_format " %title"
 bindsym $mod+Shift+quotedbl exec i3-input -F 'mark --add --toggle %s' -l 1 -P 'mark: '
 
 # Go To
-bindsym $mod+quotedbl exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Go to: '
+bindsym $mod+quotedbl exec --no-startup-id i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Go to: '
+
+# Mark some often used applications, to easily jump back to them
+for_window [class="jetbrains-pycharm"] mark i
+for_window [class="Chromium"]          mark c
+for_window [class="code-oss"]          mark v
 
 
 
@@ -343,22 +395,26 @@ floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec darkblue xfce4-terminal
 
-bindsym $mod+Shift+Return exec darkblue xfce4-terminal -T 'ZSH Launcher'
+# bindsym $mod+Shift+Return exec darkblue xfce4-terminal -T 'ZSH Launcher' -e 'sh -c "todo.sh ls @ModEst && exec $SHELL"'
+bindsym $mod+Shift+Return exec darkblue xfce4-terminal -T 'ZSH Launcher' -e 'sh -c "~/.config/conky/ruby_router_ostruct.rb && exec $SHELL"'
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
-bindsym $mod+p exec rofi -sidebar-mode -show drun
-bindsym $mod+Shift+w exec rofi -sidebar-mode -show window
-# bindsym Mod1+Tab exec rofi -sidebar-mode -show window
+bindsym $mod+p       exec --no-startup-id      $ROFI                                    -sidebar-mode -show drun
+bindsym $mod+Shift+w exec --no-startup-id ~/bin/rofi_mono_font.sh --font="Fira Code 10"               -show window
+bindsym $mod+shift+p exec --no-startup-id ~/bin/rofi_mono_font.sh --font="Fira Code 10" -sidebar-mode -show run -run-shell-command 'xfce4-terminal --hold --title="ZSH Launcher" --command={cmd}'
+bindsym $mod+period exec ROFIICONSENABLED=false rofimoji
+bindsym $mod+Tab workspace back_and_forth
 bindsym Mod1+Tab workspace back_and_forth
-bindsym $mod+Shift+p exec --no-startup-id xfce4-appfinder-category.sh "All Applications"
+# bindsym $mod+Shift+p exec --no-startup-id xfce4-appfinder-category.sh "All Applications"
 # bindsym Mod1+F3 exec --no-startup-id xfce4-appfinder
 bindsym $mod+Shift+Control+p exec --no-startup-id i3-dmenu-desktop
 
 # Preserve my Alt+Tabbing habit from using stacking window managers :D
 bindsym $mod+minus scratchpad show
-bindsym $mod+Tab workspace back_and_forth
+# bindsym Mod1+Tab exec $ROFI -sidebar-mode -show window
+# bindsym Mod1+Tab      exec --no-startup-id ~/bin/rofi_mono_font.sh --font="Fira Code 10"               -show window
 
 # Make the currently focused window a SCRATCHPAD
 bindsym $mod+Shift+minus move scratchpad
@@ -399,7 +455,7 @@ bindsym $super+Shift+Up move up
 bindsym $super+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+Shift+Semicolon split h
+# bindsym $mod+Shift+Semicolon split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -438,11 +494,11 @@ bindsym $mod+Shift+r restart
 #----------------------------------------------------------------------------###
 
 set $EXIT_MODE " E - Logout  |  L - Lock  |  P - Shutdown  |  R - Reboot  |  S - Suspend  |  H - Hibernate  |  W - Windows "
-set $FANCY_LOCK i3lock --blur 5 --indicator --clock --timecolor=1793D1ff --datecolor=1793D1ff
 bindsym $mod+Shift+e mode $EXIT_MODE
 mode $EXIT_MODE {
         bindsym e exec i3-msg exit             ; mode "default"
         bindsym l exec $FANCY_LOCK             ; mode "default"
+        bindsym shift+l exec ~/bin/i3lock_bar.rb ; mode "default"
         bindsym d exec dm-tool lock            ; mode "default"
         bindsym p exec systemctl poweroff      ; mode "default"
         bindsym s exec systemctl suspend       ; mode "default"
@@ -461,38 +517,55 @@ mode $EXIT_MODE {
 # 11 - Resize mode                                                             #
 #----------------------------------------------------------------------------###
 
+set $HIDE_EDGE_BORDERS_MODE "Switch i3 Edge Borders mode:    (n)one | (h)orizontal | (v)ertical | (b)oth | (s)mart"
+
+mode $HIDE_EDGE_BORDERS_MODE {
+    bindsym h hide_edge_borders horizontal
+    bindsym v hide_edge_borders vertical
+    bindsym b hide_edge_borders both
+    bindsym s hide_edge_borders smart
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
+    bindsym h resize shrink width 10 px or 10 ppt
+    bindsym j resize grow height 10 px or 10 ppt
+    bindsym k resize shrink height 10 px or 10 ppt
+    bindsym l resize grow width 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+    # same bindings, but for the arrow keys
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
 
-        # pressing 'c' will center the window
-        bindsym c move position center
+    # pressing 'c' will center the window
+    bindsym c move position center
 
-        # pressing 'b' will cycle through the 3 border styles
-        bindsym b border toggle
+    # pressing 'b' will cycle through the 3 border styles
+    bindsym b border toggle
 
-        bindsym t floating toggle
+    bindsym t floating toggle
 
-        bindsym a exec lxappearance; mode "default"
+    bindsym a exec lxappearance; mode "default"
 
-        # pressing 'o' will move the window to another output
-        bindsym o move to output right
+    # pressing 'o' will move the window to another output
+    bindsym o move to output right
 
-        # pressing 's' will swap the two active workspaces between outputs
-        bindsym p exec bin/i3-display-swap.sh; mode "default"
+    # pressing 's' will swap the two active workspaces between outputs
+    bindsym p exec bin/i3-display-swap.sh; mode "default"
 
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+    # pressing 'm' will make i3bar toggle between "docked" mode and "hidden"
+    # (revealed with the 'super' key) mode
+    bindsym m bar mode toggle
+
+    bindsym e mode $HIDE_EDGE_BORDERS_MODE
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 bindsym $mod+r mode "resize"
@@ -507,7 +580,8 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
     # i3bar_command i3bar --transparency
-    #mode hide
+    # mode hide
+    # status_command ~/bin/custom_i3_status.bash
     status_command i3status
     position top
     tray_padding 3
@@ -524,7 +598,7 @@ bar {
         inactive_workspace #272931 #272931 #888888
         urgent_workspace   #333333 #900000 #ffffff
     }
-    bindsym button2 exec eval $(rofi -theme dmenu -dmenu -p 'exit: ' <<<$'\
+    bindsym button2 exec eval $($ROFI -dmenu -p 'exit: ' <<<$'\
 i3-msg exit\n\
 systemctl poweroff\n\
 systemctl suspend\n\
@@ -535,9 +609,11 @@ gksu \'efibootmgr --bootnext=0\' && systemctl reboot   # windows')
 
     # bindsym button1 scratchpad show 
 
-    bindsym button3 exec --no-startup-id \
-            xfce4-appfinder-category.sh "Bookmarks" && \
-                i3-msg move position mouse && i3-msg border none
+    bindsym button3 exec --no-startup-id $ROFI -show drun -hover-select
+
+    # bindsym button3 exec --no-startup-id \
+    #         xfce4-appfinder-category.sh "Bookmarks" && \
+    #             i3-msg move position mouse && i3-msg move down $bar_height px
 
     bindsym button8 layout toggle split
     bindsym button9 layout toggle tabbed stacking
@@ -557,21 +633,22 @@ set $workspace_4 number "4: Org"
 set $workspace_5 number "5: Code"
 set $workspace_6 number "6: Test"
 set $workspace_7 number "7: Chat"
-set $workspace_8 number "8: Config"
+set $workspace_8 number "8: Notes"
 set $workspace_9 number "9: Monitor"
 set $workspace_0 "·"
 
 # switch to workspace 
-bindsym $mod+1 workspace $workspace_1
-bindsym $mod+2 workspace $workspace_2
-bindsym $mod+3 workspace $workspace_3
-bindsym $mod+4 workspace $workspace_4
-bindsym $mod+5 workspace $workspace_5
-bindsym $mod+6 workspace $workspace_6
-bindsym $mod+7 workspace $workspace_7
-bindsym $mod+8 workspace $workspace_8
-bindsym $mod+9 workspace $workspace_9
-bindsym $mod+0 workspace $workspace_0
+set $<appfinder> [class="Xfce4-appfinder"] kill;
+bindsym $mod+1 $<appfinder> workspace $workspace_1
+bindsym $mod+2 $<appfinder> workspace $workspace_2
+bindsym $mod+3 $<appfinder> workspace $workspace_3
+bindsym $mod+4 $<appfinder> workspace $workspace_4
+bindsym $mod+5 $<appfinder> workspace $workspace_5
+bindsym $mod+6 $<appfinder> workspace $workspace_6
+bindsym $mod+7 $<appfinder> workspace $workspace_7
+bindsym $mod+8 $<appfinder> workspace $workspace_8
+bindsym $mod+9 $<appfinder> workspace $workspace_9
+bindsym $mod+0 $<appfinder> workspace $workspace_0
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $workspace_1
@@ -585,12 +662,12 @@ bindsym $mod+Shift+8 move container to workspace $workspace_8
 bindsym $mod+Shift+9 move container to workspace $workspace_9
 bindsym $mod+Shift+0 move container to workspace $workspace_0
 
-# blackwidowcontrol
-bindsym XF86Tools   workspace $workspace_1
+# blackwidowcontrol - macro keys (M1, M2, M4 and M5) in razer keyboard
+# bindsym XF86Tools   workspace $workspace_1  # Bound to broken left mouse button click through evrouter
 bindsym XF86Launch5 workspace $workspace_2
-# bindsym XF86Launch6 workspace $workspace_3
-bindsym XF86Launch7 workspace $workspace_4
-bindsym XF86Launch8 workspace $workspace_5
+# bindsym XF86Launch6 workspace $workspace_3  # Bound to broken middle mouse button click through evrouter
+bindsym XF86Launch7 workspace $workspace_6
+bindsym XF86Launch8 workspace $workspace_7
 bindsym Shift+XF86Tools   move container to workspace $workspace_1
 bindsym Shift+XF86Launch5 move container to workspace $workspace_2
 bindsym Shift+XF86Launch6 move container to workspace $workspace_3
@@ -652,22 +729,66 @@ mode "$mode_gaps_inner" {
 # Workflow ModEst                                                              #
 #----------------------------------------------------------------------------###
  
+workspace "1: Term" output HDMI-1 LVDS-1
 workspace "2: Web" output HDMI-1 LVDS-1
 workspace "5: Code" output HDMI-1 LVDS-1
 workspace "6: Test" output LVDS-1
 workspace "7: Chat" output LVDS-1
 
-exec --no-startup-id ~/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox
-exec --no-startup-id /usr/bin/flatpak run --branch=stable --arch=x86_64 --command=de.manuel_kehl.go-for-it de.manuel_kehl.go-for-it
-exec --no-startup-id nautilus --name=floating-nautilus
+# Scratchpad windows
+# exec --no-startup-id ~/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox
+# exec --no-startup-id /usr/bin/flatpak run --branch=stable --arch=x86_64 --command=de.manuel_kehl.go-for-it de.manuel_kehl.go-for-it
+# exec --no-startup-id com.github.jmoerman.go-for-it
+# exec --no-startup-id nautilus --name=floating-nautilus
 
-bindsym $mod+t [title="Go For It!"] scratchpad show
+bindsym $mod+t       [title="Go For It!"]           scratchpad show
 bindsym $mod+Shift+f [instance="floating-nautilus"] scratchpad show
+bindsym $mod+Shift+z [class="Zim"]                  scratchpad show
+
+# bindsym $mod+o exec --no-startup-id i3-msg '[class="obsidian"] focus' || obsidian
+set $DigitalGarden "Digital Garden:   "
+bindsym $mod+o mode $DigitalGarden
+mode $DigitalGarden {
+    bindsym o exec --no-startup-id i3-msg '[class="obsidian"] focus' || obsidian; mode "default"
+    bindsym l exec --no-startup-id i3-msg '[class="Logseq"] focus' || ~/apps/Logseq-linux-x64-0.8.9.AppImage; mode "default"
+    bindsym z exec i3-msg '[class="Zim"] focus' || solarized-zim; mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
 
 for_window [instance="floating-nautilus"] move scratchpad
 for_window [title="Go For It!"] move scratchpad
 
-for_window [class="jetbrains-pycharm"] mark i
-for_window [class="Chromium"]          mark c
-
 for_window [class="jetbrains-pycharm"] [title="JetBrains Toolbox"] kill
+
+for_window [class="Gjs"] floating enable, border normal
+
+
+#
+# Broken M key
+#
+
+# bindsym Mod1+n exec --no-startup-id xdotool key --clearmodifiers m
+# bindsym Mod1+Shift+n exec --no-startup-id xdotool --clearmodifiers key M
+
+
+#
+# Experiments
+#
+
+for_window [title="CONKY_TEST"] floating enable
+
+# Don't focus window upon opening
+no_focus [title="CONKY_TEST"]
+
+set $CONKY_OVERLAY_CLASS Conky Overlay
+bindsym $mod+equal exec --no-startup-id i3-msg '[class="$CONKY_OVERLAY_CLASS"] focus' || conky -c <( \
+                                            sed -e "/own_window_type = /s/'\w*'/'normal'/" \
+                                                -e "/own_window_class = /s/'\w*'/'$CONKY_OVERLAY_CLASS'/" \
+                                                ~/.config/conky/conky.conf \
+                                        )
+bindsym --release $mod+equal exec --no-startup-id \
+    i3-msg '[class="$CONKY_OVERLAY_CLASS"] kill' && \
+    sleep 0.5 && \
+    i3-msg '[class="$CONKY_OVERLAY_CLASS"] kill'
+for_window [class="$CONKY_OVERLAY_CLASS"] border pixel

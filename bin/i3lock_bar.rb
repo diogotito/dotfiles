@@ -1,10 +1,17 @@
 #!/usr/bin/ruby
 
+require 'ansi/code'
+
+include ANSI::Code
+
 FULL = 0
 BEFORE_PARENTHESIS = 1
 INSIDE_PARENTHESIS = 2
 
 BOTH = 2
+
+CENTER = 0
+LEFT = 1
 RIGHT = 2
 
 # DSL
@@ -22,13 +29,19 @@ module Flaggable
     ""
   end
 
-  def pos(x, y)
-    x = "w#{x}" if x < 0
-    y = "h#{y}" if y < 0
-    flags << "#{flag_prefix}pos#{flag_suffix}=#{x}:#{y}"
+  def expr(n, dim)
+    case n
+    when Integer ; "#{n < 0 ? dim : ""}#{n}"
+    when Float   ; "#{dim}/#{(1/n).round}"
+    when String  ; n
+    end
   end
 
-  def rgb(r, g, b, a=255)
+  def pos(x, y)
+    flags << "#{flag_prefix}pos#{flag_suffix}=#{expr x, 'w'}:#{expr y, 'h'}"
+  end
+
+  def rgb(r=0, g=0, b=0, a=255)
     ((r << 24) | (g << 16) | (b << 8) | a).to_s 16
   end
 
@@ -39,6 +52,7 @@ module Flaggable
     else
       flags << "#{flag_prefix}#{flag}#{flag_suffix}=#{value}"
     end
+    value
   end
 
   def spaaaaaaaaaace!(flag, value)
@@ -75,7 +89,7 @@ def ending_with what, &block
   suffixes = [what]
   such_dry(block) { |m|
     define_method(:flag_suffix) { suffixes.join }
-    define_method(:_) { |name, &block|
+    define_method(:_) { |name='-', &block|
       suffixes.unshift name
       instance_eval &block
       suffixes.shift
@@ -85,9 +99,9 @@ end
 
 def flags_for what, &block
   prefixes = ["--#{what}"]
-  such_dry(block) { |m|
+  such_dry(block) {
     define_method(:flag_prefix) { prefixes.join }
-    define_method(:_) { |name, &block|
+    define_method(:_) { |name='-', &block|
       prefixes.push name
       instance_eval &block
       prefixes.pop
@@ -95,11 +109,26 @@ def flags_for what, &block
   }
 end
 
+def fancy_exec program, &block
+  Module.new do
+    @flags = []
+    %w[misc_flags ending_with flags_for].each do |m|
+      singleton_class.define_method m do |*args, &block|
+        f_able = Object.method(m).call(*args, &block)  # Call top-level methods
+        @flags += f_able.flags
+      end
+    end
+    instance_eval &block
+    exec program, *@flags
+  end
+end
+
 
 # exec "printf", "[%s]\\n", "i3lock", *[  # dry
-exec "i3lock", *[
+# exec "i3lock", *[
 
-  misc_flags {
+fancy_exec 'i3lock' do
+  misc_flags do
     bar_indicator
     clock
     composite
@@ -107,46 +136,66 @@ exec "i3lock", *[
     redraw_thread
     refresh_rate 0.1
     spaaaaaaaaaace! :blur, 5
-  },
+  end
 
-  ending_with('-color') {
+  ending_with '-color' do
     layout '1793D188'
-    _('hl') {
-      bs '4D586E'   # backspace
-      key '5294E2'  # keystroke
-    }
-  },
+    _ 'hl' do
+      bs '4D586E'                            # backspace highlight
+      key '5294E2'                           # keystroke highlight
+    end
+  end
 
-  flags_for('ind-') {
-    pos 683, 75
-  },
+  flags_for 'ind-' do
+    pos 683, 75                              # indicator position
+  end
 
-  flags_for('bar-') {
+  flags_for 'bar-' do                        # fancy soundwave-like bar?
+    orientation :horizontal
+    pos 0, 10
     base_width 10
+    count 50
     color rgb 0x26, 0x2a, 0x32, 0x77
     direction BOTH
     max_height 25
-    pos 0, 10
+    periodic_step 2
     step 2
-  },
+  end
 
-  flags_for('date-') {
+  misc_flags do no_verify end                # COMMENT
+
+  flags_for 'date-' do
     color rgb 0x17, 0x93, 0xD1, 0x88
-  },
+  end
 
-  flags_for('greeter-') {
-    text 'I :heart: Ruby!'
-    align RIGHT
-    pos -25, -25
-  },
-
-  flags_for('time') {
-    _color '1793D1'
-    _('outline-') {
+  flags_for 'time' do
+    _ do
+      color '1793D1'
+    end
+    _ 'outline-' do
       color '262a3288'
       width 1
-    }
-  },
+    end
+  end
 
-].collect(&:flags).flatten
+  flags_for 'greeter' do                     # random text
+    _ do
+      text `fortune -s`.lines.map(&:chomp).join
+                       .each_char.filter(&:ascii_only?).join
+      align CENTER
+      pos 0.5, -25
+      size rand(10..20)
+    end
+    _ 'outline-' do
+      width 0.4
+      color '88aadd'
+    end
+  end
+
+end
+
+# ].collect_concat(&:flags)
+
+# puts blue{"-[i3lock]-> "} + "Calling #{bold{m}} with #{bold{args}}  --  #{block && green{"(block given)"}}"
+# puts "Collected flags:"; pp @flags
 

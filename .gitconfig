@@ -2,15 +2,34 @@
 	name = diogotito
 	email = diogotitomarques@gmail.com
 [core]
-    pager = less -EX
+    pager = delta  # antes era 'less -EX'
+	autocrlf = input
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true    # use n and N to move between diff sections
+    light = false      # set to true if you're in a terminal w/ a light background
+    side-by-side = true
+[merge]
+    conflictstyle = diff3
+[diff]
+    colorMoved = default
 [alias]
 	st = status
+    lga = log --all --oneline --graph --decorate
+[pager]
+    blobs = true
 [gui]
 	recentrepo = /home/diogo/asdf/godot/Flappy Godot
 	recentrepo = /home/diogo/git/teledraw
 	recentrepo = /home/diogo/git/new_pycharm_project
+	fontdiff = -family \"Inconsolata Nerd Font\" -size 12 -weight normal -slant roman -underline 0 -overstrike 0
 [credential]
 	helper = /usr/lib/git-core/git-credential-libsecret
 [guitool "Terminal here"]
 	cmd = xfce4-terminal
 	noconsole = yes
+[pull]
+	ff = only
+[color]
+	ui = true

@@ -17,7 +17,9 @@ general {
 }
 
 order += "run_watch VPN"
+order += "path_exists VPN_DI"
 order += "wireless _first_"
+# order += "read_file dados"
 order += "ethernet _first_"
 order += "memory"
 # order += "cpu_usage"
@@ -34,6 +36,13 @@ run_watch VPN {
         pidfile = "/run/charon.pid"
         format = " %title: %status "
         format_down = ""
+}
+
+path_exists VPN_DI {
+    # path exists when a VPN tunnel launched by nmcli/nm-applet is active
+    path = "/proc/sys/net/ipv4/conf/tun0"
+    format = " %title: %status "
+    format_down = ""
 }
 
 cpu_usage {
@@ -101,4 +110,10 @@ tztime local {
         # format = " %d/%m/%Y  ⏲ %H:%M |"
         format = " %d/%m/%Y  %H:%M "
         # format = " 🗓  %Y-%m-%d	⏲  %H:%M "
+}
+
+read_file dados {
+    color_good = "#33aacc"
+    path = "/tmp/dados.txt"
+    # format = "%title: %content"
 }

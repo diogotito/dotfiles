@@ -1,14 +1,14 @@
 {
-    "abbrev": "M",
+    "abbrev": "m",
     "description": [
-        ""
+        "m"
     ],
     "formatVersion": 1,
     "menu": "",
-    "name": "M",
+    "name": "m",
     "shortcut": "",
     "tag": [
-        ""
+        "m"
     ],
-    "trigger": "NN"
+    "trigger": "nn"
 }

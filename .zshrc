@@ -156,10 +156,21 @@ bindkey -s '^[S' '^p^asudo ^e'
 bindkey -s '^[s' '^Udfc -c always 2>/dev/null | grep --colo=never /dev/sda7^M'
 bindkey -s '^[N' '^umkdir "^y" && cd "^y"^M'
 
+# Broken keyboard
+bindkey -s nn m
+
+# tilda
+function tilda() {
+    xfce4-terminal --drop-down
+}
+zle -N tilda
+bindkey '^`' tilda
+
 # woooooooooooooooooooooooooooooow
 bindkey -s '^[r' 'rr\n'
 # bindkey -s '^X^P' 'zathura --fork pdf^X^F'
 bindkey -s '^X^P' 'open-pdf\nexit\n'
+bindkey -s '^X^K' 'kill ^i'
 
 function open-pdf() (
     set -o pipefail
@@ -205,6 +216,17 @@ EOF
     bindkey -s '^X^P' 'zathura --fork "$(locate "$HOME/*.pdf" | fzf -m)"\nexit\n'
 fi
 
+# Use dedicaded graphics
+function use-gpu() {
+    set -x
+    export DRI_PRIME=1
+}
+
+function which-gpu() {
+    set -x
+    glinfo | head -3
+}
+
 
 ###
 #
@@ -239,9 +261,13 @@ bindkey '^[[1;3D'      cdUndoKey
 # I don't want the FZF plugin to override some default keybindings I happend to use
 bindkey '^R' history-incremental-pattern-search-backward
 bindkey '^T' transpose-chars
+bindkey '^U' backward-kill-line
+bindkey '^[c' capitalize-word
 
 bindkey '^X^R' fzf-history-widget
 bindkey '^X^T' fzf-file-widget
+
+bindkey -s '^[v' '^uvim^m'
 
 bindkey -s '^X^I' '^usource ~/bin/ipad^m'
 
@@ -277,6 +303,7 @@ fi
 # Bitwarden
 export BW_SESSION="0zAJ8dcK6vJT3UewqnHmjs+xS8Q0QIxeb3K+onCtpIxb/3GPGnrq3WSryAT5gQMO0kQYBlUuQTeOYTbmDe0ryg=="
 
+export npm_config_prefix="$HOME/.local"
 export PATH=/home/diogo/.local/bin:/home/diogo/.emacs.d/bin:$PATH
 
 # Dyalog APL
@@ -300,3 +327,11 @@ if [[ -n "$TMUX" ]]; then
     bindkey -s '^X^M' '^usudo nmcli connection down ^i'
 fi
 
+
+# Created by `pipx` on 2022-04-04 17:31:48
+export PATH="$PATH:/home/diogo/.local/bin"
+
+# rbenv
+export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH="/home/diogo/.gem/ruby/3.2.0/bin:$PATH"
+eval "$(rbenv init -)"

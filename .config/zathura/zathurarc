@@ -3,8 +3,8 @@ set statusbar-home-tilde
 set window-title-basename
 
 # SyncTex
-set synctex true
-set synctex-editor-command "subl %{input}:%{line}"
+# set synctex true
+# set synctex-editor-command "subl %{input}:%{line}"
 
 # Appearance
 
@@ -18,8 +18,8 @@ set index-active-bg \#D64937
 set index-active-fg \#dedede
 
 # Recolor - dark theme
-set recolor-lightcolor \#181818
-set recolor-darkcolor \#dedede
+set recolor-lightcolor \#262a32           # \#181818
+set recolor-darkcolor \#dedede           # \#dedede
 
 # Recolor - Darcula (IntelliJ dark theme)
 # set recolor-lightcolor \#AFB1B3
