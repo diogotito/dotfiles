@@ -1,4 +1,43 @@
 {
+	"auto_find_in_selection": true,
+	"bold_folder_labels": true,
+	"color_scheme": "gruvbox (Light) (Hard).sublime-color-scheme",
+	"dictionary": "Packages/LanguagePortuguese/Portuguese (European).dic",
+	"draw_centered": false,
+	"gutter": true,
+	"highlight_line": true,
+	"highlight_modified_tabs": true,
+	"font_size": 10,
+	"font_face": "Fira Code",
+	"line_numbers": true,
+	"line_padding_bottom": 0,
+	"line_padding_top": 0,
+	"overlay_scroll_bars": "enabled",
+	"rulers": [80],
+	"theme": "Adaptive.sublime-theme",
+	"ui_native_titlebar": false,
+	"ui_separator": true,
+	"ui_wide_scrollbars": false,
+	"vintageous_use_ctrl_keys": false,
+	"dark_color_scheme": "Packages/Dracula Color Scheme/Dracula.tmTheme",
+	"light_color_scheme": "Packages/Pandoc Academic/ColorScheme/The-Wine-Light-Sand.tmTheme",
+	"remember_workspace": false,
+	/*"bold_folder_labels": true,*/
+	// Highlight active indent
+	"indent_guide_options": [ "draw_normal", "draw_active"],
+	"material_theme_contrast_mode": true,
+	"index_files": false,
+	"auto_complete_triggers":
+	[
+		{
+			"characters": ".",
+			"selector": "source.python",
+		},
+		{
+			"characters": "\\",
+			"selector": "text.tex.latex",
+		}
+	],
 	"added_words":
 	[
 		"Diogo",
@@ -16,53 +55,17 @@
 		"odometria",
 		"reflectância"
 	],
-	"auto_complete_triggers":
-	[
-		{
-			"characters": ".",
-			"selector": "source.python",
-		},
-		{
-			"characters": "\\",
-			"selector": "text.tex.latex",
-		}
-	],
-	"auto_find_in_selection": true,
-	"bold_folder_labels": true,
-	"color_scheme": "GitHub Light.sublime-color-scheme",
-	"dictionary": "Packages/LanguagePortuguese/Portuguese (European).dic",
-	"draw_centered": false,
-	"gutter": true,
-	"highlight_line": true,
-	"highlight_modified_tabs": true,
-	"ignored_packages":
-	[
-		"Anaconda",
-	],
 	"ignored_words":
 	[
 		"operá"
 	],
-	"font_size": 10,
-	"font_face": "Fira Code",
-	"line_numbers": true,
-	"line_padding_bottom": 0,
-	"line_padding_top": 0,
-	"overlay_scroll_bars": "enabled",
-	"rulers":
+	"ignored_packages":
 	[
-		80
+		"A File Icon",
+		"Anaconda",
+		"FileIcons",
+		"LaTeXTools",
+		"Solarized Color Scheme",
+		"Theme - Monokai Pro",
 	],
-	"theme": "Default.sublime-theme",
-	"ui_native_titlebar": false,
-	"ui_separator": true,
-	"ui_wide_scrollbars": false,
-	"vintageous_use_ctrl_keys": false,
-	"dark_color_scheme": "Packages/Dracula Color Scheme/Dracula.tmTheme",
-	"light_color_scheme": "Packages/Pandoc Academic/ColorScheme/The-Wine-Light-Sand.tmTheme",
-	"remember_workspace": false,
-	/*"bold_folder_labels": true,*/
-	// Highlight active indent
-	"indent_guide_options": [ "draw_normal", "draw_active"],
-	"material_theme_contrast_mode": true,
 }
