@@ -61,7 +61,7 @@ exec --no-startup-id sleep 0.1s; redshift-gtk                 # Make me sleepy b
 exec --no-startup-id sleep 0.1s; xfce4-clipman                # Makes the 'Copy to clipboard' option appear
 exec --no-startup-id sleep 0.1s; xfce4-power-manager          # Makes battery & brightness work like in XFCE4
 exec --no-startup-id sleep 0.1s; xinput | grep -qi razer && polychromatic-tray-applet
-exec --no-startup-id sleep 0.1s; syncthing-gtk
+exec --no-startup-id sleep 0.1s; syncthingtray-qt6
 exec --no-startup-id sleep 0.1s; flameshot
 exec --no-startup-id sleep 0.1s; solarized-zim --plugin trayicon
 # exec --no-startup-id sleep 0.1s; birdtray                     # Thunderbird tray
@@ -269,10 +269,11 @@ for_window [title="Network Connections"]           floating enable
 for_window [title="Nitrogen"]                      floating enable, border normal, move position center
 for_window [class="feh"]                           floating enable
 # for_window [title="Variety Images"]                floating enable
-for_window [instance="^Godot_Engine$"]             floating enable, border normal, move position center
+for_window [instance="Godot_ProjectList"] floating enable, border normal, move position center
+for_window [instance="Godot_Editor"] floating enable, border normal
+for_window [instance="Godot_Editor" title=" - Godot Engine$"] floating disable, border pixel
+for_window [instance="Godot_Engine"] floating enable, border normal, move position center
 for_window [class="love"]                          floating enable, border normal, move position center
-for_window [title="^Godot Engine - Project Manager" instance="Godot_Engine"] floating enable, border normal, move position center
-for_window [title="^Godot Engine - " instance="Godot_Engine"] floating disable, border pixel
 for_window [title="^VLsub|VLSub"]                  floating enable, border normal, move position center
 for_window [title="Parse Tree Inspector"]          floating enable, resize set 900 600, move position center, border normal
 for_window [title="Go For It!"]                    floating enable, resize set 900 600, move position center
@@ -393,13 +394,15 @@ font pango:Source Sans Pro 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec darkblue xfce4-terminal
+bindsym $mod+Return exec alacritty
 
 # bindsym $mod+Shift+Return exec darkblue xfce4-terminal -T 'ZSH Launcher' -e 'sh -c "todo.sh ls @ModEst && exec $SHELL"'
 bindsym $mod+Shift+Return exec darkblue xfce4-terminal -T 'ZSH Launcher' -e 'sh -c "~/.config/conky/ruby_router_ostruct.rb && exec $SHELL"'
 
 # kill focused window
 bindsym $mod+Shift+q kill
+bindsym $mod+q kill
+bindsym Mod1+F4 kill
 
 bindsym $mod+p       exec --no-startup-id      $ROFI                                    -sidebar-mode -show drun
 bindsym $mod+Shift+w exec --no-startup-id ~/bin/rofi_mono_font.sh --font="Fira Code 10"               -show window
@@ -422,8 +425,10 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+Shift+Tab move container to workspace back_and_forth
 bindsym $mod+Prior workspace prev
 bindsym $mod+Shift+n workspace prev_on_output
+bindsym $mod+Ctrl+Left workspace prev_on_output
 bindsym $mod+Next workspace next
 bindsym $mod+n workspace next_on_output
+bindsym $mod+Ctrl+Right workspace next_on_output
 bindsym $mod+Shift+Prior move container to workspace prev, workspace prev
 bindsym $mod+Shift+Next move container to workspace next, workspace next
 

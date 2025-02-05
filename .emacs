@@ -31,9 +31,9 @@
   (require 'haskell-process)
   (add-hook 'haskell-mode-hook 'interactive-haskell-mode))
 
-(use-package latex-extra
-  :config
-  (add-hook 'LaTeX-mode-hook #'latex-extra-mode))
+;; (use-package latex-extra
+;;   :config
+;;   (add-hook 'LaTeX-mode-hook #'latex-extra-mode))
 
 
 ;;
