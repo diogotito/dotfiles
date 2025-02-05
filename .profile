@@ -28,3 +28,8 @@ export SYNCTHING_ADDRESS=localhost:8080
 
 export ROFIICONSENABLED=true
 
+
+
+# Added by Toolbox App
+export PATH="$PATH:/home/diogo/.local/share/JetBrains/Toolbox/scripts"
+

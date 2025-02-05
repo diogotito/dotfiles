@@ -53,3 +53,6 @@ alias record-big='ffmpeg -video_size 1920x1080 -framerate 10 -f x11grab -i :0.0+
 source /usr/share/nvm/init-nvm.sh
 
 source /home/diogo/.config/broot/launcher/bash/br
+
+[[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
+eval "$(atuin init bash)"

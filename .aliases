@@ -7,14 +7,18 @@ alias sudo='sudo '
 
 alias aliases='vim ~/.aliases; source ~/.aliases'
 alias bashrc='vim ~/.bashrc'
-alias zshrc='vim ~/.zshrc'
+alias zshrc='vim ~/.config/zsh/.zshrc'
 alias vimrc='vim ~/.vimrc'
 alias xconfig='vim ~/.xmonad/xmonad.hs'
 
 #############################################################################################
 ## Git
 #############################################################################################
+alias g=git
 alias gap='git add --patch'
+alias gst='git status'
+alias gd='git diff'
+alias gru='git remote update'
 alias config='git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
 alias conf='git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
 
@@ -32,8 +36,8 @@ alias record-big='ffmpeg -video_size 1920x1080 -framerate 10 -f x11grab -i :0.0+
 alias cls='tput reset'
 # alias ls='ls --color=auto'
 # alias ll='ls --color=auto -lF'
-alias ls='exa -F'
-alias ll='exa -lF --git --header'
+alias ls='eza --group-directories-first -F --icons=always'
+alias ll='eza --group-directories-first -lF --git --header --icons=always'
 alias du='du -h'
 
 alias lesse='less +G -eX'
@@ -148,6 +152,9 @@ function pacbins() {
     pacman -Ql "$1" | grep /bin/
 }
 alias bins=pacbins
+
+# Rust
+alias ca=cargo
 
 
 # Workflow specific aliases
