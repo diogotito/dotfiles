@@ -6,6 +6,7 @@
 ; (gtk_accel_path "<Actions>/ThunarStatusBar/toggle-last-modified" "")
 ; (gtk_accel_path "<Actions>/Thunarwindow/menu" "")
 ; (gtk_accel_path "<Actions>/ThunarBookmarks/045cd347ac50349d7909dc7f1de87e6b" "")
+; (gtk_accel_path "<Actions>/ThunarBookmarks/1294762fefcf0eed57544b8847cafdb4" "")
 ; (gtk_accel_path "<Actions>/ThunarActionManager/cut" "<Primary>x")
 ; (gtk_accel_path "<Actions>/ThunarStandardView/sort-by-size" "")
 ; (gtk_accel_path "<Actions>/ThunarWindow/file-menu" "")

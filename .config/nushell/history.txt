@@ -1,0 +1,54 @@
+ls
+^ls
+eza
+^eza
+ls
+git/bubble-blaster/
+ls
+ll
+ls -r
+ls **/*
+ls
+help
+help explore
+ls | explain 
+ls | describe 
+ls | explore
+ls
+gstat
+use gstat
+pacman -Ql nushell
+pacman -Qql nushell
+pacman -Qql nushell | lines
+pacman -Qql nushell | lines | explore
+fiile /usr/bin/nu_plugin_gstat
+help
+help commands
+help commands | where name {str contains 'plugin'}
+help commands | where {get name | str contains 'plugin'}
+help commands | where {get name | str contains 'plugin'} | explore
+plugin list
+plugin add
+plugin add --help 
+$nu
+$nu.plugin-path
+plugin use --help
+plugin add --help
+plugin add nu_plugin_gstat
+pacman -Qql nushell | lines
+plugin list 
+plugin add /usr/bin/nu_plugin_gstat
+plugin list
+plugin use gstat
+gstat
+help gstat
+gstat .
+gstat textures/
+ls
+z
+cd git/bubble-blaster/
+ls
+gst
+git s
+git st
+git status
