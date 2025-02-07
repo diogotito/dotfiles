@@ -1,0 +1,4 @@
+{
+	"languagetool_jar": "/usr/share/java/languagetool/languagetool.jar",
+	"default_server": "remote",
+}

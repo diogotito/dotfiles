@@ -1,0 +1,2 @@
+[general]
+import = ["/home/diogo/.config/alacritty/personal_config.toml"]

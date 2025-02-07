@@ -1,0 +1,14 @@
+configuration {
+	modi: "window,run,drun,ssh,calc,keys,filebrowser";
+	show-icons: true;
+	terminal: "xfce4-terminal";
+	sort: true;
+	matching: "fuzzy";
+    terminal: "xfce4-terminal";
+    lines: 20;
+    window-thumbnail: true;
+    /* hover-select: true; */
+    me-select-entry: "";
+    me-accept-entry: "MousePrimary";
+}
+@import "/home/diogo/.config/rofi/themes/AAAA_glue_pro_blue.rasi"

@@ -1,0 +1,12 @@
+[font]
+size = 11
+
+[font.normal]
+family = "Terminess Nerd Font"
+
+[font.offset]
+y = 0
+
+[window.padding]
+x = 10
+y = 10

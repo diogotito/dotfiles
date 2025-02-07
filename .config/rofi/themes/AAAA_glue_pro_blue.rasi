@@ -1,0 +1,233 @@
+* {
+    selected-normal-foreground:  rgba ( 255, 255, 255, 100 % );
+    foreground:                  rgba ( 255, 255, 255, 100 % );
+    foreground-translucid:       rgba ( 255, 255, 255,  60 % );
+    normal-foreground:           @foreground;
+    alternate-normal-background: transparent;
+    red:                         rgba ( 220, 50, 47, 100 % );
+    selected-urgent-foreground:  rgba ( 255, 195, 156, 100 % );
+    blue:                        rgba ( 38, 139, 210, 100 % );
+    urgent-foreground:           rgba ( 243, 132, 61, 100 % );
+    alternate-urgent-background: transparent;
+    active-foreground:           rgba ( 38, 139, 210, 100 % );
+    lightbg:                     rgba ( 238, 232, 213, 100 % );
+    selected-active-foreground:  rgba ( 32, 81, 113, 100 % );
+    alternate-active-background: transparent;
+    background:                  transparent;
+    border-color:                 rgba ( 57, 57, 57, 100 % );
+    alternate-normal-foreground: @foreground;
+    normal-background:           transparent;
+    lightfg:                     rgba ( 88, 104, 117, 100 % );
+    selected-normal-background:  rgba ( 38, 139, 210, 80 % );
+    border-color:                @foreground;
+    spacing:                     0;
+    separatorcolor:              rgba ( 38, 139, 210, 100 % );
+    urgent-background:           transparent;
+    selected-urgent-background:  rgba ( 38, 139, 210, 90 % );
+    alternate-urgent-foreground: @urgent-foreground;
+    background-color:            rgba ( 0, 0, 0, 0 % );
+    alternate-active-foreground: @active-foreground;
+    active-background:           rgba ( 57, 57, 57, 90 % );
+    selected-active-background:  rgba ( 38, 139, 210, 90 % );
+    selected-active-background-solid:  rgba ( 38, 139, 210, 100% );
+
+    /* - - - - - - - - - - - */
+    /* - - - Variables - - - */
+    /* - - - - - - - - - - - */
+    qogir-bg: #262a32;
+    qogir-bg-translucid: #262a32ee;
+    qogir-active-subtle: #4D586E;
+    mypadding:   10px;
+    mypadding-b: 2px 10px 10px;
+}
+window {
+    // Colado à minha i3bar
+    location: north;
+
+    // A altura da minha i3bar
+    y-offset: 25; 
+
+    background-color: @qogir-bg-translucid;
+    border:           0 1px 1px;
+    border-color:      #5294E2;
+    font: "Source Sans Pro 12";
+    padding: 0;
+}
+mainbox {
+    border:  0;
+    padding: 0;
+    spacing: 0px;
+}
+message {
+    background-color: @qogir-bg;
+    padding:          @mypadding;
+}
+textbox {
+    text-color: @foreground-translucid;
+}
+listview {
+    fixed-height: true;
+    lines: 15;
+    border:       0;
+    border-color: @separatorcolor;
+    spacing:      0px ;
+    padding: 0;
+    scrollbar:    true;
+    columns: 2;  // oooh
+}
+
+element {
+    border:  0;
+    padding: 0 ;
+    font: "Source Code Pro 12";
+    /* children: [ element-index, element-icon, element-text, text-lol ]; */
+    children: [ element-index, element-icon, element-text ];
+}
+
+/*
+// Exeperiment: text- prefix
+text-lol {
+    border-color: White;
+    horizontal-align: 1;
+    str: "yay";
+    content: "yay";
+    background-color: Blue;
+    text-color: Yellow;
+    font: "Source Sans Pro 12";
+    padding: 10px;
+    margin: 10px;
+}
+*/
+
+element-icon {
+  enabled: ${ROFIICONSENABLED};
+  size: 32px;
+  padding: 0 8px;
+  margin: 0 0 0 0px;
+  //background-color: @qogir-bg;
+  background-image: linear-gradient(to left, #262a3200
+                                           , #262a32ff, #262a32ff, #262a32ff, #262a32ff
+                                           , #262a3200);
+}
+element-icon selected {
+  background-image: linear-gradient(to left, #5294E200
+                                           , #5294E2ff, #5294E2ff, #5294E2ff, #5294E2ff
+                                           , #5294E200);
+}
+
+element-index {
+  width: 20px;
+  size: 20px;
+  text-color: @foreground;
+  padding: 6px 0 6px 10px;
+}
+element-index selected {
+    //background-color: @selected-normal-background;
+    background-color: #5294E200;
+}
+
+element-text {
+  border-color: White;
+  width: 0.6em;
+  padding: 6px 10px;
+  text-color: @foreground;
+}
+
+element-text.normal.normal {
+    background-color: @normal-background;
+    text-color:       @normal-foreground;
+}
+element-text.normal.urgent {
+    background-color: @urgent-background;
+    text-color:       @urgent-foreground;
+}
+element-text.normal.active {
+    background-color: @active-background;
+    text-color:       @active-foreground;
+}
+element-text.selected.normal {
+    background-color: #5294E200;
+    text-color:       @selected-normal-foreground;
+}
+element-text.selected.urgent {
+    background-color: @selected-urgent-background;
+    text-color:       @selected-urgent-foreground;
+}
+element-text.selected.active {
+    background-color: @selected-active-background;
+    text-color:       @selected-active-foreground;
+}
+element-text.alternate.normal {
+    background-color: @alternate-normal-background;
+    text-color:       @alternate-normal-foreground;
+}
+element-text.alternate.urgent {
+    background-color: @alternate-urgent-background;
+    text-color:       @alternate-urgent-foreground;
+}
+element-text.alternate.active {
+    background-color: @alternate-active-background;
+    text-color:       @alternate-active-foreground;
+}
+
+scrollbar {
+    width:        4px ;
+    border:       0;
+    handle-width: 8px ;
+    border-color: #5294E2;
+    handle-color: @qogir-active-subtle;
+}
+mode-switcher {
+    border:       0 ;
+    border-color: @separatorcolor;
+}
+button.selected {
+    background-color: @qogir-active-subtle;
+    text-color:       @selected-normal-foreground;
+}
+button {
+    background-color: @qogir-bg;
+    text-color:       @foreground-translucid;
+}
+inputbar {
+    background-color: @qogir-bg;
+    spacing:    0;
+    text-color: @normal-foreground;
+    padding:    0;
+    children:   [ prompt,entry,case-indicator ];
+}
+case-indicator {
+    spacing:    0;
+    text-color: @normal-foreground;
+}
+entry {
+    padding:    @mypadding;
+    text-color: @normal-foreground;
+    font: "Source Code Pro 12";
+    // blink: true;
+}
+prompt {
+    spacing:    0;
+    background-color: @qogir-active-subtle;
+    padding: @mypadding;
+    text-color: @selected-normal-foreground;
+}
+
+/*
+textbox-prompt-colon {
+    expand:     false;
+
+    // De momento não preciso de "::after" na minha prompt
+    str:        ":";
+
+    margin:     0px 0.3em 0em 0em ;
+    vertical-align: 1;
+    text-color: @normal-foreground;
+}
+*/
+
+num-rows {
+    text-color: @red;
+}
+
+// vim:ft=scss

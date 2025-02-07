@@ -1,0 +1,8 @@
+window:
+  padding: {x: 10, y: 10}
+
+font:
+  normal:
+    family: Terminus
+  size: 11
+  offset: {y: 1}
