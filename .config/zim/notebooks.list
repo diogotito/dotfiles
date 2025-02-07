@@ -1,0 +1,9 @@
+[NotebookList]
+Default=~/.todo/zimwiki
+1=~/.todo/zimwiki
+
+[Notebook 1]
+uri=~/.todo/zimwiki
+name=zimwiki (Windows)
+interwiki=None
+icon=None

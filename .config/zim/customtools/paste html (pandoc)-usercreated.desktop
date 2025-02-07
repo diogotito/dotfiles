@@ -1,0 +1,18 @@
+[Desktop Entry]
+Type=X-Zim-CustomTool
+Version=1.0
+GenericName=
+Name=Paste HTML (pandoc)
+Comment=Cola conteúdo web aqui no formato do Zim
+Exec=
+TryExec=
+Icon=/usr/share/icons/Qogir/32/apps/internet-web-browser.svg
+MimeType=
+Terminal=false
+NoDisplay=false
+X-Zim-ExecTool=sh -c "xclip -selection CLIPBOARD -t text/html -o | pandoc -f html -t zimwiki"
+X-Zim-ReadOnly=false
+X-Zim-ShowInToolBar=true
+X-Zim-ShowInContextMenu=None
+X-Zim-ReplaceSelection=true
+

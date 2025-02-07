@@ -1,0 +1,18 @@
+[Desktop Entry]
+Type=X-Zim-CustomTool
+Version=1.0
+GenericName=
+Name=Hour and Battery
+Comment=Regista a percentagem da bateria no cursor
+Exec=
+TryExec=
+Icon=/usr/share/icons/Qogir/16/devices/battery.svg
+MimeType=
+Terminal=false
+NoDisplay=false
+X-Zim-ExecTool=sh -c 'printf "%s\t%s\n" "$(date +%T)" "$(acpi -b | cut -d" " -f4-)" | sed -E "s/[[:digit:]]{2}%/**&**/g"'
+X-Zim-ReadOnly=false
+X-Zim-ShowInToolBar=true
+X-Zim-ShowInContextMenu=None
+X-Zim-ReplaceSelection=true
+

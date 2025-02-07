@@ -1,0 +1,18 @@
+[Desktop Entry]
+Type=X-Zim-CustomTool
+Version=1.0
+GenericName=
+Name=Git Log
+Comment=Abre o histórico dos commits no `gitk --all`
+Exec=
+TryExec=
+Icon=/usr/share/icons/Qogir/scalable/apps/gitk.svg
+MimeType=
+Terminal=false
+NoDisplay=false
+X-Zim-ExecTool=gitk --all
+X-Zim-ReadOnly=false
+X-Zim-ShowInToolBar=true
+X-Zim-ShowInContextMenu=None
+X-Zim-ReplaceSelection=false
+

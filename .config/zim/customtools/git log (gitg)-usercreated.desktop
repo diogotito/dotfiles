@@ -1,0 +1,18 @@
+[Desktop Entry]
+Type=X-Zim-CustomTool
+Version=1.0
+GenericName=
+Name=Git Log (gitg)
+Comment=Abre o histórico dos commits no gitg
+Exec=
+TryExec=
+Icon=/usr/share/icons/Qogir/scalable/apps/gitg.svg
+MimeType=
+Terminal=false
+NoDisplay=false
+X-Zim-ExecTool=gitg
+X-Zim-ReadOnly=false
+X-Zim-ShowInToolBar=false
+X-Zim-ShowInContextMenu=None
+X-Zim-ReplaceSelection=false
+
