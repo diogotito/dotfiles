@@ -1,4 +1,5 @@
 local wezterm = require("wezterm")
+local act = wezterm.action
 local config = wezterm.config_builder()
 
 -- Terminal font
@@ -22,7 +23,7 @@ config.window_frame = {
 config.window_background_opacity = 0.95
 config.text_background_opacity = 1.0 -- overlays over window_background_opacity, but makes some powerline-esque decorations look weird
 
-config.color_scheme = "Batman"
+config.color_scheme = "GruvboxDarkHard"
 
 config.colors = {
 	tab_bar = {
@@ -50,6 +51,16 @@ config.keys = {
 		key = "k",
 		mods = "CTRL|SHIFT",
 		action = wezterm.action.DisableDefaultAssignment,
+	},
+}
+
+-- Mouse bindings
+config.mouse_bindings = {
+	-- Wezterm pastes with MMB by default, but I'm used to pasting with RMB
+	{
+		event = { Down = { streak = 1, button = "Right" } },
+		mods = "NONE",
+		action = act.PasteFrom("Clipboard"),
 	},
 }
 

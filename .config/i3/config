@@ -55,12 +55,13 @@ exec --no-startup-id setxkbmap -option grp:win_space_toggle
 
 # Tray icons
 # exec --no-startup-id sleep 0.1s; dropbox
+exec --no-startup-id sleep 0.1s; xsettingsd
 exec --no-startup-id sleep 0.1s; pasystray                    # PulseAudio system tray
 exec --no-startup-id sleep 0.1s; nm-applet                    # Network Manager applet
 exec --no-startup-id sleep 0.1s; redshift-gtk                 # Make me sleepy before 1 AM
 exec --no-startup-id sleep 0.1s; xfce4-clipman                # Makes the 'Copy to clipboard' option appear
 exec --no-startup-id sleep 0.1s; xfce4-power-manager          # Makes battery & brightness work like in XFCE4
-exec --no-startup-id sleep 0.1s; xinput | grep -qi razer && polychromatic-tray-applet
+exec --no-startup-id sleep 0.1s; [ -x ~/bin/fucking-logitech.sh ] && ~/bin/fucking-logitech.sh
 exec --no-startup-id sleep 0.1s; syncthingtray-qt6
 exec --no-startup-id sleep 0.1s; flameshot
 exec --no-startup-id sleep 0.1s; solarized-zim --plugin trayicon
@@ -253,6 +254,7 @@ for_window [class="Gitk"]                             border normal
 for_window [title="Application Finder"]               border none, resize set 900 400
 for_window [class="jetbrains-toolbox"]                border none, floating enable; exec --no-startup-id i3-msg move down $bar_height px
 for_window [class="Firefox" title="Mozilla Firefox$"] border pixel
+for_window [title="Extension: (Bitwarden Password Manager) - Bitwarden — Mozilla Firefox"] border pixel, move position center
 
 for_window [title="ZSH Launcher"]                  border pixel, floating enable, resize set 900 400, move position center
 

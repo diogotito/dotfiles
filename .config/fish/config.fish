@@ -12,6 +12,7 @@ end
 set -gx LUA_PATH '/opt/luarocks/share/lua/5.3/?.lua;/usr/local/share/lua/5.3/?.lua;/usr/local/share/lua/5.3/?/init.lua;/usr/local/lib/lua/5.3/?.lua;/usr/local/lib/lua/5.3/?/init.lua;./?.lua;./?/init.lua;/home/diogo/.luarocks/share/lua/5.3/?.lua;/home/diogo/.luarocks/share/lua/5.3/?/init.lua;/opt/luarocks/share/lua/5.3/?/init.lua'
 set -gx LUA_CPATH '/usr/local/lib/lua/5.3/?.so;/usr/local/lib/lua/5.3/loadall.so;./?.so;/home/diogo/.luarocks/lib/lua/5.3/?.so;/opt/luarocks/lib/lua/5.3/?.so'
 
+# Bindings
 # bind \eh prevd-or-backward-word  # <Alt-H> is used to get help
 bind \et force-repaint
 
@@ -21,6 +22,8 @@ bind \eo bb
 
 bind \e\cl 'tput reset; commandline -f repaint'
 bind \co iterate-command
+
+
 
 abbr -a -- n nvim
 abbr -a -- v nvim
@@ -94,6 +97,7 @@ abbr -a -- sl ls
 abbr -a -- .conf 'nvim +"cd ~/.config/fish" ~/.config/fish/config.fish && source ~/.config/fish/config.fish'
 abbr -a -- .fish 'nvim +"cd ~/.config/fish" ~/.config/fish/config.fish && source ~/.config/fish/config.fish'
 abbr -a -- .c 'nvim +"cd ~/.config/fish" ~/.config/fish/config.fish && source ~/.config/fish/config.fish'
+abbr -a -- .f 'nvim +"cd ~/.config/fish" ~/.config/fish/config.fish && source ~/.config/fish/config.fish'
 abbr -a -- .v 'nvim +"cd ~/.config/nvim" nvim ~/.config/nvim/init.lua'
 abbr -a -- .n 'nvim +"cd ~/.config/nvim" nvim ~/.config/nvim/init.lua'
 abbr -a -- .nvim 'nvim +"cd ~/.config/nvim" nvim ~/.config/nvim/init.Tua'
@@ -107,6 +111,13 @@ abbr -a --regex ^\\.\\.+\$ --function multicd -- dotdot
 
 # Arch Linux
 abbr -a -- S 'pacman -S'
+abbr -a --set-cursor='%' -- bins 'pacman -Ql % | grep \'\S*/bin/[^/]\+$\''
+abbr -a --set-cursor='%' -- ,b 'pacman -Ql % | grep \'\S*/bin/[^/]\+$\''
+abbr -a -- .i3 'nvim --cmd "set modelineexpr" ~/.config/i3/config && i3-msg reload'
+abbr -a -- w wezterm
+
+# Linux ricing
+abbr -a -- .w 'nvim +"cd ~/.config/wezterm" ~/.config/wezterm/wezterm.lua'
 
 # Project-specific aliases/abbreviations
 abbr -a -- e godot
