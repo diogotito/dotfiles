@@ -12,6 +12,9 @@ end
 set -gx LUA_PATH '/opt/luarocks/share/lua/5.3/?.lua;/usr/local/share/lua/5.3/?.lua;/usr/local/share/lua/5.3/?/init.lua;/usr/local/lib/lua/5.3/?.lua;/usr/local/lib/lua/5.3/?/init.lua;./?.lua;./?/init.lua;/home/diogo/.luarocks/share/lua/5.3/?.lua;/home/diogo/.luarocks/share/lua/5.3/?/init.lua;/opt/luarocks/share/lua/5.3/?/init.lua'
 set -gx LUA_CPATH '/usr/local/lib/lua/5.3/?.so;/usr/local/lib/lua/5.3/loadall.so;./?.so;/home/diogo/.luarocks/lib/lua/5.3/?.so;/opt/luarocks/lib/lua/5.3/?.so'
 
+# Ruby gems (manually, KEEP SYNC WITH RUBY VERSION)
+set -gxa PATH '/home/diogo/.local/share/gem/ruby/3.4.0/bin'
+
 # Bindings
 # bind \eh prevd-or-backward-word  # <Alt-H> is used to get help
 bind \et force-repaint
@@ -90,6 +93,8 @@ abbr -a -- s 'git status --short --branch'
 abbr -a -- x 'xsel -b'
 abbr -a -- zl zuul
 
+abbr -a -- lg lazygit
+
 abbr -a -- lt 'l -T'
 
 abbr -a -- sl ls
@@ -110,7 +115,7 @@ abbr -a --position anywhere -- ,c '~/.config/'
 abbr -a --regex ^\\.\\.+\$ --function multicd -- dotdot
 
 # Arch Linux
-abbr -a -- S 'pacman -S'
+abbr -a -- S 'sudo pacman -S'
 abbr -a --set-cursor='%' -- bins 'pacman -Ql % | grep \'\S*/bin/[^/]\+$\''
 abbr -a --set-cursor='%' -- ,b 'pacman -Ql % | grep \'\S*/bin/[^/]\+$\''
 abbr -a -- .i3 'nvim --cmd "set modelineexpr" ~/.config/i3/config && i3-msg reload'
