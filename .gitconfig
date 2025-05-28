@@ -20,9 +20,6 @@
 [pager]
     blobs = true
 [gui]
-	recentrepo = /home/diogo/asdf/godot/Flappy Godot
-	recentrepo = /home/diogo/git/teledraw
-	recentrepo = /home/diogo/git/new_pycharm_project
 	fontdiff = -family \"Inconsolata Nerd Font\" -size 12 -weight normal -slant roman -underline 0 -overstrike 0
 [credential]
 	helper = /usr/lib/git-core/git-credential-libsecret
@@ -33,3 +30,8 @@
 	ff = only
 [color]
 	ui = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
