@@ -20,8 +20,6 @@ set -gxa PATH '/home/diogo/.local/share/gem/ruby/3.4.0/bin'
 bind \et force-repaint
 
 bind \er y
-bind \ei cd-bb
-bind \eo bb
 
 bind \e\cl 'tput reset; commandline -f repaint'
 bind \co iterate-command
@@ -102,6 +100,7 @@ abbr -a -- sl ls
 abbr -a -- .conf 'nvim +"cd ~/.config/fish" ~/.config/fish/config.fish && source ~/.config/fish/config.fish'
 abbr -a -- .fish 'nvim +"cd ~/.config/fish" ~/.config/fish/config.fish && source ~/.config/fish/config.fish'
 abbr -a -- .c 'nvim +"cd ~/.config/fish" ~/.config/fish/config.fish && source ~/.config/fish/config.fish'
+abbr -a -- .cp 'nvim +"cd ~/.config/fish" ~/.config/fish/conf.d/curproj.fish && source ~/.config/fish/conf.d/curproj.fish'
 abbr -a -- .f 'nvim +"cd ~/.config/fish" ~/.config/fish/config.fish && source ~/.config/fish/config.fish'
 abbr -a -- .v 'nvim +"cd ~/.config/nvim" nvim ~/.config/nvim/init.lua'
 abbr -a -- .n 'nvim +"cd ~/.config/nvim" nvim ~/.config/nvim/init.lua'
