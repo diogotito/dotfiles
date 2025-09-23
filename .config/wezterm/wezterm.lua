@@ -10,8 +10,9 @@ config.color_scheme = "GruvboxDarkHard"
 -- Appearance for Linux
 if wezterm.target_triple == 'x86_64-unknown-linux-gnu' then
     -- Terminal font
-    config.line_height = 0.95 -- Terminess is a bit taller than expected
-    config.font = wezterm.font_with_fallback({ "Terminess Nerd Font", "Terminus" })
+    -- config.line_height = 0.95 -- Terminess is a bit taller than expected
+    -- config.font = wezterm.font_with_fallback({ "Terminess Nerd Font", "Terminus" })
+    config.font = wezterm.font({ family = "Iosevka Nerd Font" })
 
     -- UI tweaks
     config.ui_key_cap_rendering = "WindowsSymbols"
